@@ -69,6 +69,8 @@
 
     /**
      * Constructs a new UnitList, 'cloned' from "unitList" if provided.
+     * A UnitList is a collection of units, where a unit is represented by a code,
+     * e.g. {R: 100, S: 200}.
      */
     function UnitList(unitList) {
         if (unitList) {
@@ -79,6 +81,18 @@
     }
 
     /**
+     * Unit values. Scaled up by x1000.
+     */
+    UnitList.unitValues = {
+        R: 1250,
+        B: 1000,
+        LB: 2875,
+        M: 3375,
+        C: 3375,
+        S: 6000
+    };
+
+    /**
      * @return The total number of units.
      */
     UnitList.prototype.totalUnits = function() {
@@ -87,6 +101,21 @@
             count += this[prop];
         }, this);
         return count;
+    };
+
+    /**
+     * @return The total value of units.
+     */
+    UnitList.prototype.totalUnitValue = function() {
+        var value = 0;
+        forEachOwnProperty(this, function(ob, prop) {
+            var unitValue = UnitList.unitValues[prop];
+            if (unitValue) {
+                // if not falsey
+                value += (this[prop] * unitValue);
+            }
+        }, this);
+        return value / 1000;
     };
 
     /**
@@ -131,6 +160,113 @@
     };
 
     UnitList.prototype.toString = StringUtils.simpleToString;
+
+
+
+
+
+    // SimTable
+    // Utility operations to perform on a sim table DOM element.
+    function Sim(campEnemies, exp, attackOptions) {
+        this.campEnemies = campEnemies;
+        this.exp = exp;
+        this.attackOptions = attackOptions;
+    }
+
+    Sim.getUnitsReqdUnitValueForAttack = function(attackOption) {
+        // Count up the units required for this attack option.
+        return attackOption.reduce(function(unitValue, wave) {
+            return unitValue + wave.units.totalUnitValue();
+        }, 0);
+    };
+
+    Sim.getMaxLossesForAttack = function(attackOption) {
+        return attackOption.reduce(function(prev, wave) {
+            // add this wave losses
+            return prev.add(wave.maxLoss);
+        }, new UnitList());
+    };
+
+    Sim.prototype.getMaxLossesForAttackOptions = function() {
+        return this.attackOptions.map(Sim.getMaxLossesForAttack);
+    };
+
+    Sim.prototype.findLowestMaxLossAttackOption = function() {
+        var opts = this.findLowestMaxLossAttackOptions();
+        return opts[0].idx;
+    };
+
+    /**
+     * Returns the attack options which have the lowest losses.
+     * @return Array of {idx,unitValue}.
+     */
+    Sim.prototype.findLowestMaxLossAttackOptions = function() {
+        var lowestCost = null;
+        var costsAndIdxs = this.getMaxLossesForAttackOptions().map(function(cost, idx) {
+            // map the costs to preserve index after sorting
+            return {
+                idx: idx,
+                unitValue: cost.totalUnitValue()
+            };
+        }).sort(function(cost1, cost2) {
+            // sort based on unitValue
+            return cost1.unitValue - cost2.unitValue;
+        }).filter(function(cost) {
+            // remove all costs that aren't the lowest
+            if (null === lowestCost) {
+                lowestCost = cost;
+            }
+            // keep those costs that share the same lowest value.
+            return (cost.unitValue <= lowestCost.unitValue);
+        });
+        return costsAndIdxs;
+    };
+
+    /**
+     * @return The total number of units required for the specified attack.
+     */
+    Sim.prototype.fewestReqdUnitsStrategy = function(attackOption) {
+        return attackOption.reduce(function(prev, wave) {
+            return prev + wave.units.totalUnits();
+        }, 0);
+    };
+
+    /**
+     * @return The total unit value for the units required.
+     */
+    Sim.prototype.lowestReqdUnitsValueStrategy = function(attackOption) {
+        return Sim.getUnitsReqdUnitValueForAttack(attackOption);
+    };
+
+    /**
+     * Attempts to calculate the 'best' attack option based on a strategy.
+     * The best option will always have fewest max losses, but the chosen
+     * option can differ based on choices such as using fewest number of
+     * units, or using an attack based on the total unit value of the option's
+     * units.
+     * @param strategy {string} The name of the strategy to use. Default "lowestReqdUnitsValue".
+     */
+    Sim.prototype.findBestAttackOption = function(strategy) {
+        strategy = strategy || "lowestReqdUnitsValue";
+        strategy = "fewestReqdUnits";
+        var strategyFn = this[strategy + "Strategy"];
+        var costsAndIdxs = this.findLowestMaxLossAttackOptions();
+        var unitsReqdUnitValues = costsAndIdxs.map(function(costAndIdx) {
+            var attackOption = this.attackOptions[costAndIdx.idx];
+            return strategyFn(attackOption);
+        }, this);
+        var idxOfCheapest = -1;
+        var cheapest = null;
+        unitsReqdUnitValues.forEach(function(unitValue, idx) {
+            if (null === cheapest || unitValue < cheapest) {
+                idxOfCheapest = idx;
+                cheapest = unitValue;
+            }
+        });
+        return idxOfCheapest;
+    };
+
+
 
 
 
@@ -251,7 +387,7 @@
         }
 
         //console.log(sim);
-        return sim;
+        return new Sim(sim.campEnemies, sim.exp, sim.attackOptions);
     };
 
     SimTable.getSimHeader = function($simTable) {
@@ -275,6 +411,9 @@
         SimTable.showTableAndHeader($simTable, false);
     };
 
+    /**
+     * @return int.
+     */
     SimTable.getChosenAttackOption = function($simTable) {
         var $sel = $simTable.find("tr.attack-option.selected");
         if ($sel.length < 1) {
@@ -295,12 +434,24 @@
     };
 
     SimTable.addSummaryRows = function($simTable, thisWaveLosses, totalLosses, totalActive, totalXP) {
-        var $tr1 = $("<tr class='grimbo summary wave-losses' />").html("<td>Wave losses: [" + thisWaveLosses.totalUnits() + "]</td><td colspan=99>" + thisWaveLosses + "</td>");
-        var $tr2 = $("<tr class='grimbo summary total-losses' />").html("<td>Total losses: [" + totalLosses.totalUnits() + "]</td><td colspan=99>" + totalLosses + "</td>");
+        function createRow(cssClass, cells) {
+            var $tr = $("<tr></tr>").addClass(cssClass);
+            for (var i = 0; i < cells.length; i++) {
+                // ensure a string ""+
+                var $td = $("<td></td>").html("" + cells[i]);
+                if (i === cells.length - 1) {
+                    $td.attr("colspan", "99");
+                }
+                $tr.append($td);
+            }
+            return $tr;
+        }
+        var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", thisWaveLosses + " [" + thisWaveLosses.totalUnitValue() + "]"]);
+        var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", totalLosses + " [" + totalLosses.totalUnitValue() + "]"]);
         var totalRequired = totalActive.add(totalLosses);
         //console.log(totalActive, totalLosses, totalRequired);
-        var $tr3 = $("<tr class='grimbo summary total-required' />").html("<td>Total required: [" + totalRequired.totalUnits() + "]</td><td colspan=99>" + totalRequired + "</td>");
-        var $tr4 = $("<tr class='grimbo summary total-exp' />").html("<td>Total XP:</td><td colspan=99>" + totalXP + "</td>");
+        var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", totalRequired]);
+        var $tr4 = createRow("grimbo summary total-exp", ["Total XP:", totalXP]);
         var $trs = $tr1.add($tr2).add($tr3).add($tr4).css("border", "solid black 1px");
         $simTable.append($trs);
     };
@@ -327,7 +478,7 @@
 
 
 
-	var lastSims = null;
+    var lastSims = null;
 
     function execute(simTables) {
 
@@ -358,6 +509,11 @@
                 sims.push(sim);
 
                 var chosenAttackOption = simTable.getChosenAttackOption();
+                if (chosenAttackOption < 0) {
+                    chosenAttackOption = sim.findBestAttackOption();
+                    console.log("best", chosenAttackOption);
+                    $table.find("tr").eq(chosenAttackOption + 1).addClass("selected");
+                }
                 chosenAttackOption = Math.max(chosenAttackOption, 0);
                 //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
