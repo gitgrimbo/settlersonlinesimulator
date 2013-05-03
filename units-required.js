@@ -1,6 +1,5 @@
 /*jslint browser: true*/
-/*global jQuery, console*/
-;
+/*global jQuery, console*/;
 (function($) {
     /* http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
 
@@ -76,6 +75,17 @@
             }, this);
         }
     }
+
+    /**
+     * @return The total number of units.
+     */
+    UnitList.prototype.totalUnits = function() {
+        var count = 0;
+        forEachOwnProperty(this, function(ob, prop) {
+            count += this[prop];
+        }, this);
+        return count;
+    };
 
     /**
      * @return a new UnitList.
@@ -166,14 +176,14 @@
   </h3>
 */
             var children = $h.children("span");
-            sim.enemies = [];
+            sim.campEnemies = [];
             // -2 because the filter and experience <span>s are not enemies
             for (var i = 0; i < children.length - 2; i++) {
                 var span = children[i];
                 var enemy = {};
                 enemy.count = StringUtils.$trim(span.previousSibling);
                 enemy.type = $.trim($(span).attr("title"));
-                sim.enemies.push(enemy);
+                sim.campEnemies.push(enemy);
             }
             var expStr = StringUtils.$trim(children.last().text());
             sim.exp = parseInt(expStr, 10);
@@ -219,7 +229,7 @@
         var sim = {};
         var $h = SimTable.getSimHeader($simTable);
         parseEnemiesFromHeader(sim, $h);
-        sim.options = [];
+        sim.attackOptions = [];
         $simTable.find("tr").each(function(i, tr) {
             //console.log(i, tr);
             if (0 === i) {
@@ -227,12 +237,12 @@
             }
             var option = parseUnitsRequiredFromRow(tr);
             if (option) {
-                sim.options.push(option);
+                sim.attackOptions.push(option);
             }
         });
 
-        if (sim.options.length < 1) {
-            var e = new Error("No options found");
+        if (sim.attackOptions.length < 1) {
+            var e = new Error("No attack options found");
             e.table = $simTable[0];
             throw e;
         }
@@ -255,7 +265,7 @@
         var $h = SimTable.getSimHeader($simTable);
         var func = isShow ? "show" : "hide";
         $h[func]();
-        $simTable.show[func]();
+        $simTable[func]();
     };
 
     SimTable.hideTableAndHeader = function($simTable) {
@@ -282,9 +292,11 @@
     };
 
     SimTable.addSummaryRows = function($simTable, thisWaveLosses, totalLosses, totalActive, totalXP) {
-        var $tr1 = $("<tr class='grimbo summary wave-losses' />").html("<td>Wave losses:</td><td colspan=99>" + thisWaveLosses + "</td>");
-        var $tr2 = $("<tr class='grimbo summary total-losses' />").html("<td>Total losses:</td><td colspan=99>" + totalLosses + "</td>");
-        var $tr3 = $("<tr class='grimbo summary total-required' />").html("<td>Total required:</td><td colspan=99>" + totalActive.add(totalLosses) + "</td>");
+        var $tr1 = $("<tr class='grimbo summary wave-losses' />").html("<td>Wave losses: [" + thisWaveLosses.totalUnits() + "]</td><td colspan=99>" + thisWaveLosses + "</td>");
+        var $tr2 = $("<tr class='grimbo summary total-losses' />").html("<td>Total losses: [" + totalLosses.totalUnits() + "]</td><td colspan=99>" + totalLosses + "</td>");
+        var totalRequired = totalActive.add(totalLosses);
+        //console.log(totalActive, totalLosses, totalRequired);
+        var $tr3 = $("<tr class='grimbo summary total-required' />").html("<td>Total required: [" + totalRequired.totalUnits() + "]</td><td colspan=99>" + totalRequired + "</td>");
         var $tr4 = $("<tr class='grimbo summary total-exp' />").html("<td>Total XP:</td><td colspan=99>" + totalXP + "</td>");
         var $trs = $tr1.add($tr2).add($tr3).add($tr4).css("border", "solid black 1px");
         $simTable.append($trs);
@@ -344,7 +356,7 @@
                 chosenAttackOption = Math.max(chosenAttackOption, 0);
                 //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
-                var option1waves = sim.options[chosenAttackOption];
+                var option1waves = sim.attackOptions[chosenAttackOption];
                 var thisWaveLosses = new UnitList();
                 for (var i = 0; i < option1waves.length; i++) {
                     var wave = option1waves[i];
@@ -355,6 +367,10 @@
                     // the dead are not active any more!
                     totalActive = totalActive.subtract(wave.maxLoss);
                 }
+
+                // Reset generals after each camp attack.
+                // The loss of general(s) has been taken into account above in totalWaveLosses.
+                totalActive.G = 0;
 
                 totalLosses = totalLosses.add(thisWaveLosses);
                 totalXP += sim.exp;
@@ -421,6 +437,6 @@
     try {
         execute($("table.example-sim"));
     } catch (e) {
-        console.log(e);
+        console.log(typeof e, e);
     }
 }(jQuery));
