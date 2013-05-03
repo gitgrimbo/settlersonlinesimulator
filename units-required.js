@@ -151,7 +151,8 @@
             return units;
         }
 
-        // remove attack wave prefix, e.g. "1: "
+        // Remove attack wave prefix, e.g. "1: ".
+        // So remove everything before first ':'.
         match = str.match(/.*?\:(.*)/);
         if (match) {
             str = StringUtils.$trim(match[1]);
@@ -326,6 +327,8 @@
 
 
 
+	var lastSims = null;
+
     function execute(simTables) {
 
         function doCalcs() {
@@ -380,7 +383,7 @@
                 simTable.addSummaryRows(thisWaveLosses, totalLosses, totalActive, totalXP);
             });
 
-            console.log(sims);
+            return sims;
         }
 
         function addSimControls() {
@@ -433,7 +436,8 @@
         addStyles();
         addAttackOptionClasses();
         addSimControls();
-        doCalcs();
+        var sims = doCalcs();
+        window["grimbo_lastSims"] = lastSims = sims;
     }
 
     try {
