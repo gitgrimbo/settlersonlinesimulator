@@ -1,7 +1,9 @@
 /*jslint browser: true*/
-/*global jQuery, console*/;
+/*global jQuery, console*/
+;
 (function($) {
-    /* http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
+    // Example URL:
+    // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
 
     // Page already includes:
     //   jQuery 1.6.2
