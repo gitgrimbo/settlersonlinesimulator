@@ -76,7 +76,7 @@ try {
                     this[prop] = unitList[prop];
                 }, this);
             }
-        };
+        }
 
         /**
          * @return a new UnitList.
@@ -133,21 +133,22 @@ try {
         }
 
         SimTable.parseUnitsStr = function(str) {
-            var units = new UnitList();
+            var units = new UnitList(),
+                match;
 
             if (!str) {
                 return units;
             }
 
             // remove attack wave prefix, e.g. "1: "
-            var match = str.match(/.*?\:(.*)/);
+            match = str.match(/.*?\:(.*)/);
             if (match) {
                 str = StringUtils.$trim(match[1]);
             }
 
             str = str.split(/\s+/);
             for (var i = 0; i < str.length; i++) {
-                var match = str[i].match(/([\d.]+)(.*)/);
+                match = str[i].match(/([\d.]+)(.*)/);
                 units[match[2]] = parseFloat(match[1]);
             }
             return units;
@@ -176,7 +177,7 @@ try {
                     sim.enemies.push(enemy);
                 }
                 var expStr = StringUtils.$trim(children.last().text());
-                sim.exp = parseInt(expStr);
+                sim.exp = parseInt(expStr, 10);
             }
 
             function parseUnitsRequiredFromRow(tr) {
@@ -320,7 +321,7 @@ try {
                 var totalActive = new UnitList();
                 var totalXP = 0;
 
-                simTables.each(function(i, table) {
+                simTables.each(function(tableIdx, table) {
                     var $table = $(table);
 
                     var simTable = new SimTable($table);
@@ -342,7 +343,7 @@ try {
 
                     var chosenAttackOption = simTable.getChosenAttackOption();
                     chosenAttackOption = Math.max(chosenAttackOption, 0);
-                    //console.log("sim", i, "chosenAttackOption", chosenAttackOption);
+                    //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
                     var option1waves = sim.options[chosenAttackOption];
                     var thisWaveLosses = new UnitList();
