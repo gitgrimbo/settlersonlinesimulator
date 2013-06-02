@@ -1,7 +1,7 @@
 /*jslint browser: true*/
-/*global jQuery, console*/
+/*global jQuery, console, yepnope, store*/
 ;
-(function($) {
+(function(window, document, $) {
     // Example URL:
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
 
@@ -10,6 +10,11 @@
     //     This means we use 'delegate' and not 'on'.
 
 
+
+    // IE fix
+    var console = window['console'] || {
+        log: function() {}
+    };
 
     // Util
 
@@ -171,6 +176,8 @@
         this.campEnemies = campEnemies;
         this.exp = exp;
         this.attackOptions = attackOptions;
+        this.chosenAttackOption = null;
+        this.ignore = null;
     }
 
     Sim.getUnitsReqdUnitValueForAttack = function(attackOption) {
@@ -266,6 +273,48 @@
         return idxOfCheapest;
     };
 
+    Sim.fromJSON = function(json) {
+        var sim = new Sim(json.campEnemies, json.exp, json.attackOptions);
+        sim.chosenAttackOption = json.chosenAttackOption;
+        sim.ignore = json.ignore;
+        return sim;
+    };
+
+
+
+
+
+    /**
+     * Represents the chosen Sims. This should be the model of what is on screen.
+     */
+    function AttackPlan(sims) {
+        this.sims = sims;
+    }
+
+    AttackPlan.prototype.ignore = function(simIndex, ignore) {
+        // normalise in case ignore is undefined or falsey rather than false.
+        ignore = false !== ignore;
+        this.sims[simIndex].ignore = ignore;
+    };
+
+    AttackPlan.prototype.isIgnored = function(simIndex) {
+        return this.sims[simIndex].ignore;
+    };
+
+    AttackPlan.prototype.save = function() {
+        var name = "attackPlan";
+        store.set(name, this);
+    };
+
+    AttackPlan.prototype.load = function() {
+        var name = "attackPlan";
+        var attackPlan = store.get(name);
+        this.sims = [];
+        for (var i = 0; i < attackPlan.sims.length; i++) {
+            this.sims[i] = Sim.fromJSON(attackPlan.sims[i]);
+        }
+    };
+
 
 
 
@@ -278,6 +327,44 @@
     function SimTable($simTable) {
         this.$simTable = $simTable;
     }
+
+    /**
+     * Set a "sim-index" attribute on the table, so we know which Sim it is for.
+     */
+    SimTable.setSimIndex = function($simTable, simIndex) {
+        var h = SimTable.getSimHeader($simTable);
+        $simTable.add(h).attr("data-sim-index", simIndex);
+    };
+
+    /**
+     * @return The "sim-index" attribute of the table, so we know which Sim it is for.
+     */
+    SimTable.getSimIndex = function($simTable) {
+        return parseInt($simTable.attr("data-sim-index"), 10);
+    };
+
+    SimTable.getSimIndexForHeading = function($childOfHeading) {
+        return parseInt($childOfHeading.closest("h3").attr("data-sim-index"), 10);
+    };
+
+    /**
+     * Update the table UI to match "attackOptionIndex". 
+     */
+    SimTable.setAttackOptionIndex = function($simTable, attackOptionIndex) {
+        // Get the row to be selected.
+        var $tr = $simTable.find(".grimbo.attack-option").eq(attackOptionIndex);
+        // Clear all rows of selected class.
+        $tr.siblings().add($tr).removeClass("selected");
+        // Select the chosen row.
+        $tr.addClass("selected");
+    };
+
+    /**
+     * @return The "attack-option-index" for the passed-in row.
+     */
+    SimTable.getRowAttackOptionIndex = function(tr) {
+        return parseInt($(tr).attr("data-attack-option-index"), 10);
+    };
 
     SimTable.parseUnitsStr = function(str) {
         var units = new UnitList(),
@@ -332,6 +419,7 @@
             /*
 <tr><td>1: 134B<br />2: 23R 1S 44C 132LB</td><td>134B 1G<br />22.26R</td><td>134B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>162.75</td></tr><tr><td>1: 135B<br />2: 23R 1S 44C 132LB</td><td>135B 1G<br />22.26R</td><td>135B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>163.75</td></tr><tr><td>1: 136B<br />2: 23R 1S 44C 132LB</td><td>136B 1G<br />22.27R</td><td>136B 1G<br />23R</td><td>40KU 40SS 27DP<br />13DP 1DHP</td><td>40KU 40SS 40DP<br />13DP 1DHP</td><td>164.75</td></tr>
 */
+            console.log(tr);
             var $td = $(tr).find("td");
             if (!$td || $td.length < 1) {
                 console.log("parseSimTable: tds not found");
@@ -394,13 +482,9 @@
         return $simTable.prev("h3");
     };
 
-    SimTable.isIgnored = function($simTable) {
-        var $h = SimTable.getSimHeader($simTable);
-        return !$h.find("input.include-sim").is(":checked");
-    };
-
     SimTable.showTableAndHeader = function($simTable, isShow) {
-        isShow = ("undefined" === typeof isShow) || (true === isShow);
+        // normalise in case ignore is undefined or falsey rather than false.
+        isShow = false !== isShow;
         var $h = SimTable.getSimHeader($simTable);
         var func = isShow ? "show" : "hide";
         $h[func]();
@@ -462,7 +546,13 @@
 
     // Create 'instance' methods for each of the specified 'static' methods.
     // All the 'static' methods take $simTable as the first parameter.
-    $.each(["parseToSim", "parseSimTable", "getSimHeader", "isIgnored", "showTableAndHeader", "hideTableAndHeader", "getChosenAttackOption", "addSummaryRows", "removeSummaryRows"], function(i, methodName) {
+    $.each([
+
+    "parseToSim", "parseSimTable", "getSimHeader", "showTableAndHeader", "hideTableAndHeader",
+
+    "getChosenAttackOption", "addSummaryRows", "removeSummaryRows", "getSimIndex", "setSimIndex", "setAttackOptionIndex"
+
+    ], function(i, methodName) {
         SimTable.prototype[methodName] = function() {
             var meth = SimTable[methodName];
             var args = [this.$simTable].concat(Array.prototype.slice.call(arguments));
@@ -478,11 +568,10 @@
 
 
 
-    var lastSims = null;
-
     function execute(simTables) {
+        var attackPlan = buildAttackPlan(simTables);
 
-        function doCalcs() {
+        function buildAttackPlan(simTables) {
             var sims = [];
             var totalLosses = new UnitList();
             var totalActive = new UnitList();
@@ -493,28 +582,47 @@
 
                 var simTable = new SimTable($table);
 
+                var sim = simTable.parseToSim();
+                sims.push(sim);
+
+                var chosenAttackOption = sim.findBestAttackOption();
+                console.log("best", chosenAttackOption);
+
+                sim.chosenAttackOption = Math.max(chosenAttackOption, 0);
+                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+            });
+
+            return new AttackPlan(sims);
+        }
+
+        function doCalcs() {
+            var totalLosses = new UnitList();
+            var totalActive = new UnitList();
+            var totalXP = 0;
+
+            simTables.each(function(tableIdx, table) {
+                var $table = $(table);
+
+                var simTable = new SimTable($table);
+                simTable.setSimIndex(tableIdx);
+
                 // hide by default
                 simTable.hideTableAndHeader();
 
                 // clear previous summary rows (if any)
                 simTable.removeSummaryRows();
 
-                if (simTable.isIgnored()) {
+                var sim = attackPlan.sims[tableIdx];
+                console.log("tableIdx", tableIdx, "sim", sim);
+
+                if (attackPlan.isIgnored(tableIdx)) {
                     return;
                 }
 
                 simTable.showTableAndHeader();
 
-                var sim = simTable.parseToSim();
-                sims.push(sim);
-
-                var chosenAttackOption = simTable.getChosenAttackOption();
-                if (chosenAttackOption < 0) {
-                    chosenAttackOption = sim.findBestAttackOption();
-                    console.log("best", chosenAttackOption);
-                    $table.find("tr").eq(chosenAttackOption + 1).addClass("selected");
-                }
-                chosenAttackOption = Math.max(chosenAttackOption, 0);
+                var chosenAttackOption = sim.chosenAttackOption;
+                simTable.setAttackOptionIndex(chosenAttackOption);
                 //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
                 var option1waves = sim.attackOptions[chosenAttackOption];
@@ -539,15 +647,17 @@
                 simTable.addSummaryRows(thisWaveLosses, totalLosses, totalActive, totalXP);
             });
 
-            return sims;
+            return attackPlan;
         }
 
         function addSimControls() {
             simTables.each(function(i, table) {
                 var $h = SimTable.getSimHeader($(table));
-                var $checkbox = $("<input id=ignore_sim_" + i + " type=checkbox class='grimbo include-sim' data-sim-index=" + i + " checked=checked title='Ignore this'></input>");
+                var $checkbox = $("<input id=ignore_sim_" + i + " type=checkbox class='grimbo include-sim' checked=checked title='Ignore this'></input>");
                 $h.prepend($checkbox);
-                var $button = $("<button class='grimbo ignore-prev-sims' data-sim-index=" + i + " title='Ignore all previous'>&uarr;</button>");
+                var $repeat = $("<input id=repeat_sim_" + i + " type=input class='grimbo repeat-sim' title='Repeat sim' value='1' size='2'></input>");
+                $h.prepend($repeat);
+                var $button = $("<button class='grimbo ignore-prev-sims' title='Ignore all previous'>&uarr;</button>");
                 $h.prepend($button);
             });
         }
@@ -560,31 +670,44 @@
 
         function addStyles(addTo) {
             addTo = addTo || document.body;
-            var $style = $("<style/>").html("tr.grimbo.attack-option.selected { border-left: solid red 4px; }");
+            var css = [ //
+            "tr.grimbo.attack-option.selected {", //
+            "  border-left: solid red 4px;", //
+            "}", //
+            "input.grimbo.repeat-sim {", //
+            "  width: 2em;", //
+            "}"];
+            var $style = $("<style/>").html(css.join("\n"));
             $(addTo).append($style);
         }
 
         // Ignore-sim checkbox click
         $(document).delegate("input.include-sim", "click", function(evt) {
+            var simIndex = SimTable.getSimIndexForHeading($(this));
+            console.log(this.checked);
+            attackPlan.ignore(simIndex, this.checked);
             doCalcs();
         });
 
         // Ignore-prev-sims button click
         $(document).delegate("button.ignore-prev-sims", "click", function(evt) {
-            var $button = $(this);
-            var idx = parseInt($button.attr("data-sim-index"), 10);
-            for (var i = 0; i < idx; i++) {
-                $("#ignore_sim_" + i)[0].checked = false;
+            var simIndex = SimTable.getSimIndexForHeading($(this));
+            console.log("simIndex", simIndex);
+            for (var i = 0; i < simIndex; i++) {
+                attackPlan.ignore(i);
             }
             doCalcs();
         });
 
         // Choose attack option
         $(simTables).delegate("tr.grimbo.attack-option", "click", function(evt) {
-            var $tr = $(this);
-            $tr.siblings().add($tr).removeClass("selected");
-            $tr.addClass("selected");
+            var $simTable = $(this).closest("table");
+            var chosenAttackOption = SimTable.getRowAttackOptionIndex(this);
+            var simIndex = SimTable.getSimIndex($simTable);
+            attackPlan.sims[simIndex].chosenAttackOption = chosenAttackOption;
+            console.log("chosenAttackOption", chosenAttackOption, "simIndex", simIndex);
 
+            // doCalcs will refresh the UI
             // a bit inefficient to do all the calcs again?
             doCalcs();
         });
@@ -592,13 +715,80 @@
         addStyles();
         addAttackOptionClasses();
         addSimControls();
-        var sims = doCalcs();
-        window["grimbo_lastSims"] = lastSims = sims;
+        doCalcs();
+        window["grimbo_attackPlan"] = attackPlan;
     }
 
-    try {
-        execute($("table.example-sim"));
-    } catch (e) {
-        console.log(typeof e, e);
+    /**
+     * VERY simple script loader to bootstrap yepnode.js,
+     * which is then used as the actual script loader.
+     * @param {string[]} scripts Array of script srcs.
+     * @return A Deferred that is resolved when all the scripts are loaded.
+     */
+    function importScripts(scripts) {
+        function importScript(src) {
+            var dfd = $.Deferred();
+            var s = $("<script>").load(function(evt) {
+                dfd.resolve(this);
+                s.remove();
+            }).attr("type", "text/javascript").attr("src", src);
+            var parent = document.head || document.body;
+            parent.appendChild(s[0]);
+            return dfd;
+        }
+        var dfds = [];
+        for (var i = 0; i < scripts.length; i++) {
+            dfds.push(importScript(scripts[i]));
+        }
+        return $.when.apply(null, dfds);
     }
-}(jQuery));
+
+    /**
+     * Deferred wrapper for yepnope.
+     */
+    function yepNopeDeferred(opts) {
+        var dfd = $.Deferred();
+
+        if (typeof opts === "string") {
+            var src = opts;
+            opts = {
+                load: src
+            };
+        }
+
+        var complete = opts.complete;
+        opts.complete = function() {
+            if (complete) {
+                complete.apply(this, arguments);
+            }
+            dfd.resolve.apply(dfd, arguments);
+        };
+
+        yepnope(opts);
+        return dfd;
+    }
+
+    var js = {
+        json3: "//cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
+        yepNope: "//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js",
+        storeJs: "//cdnjs.cloudflare.com/ajax/libs/store.js/1.3.7/store.min.js"
+    };
+
+    importScripts([js.yepNope]).done(function() {
+        return yepnope({
+            test: window.JSON,
+            nope: js.json3
+        });
+    }).done(function() {
+        return yepnope(js.storeJs);
+    }).done(function() {
+        try {
+            execute($("table.example-sim"));
+        } catch (e) {
+            console.log(typeof e, e);
+        }
+    }).fail(function() {
+        console.log(arguments);
+    });
+
+}(window, document, jQuery));
