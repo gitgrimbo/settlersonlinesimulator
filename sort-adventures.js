@@ -4,7 +4,8 @@
 (function(window, document, $) {
     function xp(el, val) {
         el = $(el);
-        if ("number" === typeof val) {
+        if ("undefined" !== typeof val) {
+            // parseInt on number just returns the number, so this is really for strings.
             val = parseInt(val, 10);
             return el.attr("data-xp", val);
         }
@@ -20,6 +21,7 @@
     }
 
     function addXpAttr(campEps) {
+        // Map the campEps to their parent <li>, and set xp attr.
         return campEps.map(function() {
             var t = $(this);
             var _xp = parseInt(t.text().trim(), 10);
