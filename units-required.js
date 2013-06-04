@@ -1,7 +1,8 @@
 /*jslint browser: true*/
 /*global jQuery, console, yepnope, store*/
-;
-(function(window, document, $) {
+define(function() {
+    var $ = jQuery;
+
     // Example URL:
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
 
@@ -291,6 +292,41 @@
         this.sims = sims;
     }
 
+    AttackPlan.prototype.doCalcs = function(callback) {
+        var totalLosses = new UnitList();
+        var totalActive = new UnitList();
+        var totalXP = 0;
+
+        this.sims.forEach(function(sim, idx) {
+            var chosenAttackOption = sim.chosenAttackOption;
+            //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+
+            var option1waves = sim.attackOptions[chosenAttackOption];
+            var thisWaveLosses = new UnitList();
+            for (var i = 0; i < option1waves.length; i++) {
+                var wave = option1waves[i];
+                // add this wave losses
+                thisWaveLosses = thisWaveLosses.add(wave.maxLoss);
+                // recruit enough units for this wave (may already have them active)
+                totalActive = totalActive.recruit(wave.units);
+                // the dead are not active any more!
+                totalActive = totalActive.subtract(wave.maxLoss);
+            }
+
+            // Reset generals after each camp attack.
+            // The loss of general(s) has been taken into account above in totalWaveLosses.
+            totalActive.G = 0;
+
+            totalLosses = totalLosses.add(thisWaveLosses);
+            totalXP += sim.exp;
+
+            callback(sim, idx, totalLosses, totalActive, totalXP);
+        });
+
+        return this;
+    };
+
+
     AttackPlan.prototype.ignore = function(simIndex, ignore) {
         // normalise in case ignore is undefined or falsey rather than false.
         ignore = false !== ignore;
@@ -419,7 +455,7 @@
             /*
 <tr><td>1: 134B<br />2: 23R 1S 44C 132LB</td><td>134B 1G<br />22.26R</td><td>134B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>162.75</td></tr><tr><td>1: 135B<br />2: 23R 1S 44C 132LB</td><td>135B 1G<br />22.26R</td><td>135B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>163.75</td></tr><tr><td>1: 136B<br />2: 23R 1S 44C 132LB</td><td>136B 1G<br />22.27R</td><td>136B 1G<br />23R</td><td>40KU 40SS 27DP<br />13DP 1DHP</td><td>40KU 40SS 40DP<br />13DP 1DHP</td><td>164.75</td></tr>
 */
-            console.log(tr);
+            //console.log(tr);
             var $td = $(tr).find("td");
             if (!$td || $td.length < 1) {
                 console.log("parseSimTable: tds not found");
@@ -568,14 +604,11 @@
 
 
 
-    function execute(simTables) {
+    function getUnitsRequired(simTables) {
         var attackPlan = buildAttackPlan(simTables);
 
         function buildAttackPlan(simTables) {
             var sims = [];
-            var totalLosses = new UnitList();
-            var totalActive = new UnitList();
-            var totalXP = 0;
 
             simTables.each(function(tableIdx, table) {
                 var $table = $(table);
@@ -586,10 +619,10 @@
                 sims.push(sim);
 
                 var chosenAttackOption = sim.findBestAttackOption();
-                console.log("best", chosenAttackOption);
+                //console.log("best", chosenAttackOption);
 
                 sim.chosenAttackOption = Math.max(chosenAttackOption, 0);
-                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+                //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
             });
 
             return new AttackPlan(sims);
@@ -613,7 +646,7 @@
                 simTable.removeSummaryRows();
 
                 var sim = attackPlan.sims[tableIdx];
-                console.log("tableIdx", tableIdx, "sim", sim);
+                //console.log("tableIdx", tableIdx, "sim", sim);
 
                 if (attackPlan.isIgnored(tableIdx)) {
                     return;
@@ -717,6 +750,7 @@
         addSimControls();
         doCalcs();
         window["grimbo_attackPlan"] = attackPlan;
+        return attackPlan;
     }
 
     /**
@@ -774,21 +808,31 @@
         storeJs: "//cdnjs.cloudflare.com/ajax/libs/store.js/1.3.7/store.min.js"
     };
 
-    importScripts([js.yepNope]).done(function() {
-        return yepnope({
-            test: window.JSON,
-            nope: js.json3
+    function execute() {
+        importScripts([js.yepNope]).done(function() {
+            return yepnope({
+                test: window.JSON,
+                nope: js.json3
+            });
+        }).done(function() {
+            return yepnope(js.storeJs);
+        }).done(function() {
+            try {
+                getUnitsRequired($("table.example-sim"));
+            } catch (e) {
+                console.log(typeof e, e);
+            }
+        }).fail(function() {
+            console.log(arguments);
         });
-    }).done(function() {
-        return yepnope(js.storeJs);
-    }).done(function() {
-        try {
-            execute($("table.example-sim"));
-        } catch (e) {
-            console.log(typeof e, e);
-        }
-    }).fail(function() {
-        console.log(arguments);
-    });
+    }
 
-}(window, document, jQuery));
+    return {
+        UnitList: UnitList,
+        Sim: Sim,
+        SimTable: SimTable,
+        AttackPlan: AttackPlan,
+        getUnitsRequired: getUnitsRequired,
+        execute: execute
+    };
+});
