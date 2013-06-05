@@ -1,6 +1,7 @@
 /*jslint browser: true*/
 /*global jQuery, console, yepnope, store*/
 define(function() {
+    var DEBUG = false;
     var $ = jQuery;
 
     // Example URL:
@@ -12,10 +13,16 @@ define(function() {
 
 
 
-    // IE fix
-    var console = window['console'] || {
+    var NULL_CONSOLE = {
         log: function() {}
     };
+
+    // IE fix
+    var console = window['console'] || NULL_CONSOLE;
+
+    if (!DEBUG) {
+        console = NULL_CONSOLE;
+    }
 
     // Util
 
