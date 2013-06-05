@@ -9,6 +9,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
 
     var $ = jQuery;
     var AdventuresPage = adventuresPage.AdventuresPage;
+    var UnitList = unitsRequired.UnitList;
 
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -91,7 +92,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
 
     function getTotalLosses(attackPlan) {
         var lastSimIdx = attackPlan.sims.length - 1;
-        var result;
+        var result = new UnitList();
         attackPlan.doCalcs(function(sim, idx, totalLosses, totalActive, totalXP) {
             if (lastSimIdx === idx) {
                 result = totalLosses;
