@@ -574,7 +574,7 @@ define(function() {
         if (sim.attackOptions.length < 1) {
             var e = new Error("No attack options found");
             e.table = $simTable[0];
-            throw e;
+            //throw e;
         }
 
         console.log(sim);
@@ -739,6 +739,12 @@ define(function() {
                 console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
                 var option1waves = sim.attackOptions[chosenAttackOption];
+                if (!option1waves) {
+                    // There are no waves for this sim for some reason.
+                    // Probably because no data has been logged for this sim and the chosen unit types.
+                    return;
+                }
+
                 var thisWaveLosses = new UnitList();
                 for (var i = 0; i < option1waves.length; i++) {
                     var wave = option1waves[i];
