@@ -366,7 +366,7 @@ define(function() {
 
         this.sims.forEach(function(sim, idx) {
             var chosenAttackOption = sim.chosenAttackOption;
-            //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+            console.log("sim", idx, "chosenAttackOption", chosenAttackOption);
 
             var option1waves = sim.attackOptions[chosenAttackOption];
             var thisWaveLosses = new UnitList();
@@ -522,7 +522,7 @@ define(function() {
             /*
 <tr><td>1: 134B<br />2: 23R 1S 44C 132LB</td><td>134B 1G<br />22.26R</td><td>134B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>162.75</td></tr><tr><td>1: 135B<br />2: 23R 1S 44C 132LB</td><td>135B 1G<br />22.26R</td><td>135B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>163.75</td></tr><tr><td>1: 136B<br />2: 23R 1S 44C 132LB</td><td>136B 1G<br />22.27R</td><td>136B 1G<br />23R</td><td>40KU 40SS 27DP<br />13DP 1DHP</td><td>40KU 40SS 40DP<br />13DP 1DHP</td><td>164.75</td></tr>
 */
-            //console.log(tr);
+            console.log(tr);
             var $td = $(tr).find("td");
             if (!$td || $td.length < 1) {
                 console.log("parseSimTable: tds not found");
@@ -561,7 +561,7 @@ define(function() {
         parseEnemiesFromHeader(sim, $h);
         sim.attackOptions = [];
         $simTable.find("tr").each(function(i, tr) {
-            //console.log(i, tr);
+            console.log(i, tr);
             if (0 === i) {
                 return;
             }
@@ -577,7 +577,7 @@ define(function() {
             throw e;
         }
 
-        //console.log(sim);
+        console.log(sim);
         return new Sim(sim.campEnemies, sim.exp, sim.attackOptions);
     };
 
@@ -695,10 +695,10 @@ define(function() {
                 sims.push(sim);
 
                 var chosenAttackOption = sim.findBestAttackOption();
-                //console.log("best", chosenAttackOption);
+                console.log("best", chosenAttackOption);
 
                 sim.chosenAttackOption = Math.max(chosenAttackOption, 0);
-                //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
             });
 
             return new AttackPlan(sims);
@@ -724,10 +724,10 @@ define(function() {
                 simTable.removeSummaryRows();
 
                 var sim = attackPlan.sims[tableIdx];
-                //console.log("tableIdx", tableIdx, "sim", sim);
+                console.log("tableIdx", tableIdx, "sim", sim);
 
                 var ignore = attackPlan.isIgnored(tableIdx);
-                //console.log(M, "ignore", tableIdx, ignore);
+                console.log(M, "ignore", tableIdx, ignore);
                 if (ignore) {
                     return;
                 }
@@ -736,7 +736,7 @@ define(function() {
 
                 var chosenAttackOption = sim.chosenAttackOption;
                 simTable.setAttackOptionIndex(chosenAttackOption);
-                //console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
                 var option1waves = sim.attackOptions[chosenAttackOption];
                 var thisWaveLosses = new UnitList();
