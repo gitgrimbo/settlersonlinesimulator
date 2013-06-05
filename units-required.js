@@ -97,12 +97,31 @@ define(function() {
      * Unit values. Scaled up by x1000.
      */
     UnitList.unitValues = {
-        R: 1250,
-        B: 1000,
-        LB: 2875,
-        M: 3375,
-        C: 3375,
-        S: 6000
+        "R": 1250,
+        "B": 1000,
+        "L": 2875,
+        "M": 3375,
+        "C": 3375,
+        "S": 6000,
+        "E": 11875,
+        "A": 21875,
+        "K": 26875
+    };
+
+    /**
+     *
+     */
+    UnitList.unitNames = {
+        "G": "General",
+        "R": "Recruit",
+        "B": "Bowman",
+        "L": "Longbowman",
+        "M": "Militia",
+        "C": "Cavalry",
+        "S": "Soldier",
+        "E": "Elite Soldier",
+        "A": "Crossbowman",
+        "K": "Cannoneer"
     };
 
     /**
@@ -173,6 +192,47 @@ define(function() {
     };
 
     UnitList.prototype.toString = StringUtils.simpleToString;
+
+    /**
+     * Returns a HTML string that has a sprited span followed by a unit count for each unit type in the UnitList.
+     */
+    UnitList.prototype.toHtmlString = (function() {
+        // CSS defined in
+        // http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css
+        var cssMappings = {
+            "G": "general",
+            "R": "recruit",
+            "M": "militia",
+            "C": "cavalry",
+            "S": "soldier",
+            "E": "elitesoldier",
+            "B": "bowman",
+            "L": "longbowman",
+            "A": "crossbowman",
+            "K": "cannoneer"
+        };
+
+        function sortByValue(a, b) {
+            return a.value - b.value;
+        }
+        return function() {
+            var items = [];
+            forEachOwnProperty(this, function(ob, prop) {
+                var css = cssMappings[prop];
+                if (ob[prop]) {
+                    items.push({
+                        value: UnitList.unitValues[prop],
+                        html: '<span class="' + css + ' unit-sprite" title="' + UnitList.unitNames[prop] + '">&nbsp;</span><span style=padding-right:1em;>' + ob[prop] + '</span>'
+                    });
+                }
+            }, this);
+            var s = '<div style="display:inline-block;height:24px;">';
+            items.sort(sortByValue).forEach(function(it) {
+                s += it.html;
+            });
+            return s + "</div>";
+        };
+    }());
 
 
 
@@ -573,11 +633,11 @@ define(function() {
             }
             return $tr;
         }
-        var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", thisWaveLosses + " [" + thisWaveLosses.totalUnitValue() + "]"]);
-        var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", totalLosses + " [" + totalLosses.totalUnitValue() + "]"]);
+        var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", thisWaveLosses.toHtmlString() + " [" + thisWaveLosses.totalUnitValue() + "]"]);
+        var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", totalLosses.toHtmlString() + " [" + totalLosses.totalUnitValue() + "]"]);
         var totalRequired = totalActive.add(totalLosses);
-        //console.log(totalActive, totalLosses, totalRequired);
-        var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", totalRequired]);
+        console.log(totalActive, totalLosses, totalRequired);
+        var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", totalRequired.toHtmlString()]);
         var $tr4 = createRow("grimbo summary total-exp", ["Total XP:", totalXP]);
         var $trs = $tr1.add($tr2).add($tr3).add($tr4).css("border", "solid black 1px");
         $simTable.append($trs);
@@ -610,6 +670,15 @@ define(function() {
     // Main
 
 
+
+    function addStyles(cssStr, addTo) {
+        addTo = addTo || document.body;
+        if (cssStr.join) {
+            cssStr = cssStr.join("\n");
+        }
+        var $style = $("<style/>").html(cssStr);
+        $(addTo).append($style);
+    }
 
     function getUnitsRequired(simTables) {
         var attackPlan = buildAttackPlan(simTables);
@@ -712,19 +781,6 @@ define(function() {
             });
         }
 
-        function addStyles(addTo) {
-            addTo = addTo || document.body;
-            var css = [ //
-            "tr.grimbo.attack-option.selected {", //
-            "  border-left: solid red 4px;", //
-            "}", //
-            "input.grimbo.repeat-sim {", //
-            "  width: 2em;", //
-            "}"];
-            var $style = $("<style/>").html(css.join("\n"));
-            $(addTo).append($style);
-        }
-
         // Ignore-sim checkbox click
         $(document).delegate("input.include-sim", "click", function(evt) {
             var simIndex = SimTable.getSimIndexForHeading($(this));
@@ -758,7 +814,18 @@ define(function() {
             doCalcs();
         });
 
-        addStyles();
+        addStyles([ //
+        "span.unit-sprite {", //
+        "display:inline;", //
+        "padding:0px 15px 10px 11px;", //
+        "}", //
+        "tr.grimbo.attack-option.selected {", //
+        "  border-left: solid red 4px;", //
+        "}", //
+        "input.grimbo.repeat-sim {", //
+        "  width: 2em;", //
+        "}"]);
+
         addAttackOptionClasses();
         addSimControls();
         doCalcs();
