@@ -629,6 +629,8 @@ define(function() {
         }
 
         function doCalcs() {
+            var M = "doCacls";
+
             var totalLosses = new UnitList();
             var totalActive = new UnitList();
             var totalXP = 0;
@@ -648,7 +650,9 @@ define(function() {
                 var sim = attackPlan.sims[tableIdx];
                 //console.log("tableIdx", tableIdx, "sim", sim);
 
-                if (attackPlan.isIgnored(tableIdx)) {
+                var ignore = attackPlan.isIgnored(tableIdx);
+                //console.log(M, "ignore", tableIdx, ignore);
+                if (ignore) {
                     return;
                 }
 
@@ -717,8 +721,10 @@ define(function() {
         // Ignore-sim checkbox click
         $(document).delegate("input.include-sim", "click", function(evt) {
             var simIndex = SimTable.getSimIndexForHeading($(this));
-            console.log(this.checked);
-            attackPlan.ignore(simIndex, this.checked);
+            // checkbox has already changed value, so reverse.
+            var ignore = !this.checked;
+            console.log("ignore", simIndex, ignore);
+            attackPlan.ignore(simIndex, ignore);
             doCalcs();
         });
 
