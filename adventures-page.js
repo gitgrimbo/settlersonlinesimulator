@@ -17,8 +17,20 @@ define(function() {
         return parseInt(el.attr("data-xp"), 10);
     };
 
+    AdventuresPage.prototype.findAdventuresElement = function() {
+        return this.container.find("#adventures");
+    };
+
+    AdventuresPage.prototype.findAdventureLis = function(li) {
+        return this.findAdventuresElement().find("li");
+    };
+
     AdventuresPage.liTitle = function(li) {
-        return li.find(".adventure-title").text().replace(/\s+/gi, " ").trim();
+        return li.find(".adventure-title a:first").text().replace(/\s+/gi, " ").trim();
+    };
+
+    AdventuresPage.liAdventureHref = function(li) {
+        return li.find(".adventure-title a:first").attr("href");
     };
 
     AdventuresPage.liXp = function(li) {
@@ -30,7 +42,7 @@ define(function() {
     };
 
     AdventuresPage.prototype.enhanceLis = function() {
-        return $(".camp-ep").map(function() {
+        return this.container.find(".camp-ep").map(function() {
             var t = $(this);
             return AdventuresPage.xp(t.closest("li"), AdventuresPage.campEp(t));
         });
