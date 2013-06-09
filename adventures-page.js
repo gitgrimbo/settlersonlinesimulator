@@ -7,14 +7,22 @@ define(function() {
         this.container = $(container || document);
     }
 
-    AdventuresPage.xp = function(el, val) {
-        el = $(el);
+    function intAttr(el, name, val) {
         if ("undefined" !== typeof val) {
             // parseInt on number just returns the number, so this is really for strings.
             val = parseInt(val, 10);
-            return el.attr("data-xp", val);
+            el.attr(name, val);
+            return val;
         }
-        return parseInt(el.attr("data-xp"), 10);
+        return parseInt(el.attr(name), 10);
+    }
+
+    AdventuresPage.xp = function(el, val) {
+        return intAttr(el, "data-xp", val);
+    };
+
+    AdventuresPage.idx = function(el, val) {
+        return intAttr(el, "data-idx", val);
     };
 
     AdventuresPage.prototype.findAdventuresElement = function() {
