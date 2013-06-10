@@ -25,6 +25,10 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         return $.ajax(url);
     }
 
+    function undef(o) {
+        return "undefined" === typeof o;
+    }
+
     /**
      * Remove the JS that tries to ensure the page is the top frame/window.
      */
@@ -137,10 +141,11 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         var title = AdventuresPage.liTitle(li);
         var totalLosses = getTotalLosses(details.attackPlan);
         var tuv = totalLosses.totalUnitValue();
+        // XP as calculated is called xp2. xp remains as recorded from the adventures page.
         return {
             totalLosses: totalLosses,
             title: title,
-            xp: xp,
+            xp2: xp,
             tuv: tuv
         };
     }
@@ -156,43 +161,24 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         return outer.append(inner.append("&nbsp;"));
     }
 
-    var getWikiLink = (function() {
-        var wikiMappings = {
-            "Island of the Pirates": "The Island of the Pirates",
-            "Stealing from the rich": "Stealing from the Rich",
-            "The Dark Priests": "Dark Priests",
-            "Sons of the veldt": "Sons of the Veld",
-            "Victor the vicious": "Victor the Vicious",
-            "Mother Love": "Motherly Love",
-            "The end of the earth": "The End of the World"
-        };
-
-        function getWikiLink(title) {
-            // See if we need to map the page name, before replacing spaces with underscores.
-            var pageName = (wikiMappings[title] || title).replace(/\s/gi, "_");
-            return "http://thesettlersonline.wikia.com/wiki/" + pageName;
-        }
-        return getWikiLink;
-    }());
-
     function showResults(xhr, li, status, details) {
         li = $(li);
         console.log(new Date().getTime(), arguments, xhr.idx, xhr.href, details.title, details.error);
         if (details.attackPlan) {
-            // Guess at the max xp/tuv ratio
-            var MAX_XP_TUV_RATIO = 30;
+            // Guess at the max xp2/tuv ratio
+            var MAX_XP_TUV_RATIO = 40;
             var info = handleDetails(li, details);
-            var ratioStr = toNdp("" + (info.xp / info.tuv), 2);
-            var arr = [info.totalLosses, info.xp, info.tuv, ratioStr];
-            var bar = createBar(100, 100 * (info.xp / info.tuv) / MAX_XP_TUV_RATIO);
+            var ratioStr = toNdp("" + (info.xp2 / info.tuv), 2);
+            var arr = [info.totalLosses, info.xp2, info.tuv, ratioStr];
+            var bar = createBar(100, 100 * (info.xp2 / info.tuv) / MAX_XP_TUV_RATIO);
             var ratioStrEl = $("<div>").css({
                 "display": "inline-block",
                 "width": "100%",
                 "text-align": "center"
             }).append(ratioStr);
             var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
-            var wikiLink = $("<a>").addClass("wiki-link").attr("href", getWikiLink(details.title)).html("wiki");
-            li.append($("<div>").append([info.totalLosses, info.tuv].join(" -- ")).append(" ").append(wikiLink));
+            var lossesEl = $("<span>").append([info.totalLosses, info.tuv].join(" -- "));
+            li.find(".wiki-link").after(" ").after(lossesEl);
             li.find(".camp-ep").append(ratioEl);
             console.log([info.title].concat(arr).join("\t"));
             return info;
@@ -200,26 +186,48 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         return null;
     }
 
-    function sortInfoByRatio(infos, reverse) {
-        infos.sort(function(a, b) {
-            var val = (a.xp / a.tuv) - (b.xp / b.tuv);
-            return (true === reverse) ? -val : val;
-        });
+    function checkUndef(a, b, prop) {
+        if (prop) {
+            a = a[prop];
+            b = b[prop];
+        }
+        if (undef(a)) {
+            return undef(b) ? 0 : 1;
+        }
+        if (undef(b)) {
+            return -1;
+        }
+        return null;
     }
 
-    function sortInfoByXP(infos, reverse) {
-        infos.sort(function(a, b) {
-            var val = a.xp - b.xp;
-            return (true === reverse) ? -val : val;
-        });
+    function checkUndefWrapper(fn, prop) {
+        return function(reverse, a, b) {
+            var check = checkUndef(a, b, prop);
+            if (null !== check) {
+                return check;
+            }
+            return fn(reverse, a, b);
+        };
     }
 
-    function sortInfoByTotalLosses(infos, reverse) {
-        infos.sort(function(a, b) {
-            var val = a.tuv - b.tuv;
-            return (true === reverse) ? -val : val;
-        });
+    function sortInfo(infos, reverse, fn) {
+        infos.sort(fn.bind(null, reverse));
     }
+
+    var sortInfoByRatio = checkUndefWrapper(function(reverse, a, b) {
+        var val = (a.xp / a.tuv) - (b.xp / b.tuv);
+        return (true === reverse) ? -val : val;
+    }, "tuv");
+
+    var sortInfoByXP = checkUndefWrapper(function(reverse, a, b) {
+        var val = a.xp - b.xp;
+        return (true === reverse) ? -val : val;
+    }, "xp");
+
+    var sortInfoByTotalLosses = checkUndefWrapper(function(reverse, a, b) {
+        var val = a.tuv - b.tuv;
+        return (true === reverse) ? -val : val;
+    }, "tuv");
 
     function reorderLis(ul, lis, infos) {
         lis.remove();
@@ -257,7 +265,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
                 // this === anchor
                 evt.preventDefault();
                 var reverseSort = !! this.reverseSort;
-                sortInfoFn(infos, reverseSort);
+                sortInfo(infos, reverseSort, sortInfoFn);
                 reorderLis(ads, lis, infos);
                 this.reverseSort = !reverseSort;
                 // Clear the arrows from all sort links
@@ -282,6 +290,72 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         ads.prepend(createButtonBar(btns));
     }
 
+    var getWikiLink = (function() {
+        var wikiMappings = {
+            "Island of the Pirates": "The Island of the Pirates",
+            "Stealing from the rich": "Stealing from the Rich",
+            "The Dark Priests": "Dark Priests",
+            "Sons of the veldt": "Sons of the Veld",
+            "Victor the vicious": "Victor the Vicious",
+            "Mother Love": "Motherly Love",
+            "The end of the earth": "The End of the World"
+        };
+
+        function getWikiLink(title) {
+            // See if we need to map the page name, before replacing spaces with underscores.
+            var pageName = (wikiMappings[title] || title).replace(/\s/gi, "_");
+            return "http://thesettlersonline.wikia.com/wiki/" + pageName;
+        }
+        return getWikiLink;
+    }());
+
+    function addWikiLink(li, title) {
+        var link = $("<a>").addClass("wiki-link").attr("href", getWikiLink(title)).html("wiki");
+        li.append(link);
+        return link;
+    }
+
+    function addUnitsRequiredLink(li) {
+        var link = $("<a>").addClass("units-required-link").attr("href", "#").html("Units Required");
+        li.append(link);
+        return link;
+    }
+
+    function onUnitsRequiredClicked(adventureInfo, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var link = $(evt.target);
+        var li = link.closest("li");
+        var i = AdventuresPage.idx(li);
+
+        // Find the adventure info object with matching index.
+        // Should only be one, hence the [0].
+        var info = adventureInfo.filter(function(info) {
+            return info.idx === i;
+        })[0];
+        //console.log(i, info);
+
+        var adventureUrl = info.href;
+
+        var xhr = get(adventureUrl);
+        xhr.href = adventureUrl;
+        xhr.idx = i;
+
+        var dfd = xhr.pipe(mapHtmlToAttackPlan.bind(null, i)).then(function(status, details) {
+            details.title = AdventuresPage.liTitle(li);
+            var results = showResults(xhr, li, status, details);
+            if (results) {
+                // Mixin the new data.
+                $.extend(info, results);
+                link.remove();
+            }
+        });
+
+        // Prevent default click action
+        return false;
+    }
+
     function addStyles(cssStr) {
         if (cssStr.join) {
             cssStr = cssStr.join("\n");
@@ -296,36 +370,41 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         css.push(".bar-inner { display: inline-block; background: green; }");
         addStyles(css);
 
-        var allInfo = window["allInfo"] = [];
+        var adventureInfo = window["adventureInfo"] = [];
         var allDfds = [];
 
-        var ads = $("#adventures");
+        var page = new AdventuresPage(document);
+        var ads = page.findAdventuresElement();
+
         // For each adventure, load the adventure page, and process it.
-        var lis = ads.find(".adventure-title").find("a:first").map(function(i) {
-            var href = this.href;
-            var li = $(this).closest("li").attr("data-idx", i)[0];
+        var lis = page.findAdventureLis();
+        lis.each(function(i, li) {
+            li = $(li);
+            AdventuresPage.idx(li, i);
+            var xp = AdventuresPage.liXp(li);
+            xp = AdventuresPage.xp(li, xp);
+            li[0].style.border = "solid lightgray 1px";
+
+            addWikiLink(li, AdventuresPage.liTitle(li));
+
+            var href = AdventuresPage.liAdventureHref(li);
+            var unitsRequiredLink = addUnitsRequiredLink(li, href);
+
             //console.log(i, href);
-            //if (i > 1) return li;
-            // XP from adventures page is sometimes different to that calculated on the specific
-            // adventure page. Not sure why.
-            var xhr = get(href);
-            xhr.href = href;
-            xhr.idx = i;
-            var dfd = xhr.pipe(mapHtmlToAttackPlan.bind(null, i)).then(function(status, details) {
-                details.title = $(li).find(".adventure-title").find("a:first").text().trim();
-                var info = showResults(xhr, li, status, details);
-                if (info) {
-                    info.idx = i;
-                    allInfo.push(info);
-                }
+
+            // Sparsely populate the adventure info with the basics.
+            // If we click the adventure info link then we will add more details.
+            adventureInfo.push({
+                idx: i,
+                href: href,
+                xp: xp
             });
-            allDfds.push(dfd);
-            return li;
         });
 
-        $.when.apply($, allDfds).then(function() {
-            whenAllAdventuresProcessed(ads, lis, allInfo);
-        });
+        // jQuery 1.6.4 does not have 'on'.
+        ads.delegate(".units-required-link", "click", onUnitsRequiredClicked.bind(null, adventureInfo));
+
+        whenAllAdventuresProcessed(ads, lis, adventureInfo);
     }
 
     return {
