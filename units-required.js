@@ -99,7 +99,7 @@ define(function() {
     UnitList.unitValues = {
         "R": 1250,
         "B": 1000,
-        "L": 2875,
+        "LB": 2875,
         "M": 3375,
         "C": 3375,
         "S": 6000,
@@ -115,7 +115,7 @@ define(function() {
         "G": "General",
         "R": "Recruit",
         "B": "Bowman",
-        "L": "Longbowman",
+        "LB": "Longbowman",
         "M": "Militia",
         "C": "Cavalry",
         "S": "Soldier",
@@ -207,7 +207,7 @@ define(function() {
             "S": "soldier",
             "E": "elitesoldier",
             "B": "bowman",
-            "L": "longbowman",
+            "LB": "longbowman",
             "A": "crossbowman",
             "K": "cannoneer"
         };
@@ -215,6 +215,7 @@ define(function() {
         function sortByValue(a, b) {
             return a.value - b.value;
         }
+
         return function() {
             var items = [];
             forEachOwnProperty(this, function(ob, prop) {
