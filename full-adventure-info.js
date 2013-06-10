@@ -177,7 +177,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
                 "text-align": "center"
             }).append(ratioStr);
             var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
-            var lossesEl = $("<span>").append([info.totalLosses, info.tuv].join(" -- "));
+            var lossesEl = $("<span>").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
             li.find(".wiki-link").after(" ").after(lossesEl);
             li.find(".camp-ep").append(ratioEl);
             console.log([info.title].concat(arr).join("\t"));
