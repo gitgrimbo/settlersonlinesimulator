@@ -1,0 +1,11 @@
+{
+    "name": "The Settlers Online",
+    "version": "1.0.0",
+    "permissions": ["activeTab"],
+    "content_scripts": [{
+        "matches": ["http://settlersonlinesimulator.com/dso_kampfsimulator/en/*"],
+        "js": ["chrome/contentscript.js"]
+    }],
+    "web_accessible_resources": ["all.js"],
+    "manifest_version": 2
+}
