@@ -52,7 +52,9 @@ define(function() {
     AdventuresPage.prototype.enhanceLis = function() {
         return this.container.find(".camp-ep").map(function() {
             var t = $(this);
-            return AdventuresPage.xp(t.closest("li"), AdventuresPage.campEp(t));
+            var li = t.closest("li");
+            AdventuresPage.xp(li, AdventuresPage.campEp(t));
+            return li;
         });
     };
 
