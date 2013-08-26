@@ -286,13 +286,13 @@ define([
     }
 
     function addWikiLink(li, title) {
-        var link = $("<a>").addClass("wiki-link").attr("href", wiki.getLink(title)).html("wiki");
+        var link = $("<a>").addClass("wiki-link btn-link").attr("href", wiki.getLink(title)).html("wiki");
         li.append(link);
         return link;
     }
 
     function addUnitsRequiredLink(li) {
-        var link = $("<a>").addClass("units-required-link").attr("href", "#").html("Units Required");
+        var link = $("<a>").addClass("units-required-link btn-link").attr("href", "#").html("Units Required");
         li.append("&nbsp;").append(link);
         return link;
     }
@@ -330,7 +330,7 @@ define([
     }
 
     function addRewardsLink(li) {
-        var link = $("<a>").addClass("rewards-link").attr("href", "#").html("Rewards");
+        var link = $("<a>").addClass("rewards-link btn-link").attr("href", "#").html("Rewards");
         li.append("&nbsp;").append(link);
         return link;
     }
@@ -365,7 +365,7 @@ define([
 
     function execute() {
         var css = [];
-        css.push("a.wiki-link { font-family: Tahoma; background: green; color: white; border-radius: 6px; padding: 2px; padding-left: 4px; padding-right: 4px; }");
+        css.push("a.btn-link { font-family: Tahoma; background: green; color: white; border-radius: 6px; padding: 2px; padding-left: 4px; padding-right: 4px; }");
         css.push(".bar-outer { display: inline-block; background: white; border: solid 1px black; }");
         css.push(".bar-inner { display: inline-block; background: green; }");
         addStyles(css);
