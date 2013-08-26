@@ -164,7 +164,7 @@ define(["module", "./console", "./string-utils"], function(module, console, Stri
                     });
                 }
             }, this);
-            var s = '<div style="display:inline-block;height:24px;">';
+            var s = '<div style="display:inline-block;padding:0;margin:0;height:30px;">';
             items.sort(sortByValue).forEach(function(it) {
                 s += it.html;
             });

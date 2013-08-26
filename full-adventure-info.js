@@ -172,8 +172,8 @@ define([
                 "text-align": "center"
             }).append(ratioStr);
             var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
-            var lossesEl = $("<span>").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
-            li.find(".wiki-link").after(" ").after(lossesEl);
+            var lossesEl = $("<div>").attr("style", "padding: 2px;").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
+            li.find(".wiki-link").before(lossesEl);
             li.find(".camp-ep").append(ratioEl);
             log([info.title].concat(arr).join("\t"));
             return info;
@@ -293,7 +293,7 @@ define([
 
     function addUnitsRequiredLink(li) {
         var link = $("<a>").addClass("units-required-link").attr("href", "#").html("Units Required");
-        li.append(link);
+        li.append("&nbsp;").append(link);
         return link;
     }
 
@@ -327,14 +327,11 @@ define([
                 link.remove();
             }
         });
-
-        // Prevent default click action
-        return false;
     }
 
     function addRewardsLink(li) {
         var link = $("<a>").addClass("rewards-link").attr("href", "#").html("Rewards");
-        li.append(link);
+        li.append("&nbsp;").append(link);
         return link;
     }
 
@@ -346,14 +343,16 @@ define([
         var li = link.closest("li");
         var title = AdventuresPage.liTitle(li);
 
-        var rewardsImg = li.find("img.rewards").first();
-        if (rewardsImg.length < 1) {
+        var rewards = li.find(".rewards").first();
+        if (rewards.length < 1) {
             wiki.getRewardsImageSrc(title).then(function(src) {
-                var img = $("<img>").addClass("rewards").attr("src", src);
-                li.find("p").first().append(img);
+                var img = $("<img>").attr("src", src);
+                var p = $("<p>").addClass("rewards");
+                p.append(img);
+                li.find("p").first().after(p);
             });
         } else {
-            rewardsImg.toggle();
+            rewards.toggle();
         }
     }
 
