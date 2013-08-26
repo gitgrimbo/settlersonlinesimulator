@@ -1,5 +1,7 @@
 /*global chrome, console*/
 
+// NOT USED
+
 console.log("background.js");
 
 chrome.runtime.getBackgroundPage(function() {
