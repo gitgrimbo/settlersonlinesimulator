@@ -3,23 +3,17 @@
 
 /*jslint browser: true*/
 /*global jQuery, console*/
-define(["./units-required", "./adventures-page"], function(unitsRequired, adventuresPage) {
-    var DEBUG = true;
-    var console = window.console;
-
+define(["module", "./deferred-utils", "./console", "./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"], function(module, deferredUtils, console, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
     var $ = jQuery;
-    var AdventuresPage = adventuresPage.AdventuresPage;
-    var UnitList = unitsRequired.UnitList;
-
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
     }
 
-    if (!DEBUG) {
-        console = {
-            log: function() {}
-        };
-    }
+    var DEBUG = true;
+    var log = console.createLog(module.id, DEBUG);
+
+    var AdventuresPage = adventuresPage.AdventuresPage;
+    var UnitList = unitsRequiredModel.UnitList;
 
     function get(url) {
         return $.ajax(url);
@@ -33,7 +27,12 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
      * Remove the JS that tries to ensure the page is the top frame/window.
      */
     function preventNavigation(html) {
-        return html.replace("if(top != self){top.location = self.location}", "");
+        var len = html.length;
+        html = html.replace("if(top != self){top.location = self.location}", "");
+        if (html.length === len) {
+            log("Did not find 'top.location = self.location' code.");
+        }
+        return html;
     }
 
     function getAdventureDetails(iframe) {
@@ -66,7 +65,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
      * details.
      */
     function handleAdventure(idx, html) {
-        console.log("handleAdventure.enter", arguments);
+        log("handleAdventure.enter", arguments);
 
         var dfd = $.Deferred();
 
@@ -75,7 +74,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
 
         $(document.body).append($iframe);
         $iframe.load(function(evt) {
-            console.log("handleAdventure.iframe.loaded", idx, arguments);
+            log("handleAdventure.iframe.loaded", idx, arguments);
             var details = getAdventureDetails(iframe);
             $iframe.remove();
             dfd.resolve(details);
@@ -89,7 +88,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         doc.write(html2);
         doc.close();
 
-        console.log("handleAdventure.exit");
+        log("handleAdventure.exit");
 
         return dfd.promise();
     }
@@ -113,27 +112,15 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         return s.substring(0, i + n + 1);
     }
 
-    function rejectWith() {
-        var dfd = $.Deferred();
-        dfd.reject.apply(dfd, arguments);
-        return dfd;
-    }
-
-    function resolveWith() {
-        var dfd = $.Deferred();
-        dfd.resolve.apply(dfd, arguments);
-        return dfd;
-    }
-
     function mapHtmlToAttackPlan(idx, html, status, xhr) {
-        console.log("processXhr", arguments);
+        log("processXhr", arguments);
         if ("success" === status) {
             return handleAdventure(idx, html).pipe(function(details) {
-                console.log("processXhr.success", arguments);
-                return resolveWith(status, details).promise();
+                log("processXhr.success", arguments);
+                return deferredUtils.resolveWith(status, details).promise();
             });
         }
-        return rejectWith("xhr error", xhr).promise();
+        return deferredUtils.rejectWith("xhr error", xhr).promise();
     }
 
     function handleDetails(li, details) {
@@ -163,7 +150,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
 
     function showResults(xhr, li, status, details) {
         li = $(li);
-        console.log(new Date().getTime(), arguments, xhr.idx, xhr.href, details.title, details.error);
+        log(new Date().getTime(), arguments, xhr.idx, xhr.href, details.title, details.error);
         if (details.attackPlan) {
             // Guess at the max xp2/tuv ratio
             var MAX_XP_TUV_RATIO = 40;
@@ -180,7 +167,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
             var lossesEl = $("<span>").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
             li.find(".wiki-link").after(" ").after(lossesEl);
             li.find(".camp-ep").append(ratioEl);
-            console.log([info.title].concat(arr).join("\t"));
+            log([info.title].concat(arr).join("\t"));
             return info;
         }
         return null;
@@ -290,27 +277,8 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         ads.prepend(createButtonBar(btns));
     }
 
-    var getWikiLink = (function() {
-        var wikiMappings = {
-            "Island of the Pirates": "The Island of the Pirates",
-            "Stealing from the rich": "Stealing from the Rich",
-            "The Dark Priests": "Dark Priests",
-            "Sons of the veldt": "Sons of the Veld",
-            "Victor the vicious": "Victor the Vicious",
-            "Mother Love": "Motherly Love",
-            "The end of the earth": "The End of the World"
-        };
-
-        function getWikiLink(title) {
-            // See if we need to map the page name, before replacing spaces with underscores.
-            var pageName = (wikiMappings[title] || title).replace(/\s/gi, "_");
-            return "http://thesettlersonline.wikia.com/wiki/" + pageName;
-        }
-        return getWikiLink;
-    }());
-
     function addWikiLink(li, title) {
-        var link = $("<a>").addClass("wiki-link").attr("href", getWikiLink(title)).html("wiki");
+        var link = $("<a>").addClass("wiki-link").attr("href", wiki.getLink(title)).html("wiki");
         li.append(link);
         return link;
     }
@@ -334,7 +302,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         var info = adventureInfo.filter(function(info) {
             return info.idx === i;
         })[0];
-        //console.log(i, info);
+        //log(i, info);
 
         var adventureUrl = info.href;
 
@@ -370,7 +338,10 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
         css.push(".bar-inner { display: inline-block; background: green; }");
         addStyles(css);
 
-        var adventureInfo = window["adventureInfo"] = [];
+        var adventureInfo = [];
+        // GLOBAL!
+        window["adventureInfo"] = adventureInfo;
+
         var allDfds = [];
 
         var page = new AdventuresPage(document);
@@ -390,7 +361,7 @@ define(["./units-required", "./adventures-page"], function(unitsRequired, advent
             var href = AdventuresPage.liAdventureHref(li);
             var unitsRequiredLink = addUnitsRequiredLink(li, href);
 
-            //console.log(i, href);
+            //log(i, href);
 
             // Sparsely populate the adventure info with the basics.
             // If we click the adventure info link then we will add more details.

@@ -1,7 +1,12 @@
 /*jslint browser: true*/
 /*global jQuery, console, yepnope, store*/
-define(function() {
-    var DEBUG = false;
+define(["module", "./console", "./string-utils", "./units-required-model"], function(module, console, StringUtils, model) {
+    var DEBUG = true;
+    var log = console.createLog(module.id, DEBUG);
+    var UnitList = model.UnitList;
+    var Sim = model.Sim;
+    var AttackPlan = model.AttackPlan;
+
     var $ = jQuery;
 
     // Example URL:
@@ -10,422 +15,6 @@ define(function() {
     // Page already includes:
     //   jQuery 1.6.2
     //     This means we use 'delegate' and not 'on'.
-
-
-
-    var NULL_CONSOLE = {
-        log: function() {}
-    };
-
-    // IE fix
-    var console = window['console'] || NULL_CONSOLE;
-
-    if (!DEBUG) {
-        console = NULL_CONSOLE;
-    }
-
-    // Util
-
-
-
-    var StringUtils = (function() {
-        var NODE_TEXT = 3;
-        /**
-         * Outputs the hasOwnProperty name/values of "this".
-         */
-        function simpleToString() {
-            var arr = [];
-            forEachOwnProperty(this, function(ob, prop) {
-                arr.push(prop + ": " + this[prop]);
-            }, this);
-            if (arr.length > 0) {
-                return arr.join(", ");
-            }
-            return "";
-        }
-
-        function $trim(el) {
-            var str = null;
-            if ("string" === typeof el) {
-                str = el;
-            } else if (NODE_TEXT === el.nodeType) {
-                str = el.nodeValue;
-            } else {
-                // assume a jQuery object or DOM element
-                str = $(el).html();
-            }
-            str = str.replace(/<br>/gi, "\n");
-            return $.trim(str);
-        }
-        return {
-            simpleToString: simpleToString,
-            $trim: $trim
-        };
-    }());
-
-
-
-    function forEachOwnProperty(ob, fn, context) {
-        for (var i in ob) {
-            if (ob.hasOwnProperty(i)) {
-                fn.call(context, ob, i);
-            }
-        }
-    }
-
-
-
-
-    // UnitList
-
-
-
-    /**
-     * Constructs a new UnitList, 'cloned' from "unitList" if provided.
-     * A UnitList is a collection of units, where a unit is represented by a code,
-     * e.g. {R: 100, S: 200}.
-     */
-    function UnitList(unitList) {
-        if (unitList) {
-            forEachOwnProperty(unitList, function(ob, prop) {
-                this[prop] = unitList[prop];
-            }, this);
-        }
-    }
-
-    /**
-     * Unit values. Scaled up by x1000.
-     */
-    UnitList.unitValues = {
-        "R": 1250,
-        "B": 1000,
-        "LB": 2875,
-        "M": 3375,
-        "C": 3375,
-        "S": 6000,
-        "E": 11875,
-        "A": 21875,
-        "K": 26875
-    };
-
-    /**
-     *
-     */
-    UnitList.unitNames = {
-        "G": "General",
-        "R": "Recruit",
-        "B": "Bowman",
-        "LB": "Longbowman",
-        "M": "Militia",
-        "C": "Cavalry",
-        "S": "Soldier",
-        "E": "Elite Soldier",
-        "A": "Crossbowman",
-        "K": "Cannoneer"
-    };
-
-    /**
-     * @return The total number of units.
-     */
-    UnitList.prototype.totalUnits = function() {
-        var count = 0;
-        forEachOwnProperty(this, function(ob, prop) {
-            count += this[prop];
-        }, this);
-        return count;
-    };
-
-    /**
-     * @return The total value of units.
-     */
-    UnitList.prototype.totalUnitValue = function() {
-        var value = 0;
-        forEachOwnProperty(this, function(ob, prop) {
-            var unitValue = UnitList.unitValues[prop];
-            if (unitValue) {
-                // if not falsey
-                value += (this[prop] * unitValue);
-            }
-        }, this);
-        return value / 1000;
-    };
-
-    /**
-     * @return a new UnitList.
-     */
-    UnitList.prototype.add = function(unitList) {
-        var res = new UnitList(this);
-        forEachOwnProperty(unitList, function(ob, prop) {
-            var val = unitList[prop];
-            res[prop] = this.hasOwnProperty(prop) ? res[prop] + val : val;
-        }, this);
-        return res;
-    };
-
-    /**
-     * @return a new UnitList.
-     */
-    UnitList.prototype.subtract = function(unitList) {
-        var res = new UnitList(this);
-        forEachOwnProperty(unitList, function(ob, prop) {
-            var val = unitList[prop];
-            res[prop] = this.hasOwnProperty(prop) ? res[prop] - val : -val;
-        }, this);
-        return res;
-    };
-
-    /**
-     * Ensure that the returned UnitList has enough units to satisfy the
-     * "recruitmentUnitList" unit requirements. I.e., the returned UnitList may be
-     * exactly the same as "this" if there are enough units to satisfy
-     * "recruitmentUnitList".
-     *
-     * @return a new UnitList.
-     */
-    UnitList.prototype.recruit = function(recruitmentUnitList) {
-        var res = new UnitList(this);
-        forEachOwnProperty(recruitmentUnitList, function(ob, prop) {
-            var val = recruitmentUnitList[prop];
-            res[prop] = this.hasOwnProperty(prop) ? Math.max(val, this[prop]) : val;
-        }, this);
-        return res;
-    };
-
-    UnitList.prototype.toString = StringUtils.simpleToString;
-
-    /**
-     * Returns a HTML string that has a sprited span followed by a unit count for each unit type in the UnitList.
-     */
-    UnitList.prototype.toHtmlString = (function() {
-        // CSS defined in
-        // http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css
-        var cssMappings = {
-            "G": "general",
-            "R": "recruit",
-            "M": "militia",
-            "C": "cavalry",
-            "S": "soldier",
-            "E": "elitesoldier",
-            "B": "bowman",
-            "LB": "longbowman",
-            "A": "crossbowman",
-            "K": "cannoneer"
-        };
-
-        function sortByValue(a, b) {
-            return a.value - b.value;
-        }
-
-        return function() {
-            var items = [];
-            forEachOwnProperty(this, function(ob, prop) {
-                var css = cssMappings[prop];
-                if (ob[prop]) {
-                    items.push({
-                        value: UnitList.unitValues[prop],
-                        html: '<span class="' + css + ' unit-sprite" title="' + UnitList.unitNames[prop] + '">&nbsp;</span><span style=padding-right:1em;>' + ob[prop] + '</span>'
-                    });
-                }
-            }, this);
-            var s = '<div style="display:inline-block;height:24px;">';
-            items.sort(sortByValue).forEach(function(it) {
-                s += it.html;
-            });
-            return s + "</div>";
-        };
-    }());
-
-
-
-
-
-    // SimTable
-    // Utility operations to perform on a sim table DOM element.
-    function Sim(campEnemies, exp, attackOptions) {
-        this.campEnemies = campEnemies;
-        this.exp = exp;
-        this.attackOptions = attackOptions;
-        this.chosenAttackOption = null;
-        this.ignore = null;
-    }
-
-    Sim.getUnitsReqdUnitValueForAttack = function(attackOption) {
-        // Count up the units required for this attack option.
-        return attackOption.reduce(function(unitValue, wave) {
-            return unitValue + wave.units.totalUnitValue();
-        }, 0);
-    };
-
-    Sim.getMaxLossesForAttack = function(attackOption) {
-        return attackOption.reduce(function(prev, wave) {
-            // add this wave losses
-            return prev.add(wave.maxLoss);
-        }, new UnitList());
-    };
-
-    Sim.prototype.getMaxLossesForAttackOptions = function() {
-        return this.attackOptions.map(Sim.getMaxLossesForAttack);
-    };
-
-    Sim.prototype.findLowestMaxLossAttackOption = function() {
-        var opts = this.findLowestMaxLossAttackOptions();
-        return opts[0].idx;
-    };
-
-    /**
-     * Returns the attack options which have the lowest losses.
-     * @return Array of {idx,unitValue}.
-     */
-    Sim.prototype.findLowestMaxLossAttackOptions = function() {
-        var lowestCost = null;
-        var costsAndIdxs = this.getMaxLossesForAttackOptions().map(function(cost, idx) {
-            // map the costs to preserve index after sorting
-            return {
-                idx: idx,
-                unitValue: cost.totalUnitValue()
-            };
-        }).sort(function(cost1, cost2) {
-            // sort based on unitValue
-            return cost1.unitValue - cost2.unitValue;
-        }).filter(function(cost) {
-            // remove all costs that aren't the lowest
-            if (null === lowestCost) {
-                lowestCost = cost;
-            }
-            // keep those costs that share the same lowest value.
-            return (cost.unitValue <= lowestCost.unitValue);
-        });
-        return costsAndIdxs;
-    };
-
-    /**
-     * @return The total number of units required for the specified attack.
-     */
-    Sim.prototype.fewestReqdUnitsStrategy = function(attackOption) {
-        return attackOption.reduce(function(prev, wave) {
-            return prev + wave.units.totalUnits();
-        }, 0);
-    };
-
-    /**
-     * @return The total unit value for the units required.
-     */
-    Sim.prototype.lowestReqdUnitsValueStrategy = function(attackOption) {
-        return Sim.getUnitsReqdUnitValueForAttack(attackOption);
-    };
-
-    /**
-     * Attempts to calculate the 'best' attack option based on a strategy.
-     * The best option will always have fewest max losses, but the chosen
-     * option can differ based on choices such as using fewest number of
-     * units, or using an attack based on the total unit value of the option's
-     * units.
-     * @param strategy {string} The name of the strategy to use. Default "lowestReqdUnitsValue".
-     */
-    Sim.prototype.findBestAttackOption = function(strategy) {
-        strategy = strategy || "lowestReqdUnitsValue";
-        strategy = "fewestReqdUnits";
-        var strategyFn = this[strategy + "Strategy"];
-        var costsAndIdxs = this.findLowestMaxLossAttackOptions();
-        var unitsReqdUnitValues = costsAndIdxs.map(function(costAndIdx) {
-            var attackOption = this.attackOptions[costAndIdx.idx];
-            return strategyFn(attackOption);
-        }, this);
-        var idxOfCheapest = -1;
-        var cheapest = null;
-        unitsReqdUnitValues.forEach(function(unitValue, idx) {
-            if (null === cheapest || unitValue < cheapest) {
-                idxOfCheapest = idx;
-                cheapest = unitValue;
-            }
-        });
-        return idxOfCheapest;
-    };
-
-    Sim.fromJSON = function(json) {
-        var sim = new Sim(json.campEnemies, json.exp, json.attackOptions);
-        sim.chosenAttackOption = json.chosenAttackOption;
-        sim.ignore = json.ignore;
-        return sim;
-    };
-
-
-
-
-
-    /**
-     * Represents the chosen Sims. This should be the model of what is on screen.
-     */
-    function AttackPlan(sims) {
-        this.sims = sims;
-    }
-
-    AttackPlan.prototype.doCalcs = function(callback) {
-        var totalLosses = new UnitList();
-        var totalActive = new UnitList();
-        var totalXP = 0;
-
-        this.sims.forEach(function(sim, idx) {
-            var chosenAttackOption = sim.chosenAttackOption;
-            console.log("sim", idx, "chosenAttackOption", chosenAttackOption);
-
-            var option1waves = sim.attackOptions[chosenAttackOption];
-            if (!option1waves) {
-                // There are no waves for this sim for some reason.
-                // Probably because no data has been logged for this sim and the chosen unit types.
-                return;
-            }
-
-            var thisWaveLosses = new UnitList();
-            for (var i = 0; i < option1waves.length; i++) {
-                var wave = option1waves[i];
-                // add this wave losses
-                thisWaveLosses = thisWaveLosses.add(wave.maxLoss);
-                // recruit enough units for this wave (may already have them active)
-                totalActive = totalActive.recruit(wave.units);
-                // the dead are not active any more!
-                totalActive = totalActive.subtract(wave.maxLoss);
-            }
-
-            // Reset generals after each camp attack.
-            // The loss of general(s) has been taken into account above in totalWaveLosses.
-            totalActive.G = 0;
-
-            totalLosses = totalLosses.add(thisWaveLosses);
-            totalXP += sim.exp;
-
-            callback(sim, idx, totalLosses, totalActive, totalXP);
-        });
-
-        return this;
-    };
-
-
-    AttackPlan.prototype.ignore = function(simIndex, ignore) {
-        // normalise in case ignore is undefined or falsey rather than false.
-        ignore = false !== ignore;
-        this.sims[simIndex].ignore = ignore;
-    };
-
-    AttackPlan.prototype.isIgnored = function(simIndex) {
-        return this.sims[simIndex].ignore;
-    };
-
-    AttackPlan.prototype.save = function() {
-        var name = "attackPlan";
-        store.set(name, this);
-    };
-
-    AttackPlan.prototype.load = function() {
-        var name = "attackPlan";
-        var attackPlan = store.get(name);
-        this.sims = [];
-        for (var i = 0; i < attackPlan.sims.length; i++) {
-            this.sims[i] = Sim.fromJSON(attackPlan.sims[i]);
-        }
-    };
-
-
 
 
 
@@ -529,10 +118,10 @@ define(function() {
             /*
 <tr><td>1: 134B<br />2: 23R 1S 44C 132LB</td><td>134B 1G<br />22.26R</td><td>134B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>162.75</td></tr><tr><td>1: 135B<br />2: 23R 1S 44C 132LB</td><td>135B 1G<br />22.26R</td><td>135B 1G<br />23R</td><td>40KU 40SS 24DP<br />16DP 1DHP</td><td>40KU 40SS 40DP<br />16DP 1DHP</td><td>163.75</td></tr><tr><td>1: 136B<br />2: 23R 1S 44C 132LB</td><td>136B 1G<br />22.27R</td><td>136B 1G<br />23R</td><td>40KU 40SS 27DP<br />13DP 1DHP</td><td>40KU 40SS 40DP<br />13DP 1DHP</td><td>164.75</td></tr>
 */
-            console.log(tr);
+            log(tr);
             var $td = $(tr).find("td");
             if (!$td || $td.length < 1) {
-                console.log("parseSimTable: tds not found");
+                log("parseSimTable: tds not found");
                 return null;
             }
 
@@ -568,7 +157,7 @@ define(function() {
         parseEnemiesFromHeader(sim, $h);
         sim.attackOptions = [];
         $simTable.find("tr").each(function(i, tr) {
-            console.log(i, tr);
+            log(i, tr);
             if (0 === i) {
                 return;
             }
@@ -584,7 +173,7 @@ define(function() {
             //throw e;
         }
 
-        console.log(sim);
+        log(sim);
         return new Sim(sim.campEnemies, sim.exp, sim.attackOptions);
     };
 
@@ -643,7 +232,7 @@ define(function() {
         var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", thisWaveLosses.toHtmlString() + " [" + thisWaveLosses.totalUnitValue() + "]"]);
         var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", totalLosses.toHtmlString() + " [" + totalLosses.totalUnitValue() + "]"]);
         var totalRequired = totalActive.add(totalLosses);
-        console.log(totalActive, totalLosses, totalRequired);
+        log(totalActive, totalLosses, totalRequired);
         var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", totalRequired.toHtmlString()]);
         var $tr4 = createRow("grimbo summary total-exp", ["Total XP:", totalXP]);
         var $trs = $tr1.add($tr2).add($tr3).add($tr4).css("border", "solid black 1px");
@@ -702,10 +291,10 @@ define(function() {
                 sims.push(sim);
 
                 var chosenAttackOption = sim.findBestAttackOption();
-                console.log("best", chosenAttackOption);
+                log("best", chosenAttackOption);
 
                 sim.chosenAttackOption = Math.max(chosenAttackOption, 0);
-                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+                log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
             });
 
             return new AttackPlan(sims);
@@ -731,10 +320,10 @@ define(function() {
                 simTable.removeSummaryRows();
 
                 var sim = attackPlan.sims[tableIdx];
-                console.log("tableIdx", tableIdx, "sim", sim);
+                log("tableIdx", tableIdx, "sim", sim);
 
                 var ignore = attackPlan.isIgnored(tableIdx);
-                console.log(M, "ignore", tableIdx, ignore);
+                log(M, "ignore", tableIdx, ignore);
                 if (ignore) {
                     return;
                 }
@@ -743,7 +332,7 @@ define(function() {
 
                 var chosenAttackOption = sim.chosenAttackOption;
                 simTable.setAttackOptionIndex(chosenAttackOption);
-                console.log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+                log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
                 var option1waves = sim.attackOptions[chosenAttackOption];
                 if (!option1waves) {
@@ -799,7 +388,7 @@ define(function() {
             var simIndex = SimTable.getSimIndexForHeading($(this));
             // checkbox has already changed value, so reverse.
             var ignore = !this.checked;
-            console.log("ignore", simIndex, ignore);
+            log("ignore", simIndex, ignore);
             attackPlan.ignore(simIndex, ignore);
             doCalcs();
         });
@@ -807,7 +396,7 @@ define(function() {
         // Ignore-prev-sims button click
         $(document).delegate("button.ignore-prev-sims", "click", function(evt) {
             var simIndex = SimTable.getSimIndexForHeading($(this));
-            console.log("simIndex", simIndex);
+            log("simIndex", simIndex);
             for (var i = 0; i < simIndex; i++) {
                 attackPlan.ignore(i);
             }
@@ -820,7 +409,7 @@ define(function() {
             var chosenAttackOption = SimTable.getRowAttackOptionIndex(this);
             var simIndex = SimTable.getSimIndex($simTable);
             attackPlan.sims[simIndex].chosenAttackOption = chosenAttackOption;
-            console.log("chosenAttackOption", chosenAttackOption, "simIndex", simIndex);
+            log("chosenAttackOption", chosenAttackOption, "simIndex", simIndex);
 
             // doCalcs will refresh the UI
             // a bit inefficient to do all the calcs again?
@@ -842,6 +431,7 @@ define(function() {
         addAttackOptionClasses();
         addSimControls();
         doCalcs();
+        // GLOBAL!
         window["grimbo_attackPlan"] = attackPlan;
         return attackPlan;
     }
@@ -896,7 +486,7 @@ define(function() {
     }
 
     var js = {
-        json3: "//cdnjs.cloudflare.com/ajax/libs/json3/3.2.4/json3.min.js",
+        json3: "//cdnjs.cloudflare.com/ajax/libs/json3/3.2.5/json3.min.js",
         yepNope: "//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js",
         storeJs: "//cdnjs.cloudflare.com/ajax/libs/store.js/1.3.7/store.min.js"
     };
@@ -913,18 +503,15 @@ define(function() {
             try {
                 getUnitsRequired($("table.example-sim"));
             } catch (e) {
-                console.log(typeof e, e);
+                log(typeof e, e.message, e);
             }
         }).fail(function() {
-            console.log(arguments);
+            log(arguments);
         });
     }
 
     return {
-        UnitList: UnitList,
-        Sim: Sim,
         SimTable: SimTable,
-        AttackPlan: AttackPlan,
         getUnitsRequired: getUnitsRequired,
         execute: execute
     };

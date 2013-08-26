@@ -1,7 +1,8 @@
 /*jslint browser: true*/
-/*global jQuery, console*/
-define(["./adventures-page"], function(adventuresPage) {
+/*global jQuery*/
+define(["module", "./console", "./adventures-page"], function(module, console, adventuresPage) {
     var $ = jQuery;
+    var log = console.createLog(module.id);
     var AdventuresPage = adventuresPage.AdventuresPage;
 
     function xpSort(a, b) {
