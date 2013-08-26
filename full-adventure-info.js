@@ -3,7 +3,15 @@
 
 /*jslint browser: true*/
 /*global jQuery, console*/
-define(["module", "./deferred-utils", "./console", "./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"], function(module, deferredUtils, console, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
+define([
+
+"module",
+
+"./deferred-utils", "./console", "./ajax",
+
+"./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"
+
+], function(module, deferredUtils, console, ajax, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -16,7 +24,7 @@ define(["module", "./deferred-utils", "./console", "./units-required-model", "./
     var UnitList = unitsRequiredModel.UnitList;
 
     function get(url) {
-        return $.ajax(url);
+        return ajax.ajax(url);
     }
 
     function undef(o) {
@@ -324,6 +332,31 @@ define(["module", "./deferred-utils", "./console", "./units-required-model", "./
         return false;
     }
 
+    function addRewardsLink(li) {
+        var link = $("<a>").addClass("rewards-link").attr("href", "#").html("Rewards");
+        li.append(link);
+        return link;
+    }
+
+    function onRewardsClicked(adventureInfo, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var link = $(evt.target);
+        var li = link.closest("li");
+        var title = AdventuresPage.liTitle(li);
+
+        var rewardsImg = li.find("img.rewards").first();
+        if (rewardsImg.length < 1) {
+            wiki.getRewardsImageSrc(title).then(function(src) {
+                var img = $("<img>").addClass("rewards").attr("src", src);
+                li.find("p").first().append(img);
+            });
+        } else {
+            rewardsImg.toggle();
+        }
+    }
+
     function addStyles(cssStr) {
         if (cssStr.join) {
             cssStr = cssStr.join("\n");
@@ -360,6 +393,7 @@ define(["module", "./deferred-utils", "./console", "./units-required-model", "./
 
             var href = AdventuresPage.liAdventureHref(li);
             var unitsRequiredLink = addUnitsRequiredLink(li, href);
+            var rewardsLink = addRewardsLink(li, href);
 
             //log(i, href);
 
@@ -374,6 +408,7 @@ define(["module", "./deferred-utils", "./console", "./units-required-model", "./
 
         // jQuery 1.6.4 does not have 'on'.
         ads.delegate(".units-required-link", "click", onUnitsRequiredClicked.bind(null, adventureInfo));
+        ads.delegate(".rewards-link", "click", onRewardsClicked.bind(null, adventureInfo));
 
         whenAllAdventuresProcessed(ads, lis, adventureInfo);
     }

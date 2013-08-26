@@ -1,4 +1,4 @@
-define(function() {
+define(["module", "./ajax", "./WikiAdventurePage"], function(module, ajax, WikiAdventurePage) {
     var wikiMappings = {
         "Island of the Pirates": "The Island of the Pirates",
         "Stealing from the rich": "Stealing from the Rich",
@@ -15,12 +15,18 @@ define(function() {
         return "http://thesettlersonline.wikia.com/wiki/" + pageName;
     }
 
-    function getRewardsImg(title) {
-        throw new Error("Need to parse the wiki page to get the rewards image link");
+    function getRewardsImageSrc(title) {
+        var link = getLink(title);
+        // Using deprecated pipe() because of the version of jQuery on the page.
+        return ajax.crossDomainAjax(link).pipe(function(response) {
+            var page = new WikiAdventurePage(response);
+            return page.getRewardsImageSrc();
+        });
     }
 
     return {
         getLink: getLink,
-        getRewardsImg: getRewardsImg
+        getRewardsImageSrc: getRewardsImageSrc
     };
+
 });
