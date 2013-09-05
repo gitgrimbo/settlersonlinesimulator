@@ -2,17 +2,21 @@
 /*global jQuery, chrome, console*/
 define(function() {
     var $ = jQuery;
-    var chromeExtensionId = "mecfbfajgmehbcpooblfiklipncfjcop";
 
     var REQ_TYPE = "grimbo.xhr.request";
     var RESP_TYPE = "grimbo.xhr.response";
 
     var count = 0;
 
-    function newMessage(url, opts) {
+    function generateMessageId() {
         var rnd = "" + Math.random();
         rnd = rnd.substring(rnd.indexOf(".") + 1);
         var id = REQ_TYPE + "." + (count++) + "." + rnd;
+        return id;
+    }
+
+    function newMessage(url, opts) {
+        var id = generateMessageId();
         return {
             type: REQ_TYPE,
             id: id,
