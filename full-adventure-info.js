@@ -48,7 +48,11 @@ define([
             var info = handleDetails(li, details);
             var ratioStr = toNdp("" + (info.xp2 / info.tuv), 2);
             var arr = [info.totalLosses, info.xp2, info.tuv, ratioStr];
-            var bar = createBar(100, 100 * (info.xp2 / info.tuv) / MAX_XP_TUV_RATIO);
+            var bar = createBar({
+                width: "100px"
+            }, {
+                width: 100 * (info.xp2 / info.tuv) / MAX_XP_TUV_RATIO + "px"
+            });
             var ratioStrEl = $("<div>").css({
                 "display": "inline-block",
                 "width": "100%",
@@ -250,15 +254,9 @@ define([
     }
 
     // Creates a bar chart effect
-    function createBar(w1, w2) {
-        w1 = ("string" === typeof w1) ? w1 : w1 + "px";
-        w2 = ("string" === typeof w2) ? w2 : w2 + "px";
-        var outer = $("<div>").css({
-            "width": w1
-        }).addClass("bar-outer");
-        var inner = $("<div>").css({
-            "width": w2
-        }).addClass("bar-inner");
+    function createBar(css1, css2) {
+        var outer = $("<div>").css(css1).addClass("bar-outer");
+        var inner = $("<div>").css(css2).addClass("bar-inner");
         return outer.append(inner.append("&nbsp;"));
     }
 
@@ -392,7 +390,13 @@ define([
 
         // A callback that is fired for each adventure that is loaded, when we're finding out the units required
         var allUnitsRequiredProgressCallback = (function() {
-            var bar = createBar("100%", "0%");
+            var bar = createBar({
+                width: "100%",
+                fontSize: "4px",
+                marginBottom: "2px"
+            }, {
+                width: "0%"
+            });
             var inner = bar.find("div").first();
 
             return function(info) {
