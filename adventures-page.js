@@ -14,7 +14,9 @@ define(function() {
     function intAttr(el, name, val) {
         if ("undefined" !== typeof val) {
             // parseInt on number just returns the number, so this is really for strings.
-            val = intOrUndef(val);
+            if ("string" === typeof val) {
+                val = intOrUndef(val);
+            }
             el.attr(name, val);
             return val;
         }
