@@ -1,13 +1,17 @@
 /*jslint browser: true*/
 /*global jQuery, console, yepnope, store*/
 define(["module", "./console", "./string-utils", "./units-required-model"], function(module, console, StringUtils, model) {
-    var DEBUG = true;
+    var DEBUG = false;
     var log = console.createLog(module.id, DEBUG);
     var UnitList = model.UnitList;
     var Sim = model.Sim;
     var AttackPlan = model.AttackPlan;
 
     var $ = jQuery;
+
+    // GLOBAL!
+    var GRIMBO = window["GRIMBO"] || {};
+    window["GRIMBO"] = GRIMBO;
 
     // Example URL:
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
@@ -276,6 +280,24 @@ define(["module", "./console", "./string-utils", "./units-required-model"], func
         $(addTo).append($style);
     }
 
+    function getUnitsRequiredFromAdventurePageHtml(html) {
+        // non-greedy regex to capture the tables
+        var re = /<table class="example-sim">[\s\S]*?<\/table>/g;
+
+        var tableHtmlList = [];
+        var match = re.exec(html);
+        while (match) {
+            tableHtmlList.push(match[0]);
+            match = re.exec(html);
+        }
+
+        var simTables = tableHtmlList.map(function(html) {
+            return $("<div>").html(html).find("table").first();
+        });
+
+        return getUnitsRequired($(simTables));
+    }
+
     function getUnitsRequired(simTables) {
         var attackPlan = buildAttackPlan(simTables);
 
@@ -431,8 +453,10 @@ define(["module", "./console", "./string-utils", "./units-required-model"], func
         addAttackOptionClasses();
         addSimControls();
         doCalcs();
+
         // GLOBAL!
-        window["grimbo_attackPlan"] = attackPlan;
+        GRIMBO.attackPlan = attackPlan;
+
         return attackPlan;
     }
 
@@ -513,6 +537,7 @@ define(["module", "./console", "./string-utils", "./units-required-model"], func
     return {
         SimTable: SimTable,
         getUnitsRequired: getUnitsRequired,
+        getUnitsRequiredFromAdventurePageHtml: getUnitsRequiredFromAdventurePageHtml,
         execute: execute
     };
 });

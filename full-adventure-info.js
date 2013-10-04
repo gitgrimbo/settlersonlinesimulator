@@ -9,27 +9,168 @@ define([
 
 "./deferred-utils", "./console", "./ajax",
 
-"./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"
+"./adventures-model", "./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"
 
-], function(module, deferredUtils, console, ajax, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
+], function(module, deferredUtils, _console, ajax, adventuresModel, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
     }
 
-    var DEBUG = true;
-    var log = console.createLog(module.id, DEBUG);
+    var DEBUG = false;
+    var log = _console.createLog(module.id, DEBUG);
 
     var AdventuresPage = adventuresPage.AdventuresPage;
     var UnitList = unitsRequiredModel.UnitList;
+    var AdventuresModel = adventuresModel;
 
     function get(url) {
         return ajax.ajax(url);
     }
 
-    function undef(o) {
-        return "undefined" === typeof o;
+
+
+
+
+    // UI class for an Adventure Box
+    // All the UI handling for the enhancements to each adventure <li>
+
+    function AdventureBox(li, adventureInfo) {
+        this.li = li;
+        this.adventureInfo = adventureInfo;
     }
+
+    AdventureBox.prototype.showResults = function(details) {
+        var li = $(this.li);
+        if (details.attackPlan) {
+            // Guess at the max xp2/tuv ratio
+            var MAX_XP_TUV_RATIO = 40;
+            var info = handleDetails(li, details);
+            var ratioStr = toNdp("" + (info.xp2 / info.tuv), 2);
+            var arr = [info.totalLosses, info.xp2, info.tuv, ratioStr];
+            var bar = createBar(100, 100 * (info.xp2 / info.tuv) / MAX_XP_TUV_RATIO);
+            var ratioStrEl = $("<div>").css({
+                "display": "inline-block",
+                "width": "100%",
+                "text-align": "center"
+            }).append(ratioStr);
+            var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
+            var lossesEl = $("<div>").attr("style", "padding: 2px;").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
+            li.find(".wiki-link").before(lossesEl);
+            li.find(".camp-ep").append(ratioEl);
+            log([info.title].concat(arr).join("\t"));
+            return info;
+        }
+        return null;
+    };
+
+    AdventureBox.prototype.addWikiLink = function(title) {
+        var link = $("<a>").addClass("wiki-link btn-link").attr("href", wiki.getLink(title)).html("wiki");
+        this.li.append(link);
+        return link;
+    };
+
+    AdventureBox.prototype.addUnitsRequiredLink = function() {
+        var link = $("<a>").addClass("units-required-link btn-link").attr("href", "#").html("Units Required");
+        this.li.append("&nbsp;").append(link);
+        return link;
+    };
+
+    AdventureBox.prototype.addAllUnitsRequiredLink = function() {
+        var link = $("<a>").addClass("all-units-required-link btn-link").attr("href", "#").html("*");
+        this.li.append("&nbsp;").append(link);
+        return link;
+    };
+
+    AdventureBox.loadAttackPlan = function(adventureInfo) {
+        var xhr = get(adventureInfo.href);
+        xhr.href = adventureInfo.href;
+        xhr.idx = adventureInfo.idx;
+        return xhr.pipe(mapHtmlToAttackPlan.bind(null, adventureInfo.idx));
+    };
+
+    AdventureBox.prototype.updateWithAttackPlan = function(status, details) {
+        var li = this.li;
+        var info = this.adventureInfo;
+        var link = li.find(".units-required-link").first();
+        details.title = AdventuresPage.liTitle(li);
+        var box = new AdventureBox(li);
+        var results = box.showResults(details);
+        if (results) {
+            // Mixin the new data.
+            $.extend(info, results);
+            link.remove();
+        }
+    };
+
+    AdventureBox.updateAllAttackPlans = function(adventureBoxes, progressCallback) {
+        var count = 0;
+        var size = adventureBoxes.length;
+        var dfds = adventureBoxes.map(function(box) {
+            return AdventureBox.loadAttackPlan(box.adventureInfo).then(function(status, details) {
+                progressCallback({
+                    item: ++count,
+                    size: size
+                });
+                box.updateWithAttackPlan(status, details);
+            });
+        });
+        return $.when.apply($, dfds);
+    };
+
+    AdventureBox.onAllUnitsRequiredClicked = function(adventureBoxes, progressCallback, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        AdventureBox.updateAllAttackPlans(adventureBoxes, progressCallback);
+    };
+
+    AdventureBox.onUnitsRequiredClicked = function(adventureBoxes, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var link = $(evt.target);
+        var li = link.closest("li");
+        var i = AdventuresPage.idx(li);
+
+        // Find the adventure info object with matching index.
+        // Should only be one, hence the [0].
+        var box = adventureBoxes.filter(function(box) {
+            return box.adventureInfo.idx === i;
+        })[0];
+
+        AdventureBox.loadAttackPlan(box.adventureInfo).then(box.updateWithAttackPlan.bind(box));
+    };
+
+    AdventureBox.prototype.addRewardsLink = function() {
+        var link = $("<a>").addClass("rewards-link btn-link").attr("href", "#").html("Rewards");
+        this.li.append("&nbsp;").append(link);
+        return link;
+    };
+
+    AdventureBox.onRewardsClicked = function(adventureInfoList, evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var link = $(evt.target);
+        var li = link.closest("li");
+        var title = AdventuresPage.liTitle(li);
+
+        var rewards = li.find(".rewards").first();
+        if (rewards.length < 1) {
+            wiki.getRewardsImageSrc(title).then(function(src) {
+                var img = $("<img>").attr("src", src);
+                var p = $("<p>").addClass("rewards");
+                p.append(img);
+                li.find("p").first().after(p);
+            });
+        } else {
+            rewards.toggle();
+        }
+    };
+
+
+
+
 
     /**
      * Remove the JS that tries to ensure the page is the top frame/window.
@@ -43,12 +184,10 @@ define([
         return html;
     }
 
-    function getAdventureDetails(iframe) {
-        var doc = iframe.contentWindow.document,
-            $doc = $(doc);
+    function getAdventureDetails(html) {
         try {
-            var attackPlan = unitsRequired.getUnitsRequired($doc.find("table.example-sim"));
-            var title = $doc.find("title").text().trim();
+            var attackPlan = unitsRequired.getUnitsRequiredFromAdventurePageHtml(html);
+            var title = "FAKE"; //$doc.find("title").text().trim();
             return {
                 attackPlan: attackPlan,
                 title: title
@@ -60,14 +199,6 @@ define([
         }
     }
 
-    function createIFrame() {
-        // w=1, h=1 so the iframe is visible, and thus capable of load events.
-        return $("<iframe>").attr({
-            width: 1,
-            height: 1
-        });
-    }
-
     /**
      * Processes the adventure page by returning a Deferred that is resolved with the adventure's
      * details.
@@ -77,39 +208,12 @@ define([
 
         var dfd = $.Deferred();
 
-        var $iframe = createIFrame().attr("data-idx", idx);
-        var iframe = $iframe[0];
-
-        $(document.body).append($iframe);
-        $iframe.load(function(evt) {
-            log("handleAdventure.iframe.loaded", idx, arguments);
-            var details = getAdventureDetails(iframe);
-            $iframe.remove();
-            dfd.resolve(details);
-        });
-
-        // Write the processed html to the iframe, which will trigger the load event, and therefore
-        // trigger our callback.
-        var html2 = preventNavigation(html);
-        var doc = iframe.contentWindow.document;
-        doc.open();
-        doc.write(html2);
-        doc.close();
+        var details = getAdventureDetails(html);
+        dfd.resolve(details);
 
         log("handleAdventure.exit");
 
         return dfd.promise();
-    }
-
-    function getTotalLosses(attackPlan) {
-        var lastSimIdx = attackPlan.sims.length - 1;
-        var result = new UnitList();
-        attackPlan.doCalcs(function(sim, idx, totalLosses, totalActive, totalXP) {
-            if (lastSimIdx === idx) {
-                result = totalLosses;
-            }
-        });
-        return result;
     }
 
     function toNdp(s, n) {
@@ -134,7 +238,7 @@ define([
     function handleDetails(li, details) {
         var xp = AdventuresPage.liXp(li);
         var title = AdventuresPage.liTitle(li);
-        var totalLosses = getTotalLosses(details.attackPlan);
+        var totalLosses = details.attackPlan.getTotalLosses();
         var tuv = totalLosses.totalUnitValue();
         // XP as calculated is called xp2. xp remains as recorded from the adventures page.
         return {
@@ -147,95 +251,31 @@ define([
 
     // Creates a bar chart effect
     function createBar(w1, w2) {
+        w1 = ("string" === typeof w1) ? w1 : w1 + "px";
+        w2 = ("string" === typeof w2) ? w2 : w2 + "px";
         var outer = $("<div>").css({
-            "width": w1 + "px"
+            "width": w1
         }).addClass("bar-outer");
         var inner = $("<div>").css({
-            "width": w2 + "px"
+            "width": w2
         }).addClass("bar-inner");
         return outer.append(inner.append("&nbsp;"));
     }
 
-    function showResults(xhr, li, status, details) {
-        li = $(li);
-        log(new Date().getTime(), arguments, xhr.idx, xhr.href, details.title, details.error);
-        if (details.attackPlan) {
-            // Guess at the max xp2/tuv ratio
-            var MAX_XP_TUV_RATIO = 40;
-            var info = handleDetails(li, details);
-            var ratioStr = toNdp("" + (info.xp2 / info.tuv), 2);
-            var arr = [info.totalLosses, info.xp2, info.tuv, ratioStr];
-            var bar = createBar(100, 100 * (info.xp2 / info.tuv) / MAX_XP_TUV_RATIO);
-            var ratioStrEl = $("<div>").css({
-                "display": "inline-block",
-                "width": "100%",
-                "text-align": "center"
-            }).append(ratioStr);
-            var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
-            var lossesEl = $("<div>").attr("style", "padding: 2px;").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
-            li.find(".wiki-link").before(lossesEl);
-            li.find(".camp-ep").append(ratioEl);
-            log([info.title].concat(arr).join("\t"));
-            return info;
-        }
-        return null;
-    }
-
-    function checkUndef(a, b, prop) {
-        if (prop) {
-            a = a[prop];
-            b = b[prop];
-        }
-        if (undef(a)) {
-            return undef(b) ? 0 : 1;
-        }
-        if (undef(b)) {
-            return -1;
-        }
-        return null;
-    }
-
-    function checkUndefWrapper(fn, prop) {
-        return function(reverse, a, b) {
-            var check = checkUndef(a, b, prop);
-            if (null !== check) {
-                return check;
-            }
-            return fn(reverse, a, b);
-        };
-    }
-
-    function sortInfo(infos, reverse, fn) {
-        infos.sort(fn.bind(null, reverse));
-    }
-
-    var sortInfoByRatio = checkUndefWrapper(function(reverse, a, b) {
-        var val = (a.xp / a.tuv) - (b.xp / b.tuv);
-        return (true === reverse) ? -val : val;
-    }, "tuv");
-
-    var sortInfoByXP = checkUndefWrapper(function(reverse, a, b) {
-        var val = a.xp - b.xp;
-        return (true === reverse) ? -val : val;
-    }, "xp");
-
-    var sortInfoByTotalLosses = checkUndefWrapper(function(reverse, a, b) {
-        var val = a.tuv - b.tuv;
-        return (true === reverse) ? -val : val;
-    }, "tuv");
-
-    function reorderLis(ul, lis, infos) {
-        lis.remove();
-        infos.forEach(function(info, i) {
-            var li = lis[info.idx];
+    function reorderLis(ul, lis) {
+        lis.forEach(function(li) {
+            li.remove();
+        });
+        lis.forEach(function(li) {
             ul.append(li);
         });
     }
 
-    function whenAllAdventuresProcessed(ads, lis, infos) {
+    function whenAllAdventuresProcessed(ads, adventureBoxes, adventureInfoList) {
         var UP_ARROW = "\u25B2";
         var DOWN_ARROW = "\u25BC";
         var arrowSpans = null;
+        var clone = adventureBoxes.slice();
 
         function createButtonBar(btns) {
             var div = $("<div>").html("[ ");
@@ -260,8 +300,17 @@ define([
                 // this === anchor
                 evt.preventDefault();
                 var reverseSort = !! this.reverseSort;
-                sortInfo(infos, reverseSort, sortInfoFn);
-                reorderLis(ads, lis, infos);
+
+                AdventuresModel.sortInfo(adventureInfoList, reverseSort, sortInfoFn);
+
+                for (var i = 0; i < adventureInfoList.length; i++) {
+                    adventureBoxes[i] = clone[adventureInfoList[i].idx];
+                }
+
+                var lis = adventureBoxes.map(function(box) {
+                    return box.li;
+                });
+                reorderLis(ads, lis);
                 this.reverseSort = !reverseSort;
                 // Clear the arrows from all sort links
                 arrowSpans.empty();
@@ -275,85 +324,14 @@ define([
             return $("<a>").attr("href", "#").html(text).append(span).click(createSortBtnHandler(sortInfoFn))[0];
         }
 
-        var sortByRatio = createSortLink("Sort by ratio", sortInfoByRatio);
-        var sortByXp = createSortLink("Sort by XP", sortInfoByXP);
-        var sortByTotalLosses = createSortLink("Sort by total losses", sortInfoByTotalLosses);
+        var sortByRatio = createSortLink("Sort by ratio", AdventuresModel.sortInfoByRatio);
+        var sortByXp = createSortLink("Sort by XP", AdventuresModel.sortInfoByXP);
+        var sortByTotalLosses = createSortLink("Sort by total losses", AdventuresModel.sortInfoByTotalLosses);
         var btns = [sortByRatio, sortByXp, sortByTotalLosses];
 
         arrowSpans = $(btns).find("span");
 
         ads.prepend(createButtonBar(btns));
-    }
-
-    function addWikiLink(li, title) {
-        var link = $("<a>").addClass("wiki-link btn-link").attr("href", wiki.getLink(title)).html("wiki");
-        li.append(link);
-        return link;
-    }
-
-    function addUnitsRequiredLink(li) {
-        var link = $("<a>").addClass("units-required-link btn-link").attr("href", "#").html("Units Required");
-        li.append("&nbsp;").append(link);
-        return link;
-    }
-
-    function onUnitsRequiredClicked(adventureInfo, evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        var link = $(evt.target);
-        var li = link.closest("li");
-        var i = AdventuresPage.idx(li);
-
-        // Find the adventure info object with matching index.
-        // Should only be one, hence the [0].
-        var info = adventureInfo.filter(function(info) {
-            return info.idx === i;
-        })[0];
-        //log(i, info);
-
-        var adventureUrl = info.href;
-
-        var xhr = get(adventureUrl);
-        xhr.href = adventureUrl;
-        xhr.idx = i;
-
-        var dfd = xhr.pipe(mapHtmlToAttackPlan.bind(null, i)).then(function(status, details) {
-            details.title = AdventuresPage.liTitle(li);
-            var results = showResults(xhr, li, status, details);
-            if (results) {
-                // Mixin the new data.
-                $.extend(info, results);
-                link.remove();
-            }
-        });
-    }
-
-    function addRewardsLink(li) {
-        var link = $("<a>").addClass("rewards-link btn-link").attr("href", "#").html("Rewards");
-        li.append("&nbsp;").append(link);
-        return link;
-    }
-
-    function onRewardsClicked(adventureInfo, evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        var link = $(evt.target);
-        var li = link.closest("li");
-        var title = AdventuresPage.liTitle(li);
-
-        var rewards = li.find(".rewards").first();
-        if (rewards.length < 1) {
-            wiki.getRewardsImageSrc(title).then(function(src) {
-                var img = $("<img>").attr("src", src);
-                var p = $("<p>").addClass("rewards");
-                p.append(img);
-                li.find("p").first().after(p);
-            });
-        } else {
-            rewards.toggle();
-        }
     }
 
     function addStyles(cssStr) {
@@ -370,9 +348,9 @@ define([
         css.push(".bar-inner { display: inline-block; background: green; }");
         addStyles(css);
 
-        var adventureInfo = [];
+        var adventureInfoList = [];
         // GLOBAL!
-        window["adventureInfo"] = adventureInfo;
+        window["adventureInfoList"] = adventureInfoList;
 
         var allDfds = [];
 
@@ -380,36 +358,56 @@ define([
         var ads = page.findAdventuresElement();
 
         // For each adventure, load the adventure page, and process it.
-        var lis = page.findAdventureLis();
-        lis.each(function(i, li) {
+        var lis = page.findAdventureLis().toArray();
+        var adventureBoxes = lis.map(function(li, i) {
             li = $(li);
+
             AdventuresPage.idx(li, i);
             var xp = AdventuresPage.liXp(li);
             xp = AdventuresPage.xp(li, xp);
             li[0].style.border = "solid lightgray 1px";
 
-            addWikiLink(li, AdventuresPage.liTitle(li));
-
             var href = AdventuresPage.liAdventureHref(li);
-            var unitsRequiredLink = addUnitsRequiredLink(li, href);
-            var rewardsLink = addRewardsLink(li, href);
+
+            var adventureInfo = {
+                idx: i,
+                href: href,
+                xp: xp
+            };
+
+            var adventureBox = new AdventureBox(li, adventureInfo);
+            adventureBox.addWikiLink(AdventuresPage.liTitle(li));
+            var unitsRequiredLink = adventureBox.addUnitsRequiredLink();
+            var allUnitsRequiredLink = adventureBox.addAllUnitsRequiredLink();
+            var rewardsLink = adventureBox.addRewardsLink(href);
 
             //log(i, href);
 
             // Sparsely populate the adventure info with the basics.
             // If we click the adventure info link then we will add more details.
-            adventureInfo.push({
-                idx: i,
-                href: href,
-                xp: xp
-            });
+            adventureInfoList.push(adventureInfo);
+
+            return adventureBox;
         });
 
-        // jQuery 1.6.4 does not have 'on'.
-        ads.delegate(".units-required-link", "click", onUnitsRequiredClicked.bind(null, adventureInfo));
-        ads.delegate(".rewards-link", "click", onRewardsClicked.bind(null, adventureInfo));
+        // A callback that is fired for each adventure that is loaded, when we're finding out the units required
+        var allUnitsRequiredProgressCallback = (function() {
+            var bar = createBar("100%", "0%");
+            var inner = bar.find("div").first();
 
-        whenAllAdventuresProcessed(ads, lis, adventureInfo);
+            return function(info) {
+                $(ads).prepend(bar);
+                var msg = info.item + " of " + info.size;
+                inner.css("width", (info.item / info.size) * 100 + "%");
+            };
+        }());
+
+        // jQuery 1.6.4 does not have 'on'.
+        ads.delegate(".all-units-required-link", "click", AdventureBox.onAllUnitsRequiredClicked.bind(null, adventureBoxes, allUnitsRequiredProgressCallback));
+        ads.delegate(".units-required-link", "click", AdventureBox.onUnitsRequiredClicked.bind(null, adventureBoxes));
+        ads.delegate(".rewards-link", "click", AdventureBox.onRewardsClicked.bind(null, adventureBoxes));
+
+        whenAllAdventuresProcessed(ads, adventureBoxes, adventureInfoList);
     }
 
     return {

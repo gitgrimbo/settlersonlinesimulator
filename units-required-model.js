@@ -1,5 +1,5 @@
 define(["module", "./console", "./string-utils"], function(module, console, StringUtils) {
-    var DEBUG = true;
+    var DEBUG = false;
     var log = console.createLog(module.id, DEBUG);
 
     function forEachOwnProperty(ob, fn, context) {
@@ -337,6 +337,16 @@ define(["module", "./console", "./string-utils"], function(module, console, Stri
         return this;
     };
 
+    AttackPlan.prototype.getTotalLosses = function() {
+        var lastSimIdx = this.sims.length - 1;
+        var result = new UnitList();
+        this.doCalcs(function(sim, idx, totalLosses, totalActive, totalXP) {
+            if (lastSimIdx === idx) {
+                result = totalLosses;
+            }
+        });
+        return result;
+    };
 
     AttackPlan.prototype.ignore = function(simIndex, ignore) {
         // normalise in case ignore is undefined or falsey rather than false.
