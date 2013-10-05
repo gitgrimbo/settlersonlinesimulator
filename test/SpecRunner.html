@@ -1,59 +1,51 @@
 <doctype html>
 <html>
 <head>
-  <title>Jasmine Spec Runner</title>
+<title>Jasmine Spec Runner</title>
 
-  <link rel="shortcut icon" type="image/png" href="../jasmine_favicon.png">
-  <link rel="stylesheet" type="text/css" href="../jasmine/jasmine.css">
-  <script type="text/javascript" src="../jasmine/jasmine.js"></script>
-  <script type="text/javascript" src="../jasmine/jasmine-html.js"></script>
+<link rel="shortcut icon" type="image/png" href="../jasmine_favicon.png">
+<link rel="stylesheet" type="text/css" href="../jasmine/jasmine.css">
+<script type="text/javascript" src="../jasmine/jasmine.js"></script>
+<script type="text/javascript" src="../jasmine/jasmine-html.js"></script>
 
-  <!-- jquery is 1.6.4 on the target page -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
-  <script>
-  require = {
-    baseUrl: "../..",
-    paths: {
-      "domReady": "https://rawgithub.com/requirejs/domReady/2.0.1/domReady",
-      "text": "https://rawgithub.com/requirejs/text/2.0.10/text",
-      "spec": "./test/spec",
-      "html": "./test/html"
-    }
-  };
-  </script>
-  <script type="text/javascript" src="http://requirejs.org/docs/release/2.1.8/comments/require.js"></script>
-  <script>
-	// jQuery dance
-	// jQuery should be on the page already, but we want to use it as a module.
-	(function() {
-		function maybeDefine(moduleName, scope, property) {
-			var ob = scope[property];
-			if (ob) {
-				define(moduleName, [], function() {
-					return ob;
-				});
-			}
+<!-- jquery is 1.6.4 on the target page -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+
+<script src="requirejs-config.js"></script>
+<script src="http://requirejs.org/docs/release/2.1.8/comments/require.js"></script>
+
+<script>
+// jQuery dance
+// jQuery should be on the page already, but we want to use it as a module.
+(function() {
+	function maybeDefine(moduleName, scope, property) {
+		var ob = scope[property];
+		if (ob) {
+			define(moduleName, [], function() {
+				return ob;
+			});
 		}
-		maybeDefine("jquery", window, "jQuery");
-	}());
-  </script>
+	}
+	maybeDefine("jquery", window, "jQuery");
+}());
+</script>
 
-  <script type="text/javascript">
-  require(["spec/Main", "domReady!"], function(main) {
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
+<script>
+require(["spec/Main", "domReady!"], function(main) {
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
 
-      var htmlReporter = new jasmine.HtmlReporter();
+    var htmlReporter = new jasmine.HtmlReporter();
 
-      jasmineEnv.addReporter(htmlReporter);
+    jasmineEnv.addReporter(htmlReporter);
 
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
+    jasmineEnv.specFilter = function(spec) {
+      return htmlReporter.specFilter(spec);
+    };
 
-      jasmineEnv.execute();
-  });
-  </script>
+    jasmineEnv.execute();
+});
+</script>
 
 </head>
 
