@@ -239,15 +239,15 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./un
     };
 
     function createInstanceMethodsForStatics(constructor, firstArgPropertyName, methodNames) {
-        // Create 'instance' methods for each of the specified 'static' methods.
-        // All the 'static' methods take $simTable as the first parameter.
+        // For each static method name provided, create an instance method (on the prototype).
         $.each(methodNames, function(i, methodName) {
             // Create a new 'instance' method on the prototype with the same name as the static method.
             constructor.prototype[methodName] = function() {
+                var instance = this;
                 var staticMeth = constructor[methodName];
 
                 // The first argument to the static method is a property of the instance itself.
-                var firstArg = this[firstArgPropertyName];
+                var firstArg = instance[firstArgPropertyName];
                 var args = [firstArg].concat(Array.prototype.slice.apply(arguments));
 
                 return staticMeth.apply(null, args);
