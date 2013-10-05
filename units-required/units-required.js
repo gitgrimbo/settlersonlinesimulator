@@ -1,6 +1,14 @@
 /*jslint browser: true*/
-/*global console, yepnope, store*/
-define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsRequiredPageParser", "./SimTable", "./units-required-model"], function(module, $, GRIMBO, console, uiUtils, UnitsRequiredPageParser, SimTable, model) {
+/*global console, store*/
+define([
+
+"module", "jquery",
+
+"../context", "../console", "../conditional-script-loader",
+
+"../ui-utils", "./UnitsRequiredPageParser", "./SimTable", "./units-required-model"
+
+], function(module, $, GRIMBO, console, ScriptLoader, uiUtils, UnitsRequiredPageParser, SimTable, model) {
     var DEBUG = GRIMBO.debug;
     var log = console.createLog(module.id, DEBUG);
     var UnitList = model.UnitList;
@@ -21,7 +29,7 @@ define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsR
 
 
     function doCalcs(simTables, attackPlan) {
-        var M = "doCacls";
+        var M = "doCalcs";
 
         var totalLosses = new UnitList();
         var totalActive = new UnitList();
@@ -123,7 +131,7 @@ define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsR
             for (var i = 0; i < simIndex; i++) {
                 attackPlan.ignore(i);
             }
-            doCalcs();
+            doCalcs(simTables, attackPlan);
         });
 
         // Choose attack option
@@ -136,14 +144,10 @@ define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsR
 
             // doCalcs will refresh the UI
             // a bit inefficient to do all the calcs again?
-            doCalcs();
+            doCalcs(simTables, attackPlan);
         });
 
         uiUtils.addStyles([ //
-        "span.unit-sprite {", //
-        "display:inline;", //
-        "padding:0px 15px 10px 11px;", //
-        "}", //
         "tr.grimbo.attack-option.selected {", //
         "  border-left: solid red 4px;", //
         "}", //
@@ -153,7 +157,7 @@ define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsR
 
         addAttackOptionClasses();
         addSimControls();
-        doCalcs();
+        doCalcs(simTables, attackPlan);
 
         // GLOBAL!
         GRIMBO.attackPlan = attackPlan;
@@ -161,69 +165,21 @@ define(["module", "jquery", "../context", "../console", "../ui-utils", "./UnitsR
         return attackPlan;
     }
 
-    /**
-     * VERY simple script loader to bootstrap yepnode.js,
-     * which is then used as the actual script loader.
-     * @param {string[]} scripts Array of script srcs.
-     * @return A Deferred that is resolved when all the scripts are loaded.
-     */
-    function importScripts(scripts) {
-        function importScript(src) {
-            var dfd = $.Deferred();
-            var s = $("<script>").load(function(evt) {
-                dfd.resolve(this);
-                s.remove();
-            }).attr("type", "text/javascript").attr("src", src);
-            var parent = document.head || document.body;
-            parent.appendChild(s[0]);
-            return dfd;
-        }
-        var dfds = [];
-        for (var i = 0; i < scripts.length; i++) {
-            dfds.push(importScript(scripts[i]));
-        }
-        return $.when.apply(null, dfds);
-    }
-
-    /**
-     * Deferred wrapper for yepnope.
-     */
-    function yepNopeDeferred(opts) {
-        var dfd = $.Deferred();
-
-        if (typeof opts === "string") {
-            var src = opts;
-            opts = {
-                load: src
-            };
-        }
-
-        var complete = opts.complete;
-        opts.complete = function() {
-            if (complete) {
-                complete.apply(this, arguments);
-            }
-            dfd.resolve.apply(dfd, arguments);
+    function execute() {
+        var js = {
+            json3: "//cdnjs.cloudflare.com/ajax/libs/json3/3.2.5/json3.min.js",
+            storeJs: "//cdnjs.cloudflare.com/ajax/libs/store.js/1.3.7/store.min.js"
         };
 
-        yepnope(opts);
-        return dfd;
-    }
+        var loader = new ScriptLoader();
 
-    var js = {
-        json3: "//cdnjs.cloudflare.com/ajax/libs/json3/3.2.5/json3.min.js",
-        yepNope: "//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js",
-        storeJs: "//cdnjs.cloudflare.com/ajax/libs/store.js/1.3.7/store.min.js"
-    };
-
-    function execute() {
-        importScripts([js.yepNope]).done(function() {
-            return yepnope({
+        loader.loadLoader().then(function() {
+            return loader.yepNopeDeferred({
                 test: window.JSON,
                 nope: js.json3
             });
         }).done(function() {
-            return yepnope(js.storeJs);
+            return loader.yepNopeDeferred(js.storeJs);
         }).done(function() {
             try {
                 doUnitsRequiredUI($("table.example-sim"));

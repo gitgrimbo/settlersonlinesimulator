@@ -1,3 +1,12 @@
+/*
+
+An abstraction over a 'SimTable' in the units required page.
+
+The SimTable is represented on the page as a table with attack options.
+
+This module provided utility functions for reading from and manipulating this table.
+
+*/
 define(["module", "jquery", "../context", "../console", "../string-utils", "./units-required-model"], function(module, $, GRIMBO, console, StringUtils, model) {
 
     var DEBUG = GRIMBO.debug;
@@ -229,22 +238,32 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./un
         $simTable.find("tr.grimbo.summary").remove();
     };
 
+    function createInstanceMethodsForStatics(constructor, firstArgPropertyName, methodNames) {
+        // Create 'instance' methods for each of the specified 'static' methods.
+        // All the 'static' methods take $simTable as the first parameter.
+        $.each(methodNames, function(i, methodName) {
+            // Create a new 'instance' method on the prototype with the same name as the static method.
+            constructor.prototype[methodName] = function() {
+                var staticMeth = constructor[methodName];
+
+                // The first argument to the static method is a property of the instance itself.
+                var firstArg = this[firstArgPropertyName];
+                var args = [firstArg].concat(Array.prototype.slice.apply(arguments));
+
+                return staticMeth.apply(null, args);
+            };
+        });
+    }
+
     // Create 'instance' methods for each of the specified 'static' methods.
     // All the 'static' methods take $simTable as the first parameter.
-    $.each([
+    createInstanceMethodsForStatics(SimTable, "$simTable", [
 
     "parseToSim", "parseSimTable", "getSimHeader", "showTableAndHeader", "hideTableAndHeader",
 
     "getChosenAttackOption", "addSummaryRows", "removeSummaryRows", "getSimIndex", "setSimIndex", "setAttackOptionIndex"
 
-    ], function(i, methodName) {
-        SimTable.prototype[methodName] = function() {
-            var meth = SimTable[methodName];
-            var args = [this.$simTable].concat(Array.prototype.slice.call(arguments));
-            // null === no execution context as this method is 'static'.
-            return meth.apply(null, args);
-        };
-    });
+    ]);
 
     return SimTable;
 
