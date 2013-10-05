@@ -1,5 +1,6 @@
 define(function() {
-	// GLOBAL!
-	var GRIMBO = true;
-	return GRIMBO;
+    // GLOBAL!
+    var GRIMBO = window["GRIMBO"] = window["GRIMBO"] || {};
+    GRIMBO.debug = false;
+    return GRIMBO;
 });
