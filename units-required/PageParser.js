@@ -3,7 +3,7 @@
 Parser for a single adventure page.
 
 */
-define(["module", "jquery", "../context", "../console", "./SimTable", "./units-required-model"], function(module, $, GRIMBO, _console, SimTable, model) {
+define(["module", "jquery", "../context", "../console", "./SimTable", "./model"], function(module, $, GRIMBO, _console, SimTable, model) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
     var AttackPlan = model.AttackPlan;

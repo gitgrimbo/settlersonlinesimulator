@@ -7,7 +7,7 @@ The SimTable is represented on the page as a table with attack options.
 This module provided utility functions for reading from and manipulating this table.
 
 */
-define(["module", "jquery", "../context", "../console", "../string-utils", "./units-required-model"], function(module, $, GRIMBO, console, StringUtils, model) {
+define(["module", "jquery", "../context", "../console", "../string-utils", "./model"], function(module, $, GRIMBO, console, StringUtils, model) {
 
     var DEBUG = GRIMBO.debug;
     var log = console.createLog(module.id, DEBUG);

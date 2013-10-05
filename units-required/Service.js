@@ -3,7 +3,7 @@
 Module to provide an abstraction for loading an adventure attack plan details.
 
 */
-define(["module", "jquery", "../context", "../console", "../deferred-utils", "./UnitsRequiredPageParser"], function(module, $, GRIMBO, _console, deferredUtils, UnitsRequiredPageParser) {
+define(["module", "jquery", "../context", "../console", "../deferred-utils", "./PageParser"], function(module, $, GRIMBO, _console, deferredUtils, UnitsRequiredPageParser) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
 

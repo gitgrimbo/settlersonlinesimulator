@@ -9,7 +9,7 @@ define([
 
 "./deferred-utils", "./console", "./ajax", "./ui-utils",
 
-"./adventures-model", "./units-required/units-required-model", "./units-required/units-required", "./units-required/UnitsRequiredService", "./adventures-page", "./thesettlersonline-wiki"
+"./adventures-model", "./units-required/model", "./units-required/ui-app", "./units-required/Service", "./adventures-page", "./thesettlersonline-wiki"
 
 ], function(module, deferredUtils, _console, ajax, uiUtils, adventuresModel, unitsRequiredModel, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
     var $ = jQuery;

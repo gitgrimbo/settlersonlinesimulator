@@ -6,7 +6,7 @@ define([
 
 "../context", "../console", "../conditional-script-loader",
 
-"../ui-utils", "./UnitsRequiredPageParser", "./SimTable", "./units-required-model"
+"../ui-utils", "./PageParser", "./SimTable", "./model"
 
 ], function(module, $, GRIMBO, console, ScriptLoader, uiUtils, UnitsRequiredPageParser, SimTable, model) {
     var DEBUG = GRIMBO.debug;

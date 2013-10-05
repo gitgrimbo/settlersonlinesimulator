@@ -1,5 +1,5 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
-define(["units-required/UnitsRequiredPageParser", "adventures-model", "text!html/der-schamane-adventure.html"], function(UnitsRequiredPageParser, adventuresModel, adventureHtml) {
+define(["units-required/PageParser", "adventures-model", "text!html/der-schamane-adventure.html"], function(UnitsRequiredPageParser, adventuresModel, adventureHtml) {
     var AdventuresModel = adventuresModel;
 
     describe("Units Required", function() {
