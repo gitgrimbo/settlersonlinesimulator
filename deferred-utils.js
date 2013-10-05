@@ -1,8 +1,4 @@
-/*jslint browser: true*/
-/*global jQuery*/
-define(function() {
-    var $ = jQuery;
-
+define(["jquery"], function($) {
     function rejectWith() {
         var dfd = $.Deferred();
         dfd.reject.apply(dfd, arguments);

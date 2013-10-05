@@ -7,7 +7,10 @@ REM npm install -g almond
 
 REM We use requirejs's "r.js" to do the build, and almondjs for the lightweight AMD loading.
 
-r.js.cmd -o baseUrl=.. name=chrome/almond include=chrome/main out=../all.js wrap=true optimize=none
+REM Set paths for modules you expect to be loaded by the page, or by a CDN, to "empty:"
+REM   http://requirejs.org/docs/optimization.html#empty
+
+r.js.cmd -o baseUrl=.. name=chrome/almond include=chrome/main out=../all.js wrap=true optimize=none paths.jquery=empty:
 
 REM ----------
 REM Sample output:

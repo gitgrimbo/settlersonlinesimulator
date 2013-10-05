@@ -1,17 +1,11 @@
 /*jslint browser: true*/
-/*global jQuery, console, yepnope, store*/
-define(["module", "./console", "./string-utils", "./units-required-model"], function(module, console, StringUtils, model) {
-    var DEBUG = false;
+/*global console, yepnope, store*/
+define(["module", "jquery", "./context", "./console", "./string-utils", "./ui-utils", "./units-required-model"], function(module, $, GRIMBO, console, StringUtils, uiUtils, model) {
+    var DEBUG = GRIMBO.debug;
     var log = console.createLog(module.id, DEBUG);
     var UnitList = model.UnitList;
     var Sim = model.Sim;
     var AttackPlan = model.AttackPlan;
-
-    var $ = jQuery;
-
-    // GLOBAL!
-    var GRIMBO = window["GRIMBO"] || {};
-    window["GRIMBO"] = GRIMBO;
 
     // Example URL:
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */
@@ -271,15 +265,6 @@ define(["module", "./console", "./string-utils", "./units-required-model"], func
 
 
 
-    function addStyles(cssStr, addTo) {
-        addTo = addTo || document.body;
-        if (cssStr.join) {
-            cssStr = cssStr.join("\n");
-        }
-        var $style = $("<style/>").html(cssStr);
-        $(addTo).append($style);
-    }
-
     function getUnitsRequiredFromAdventurePageHtml(html) {
         // non-greedy regex to capture the tables
         var re = /<table class="example-sim">[\s\S]*?<\/table>/g;
@@ -438,7 +423,7 @@ define(["module", "./console", "./string-utils", "./units-required-model"], func
             doCalcs();
         });
 
-        addStyles([ //
+        uiUtils.addStyles([ //
         "span.unit-sprite {", //
         "display:inline;", //
         "padding:0px 15px 10px 11px;", //

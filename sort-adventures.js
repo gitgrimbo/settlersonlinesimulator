@@ -1,7 +1,4 @@
-/*jslint browser: true*/
-/*global jQuery*/
-define(["module", "./console", "./adventures-page"], function(module, console, adventuresPage) {
-    var $ = jQuery;
+define(["module", "jquery", "./console", "./adventures-page"], function(module, $, console, adventuresPage) {
     var log = console.createLog(module.id);
     var AdventuresPage = adventuresPage.AdventuresPage;
 

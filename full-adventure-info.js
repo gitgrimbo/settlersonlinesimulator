@@ -7,11 +7,11 @@ define([
 
 "module",
 
-"./deferred-utils", "./console", "./ajax",
+"./deferred-utils", "./console", "./ajax", "./ui-utils",
 
 "./adventures-model", "./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"
 
-], function(module, deferredUtils, _console, ajax, adventuresModel, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
+], function(module, deferredUtils, _console, ajax, uiUtils, adventuresModel, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -332,19 +332,12 @@ define([
         ads.prepend(createButtonBar(btns));
     }
 
-    function addStyles(cssStr) {
-        if (cssStr.join) {
-            cssStr = cssStr.join("\n");
-        }
-        $("<style>").text(cssStr).appendTo(document.body);
-    }
-
     function execute() {
         var css = [];
         css.push("a.btn-link { font-family: Tahoma; background: green; color: white; border-radius: 6px; padding: 2px; padding-left: 4px; padding-right: 4px; }");
         css.push(".bar-outer { display: inline-block; background: white; border: solid 1px black; }");
         css.push(".bar-inner { display: inline-block; background: green; }");
-        addStyles(css);
+        uiUtils.addStyles(css);
 
         var adventureInfoList = [];
         // GLOBAL!
