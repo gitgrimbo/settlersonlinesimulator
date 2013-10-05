@@ -1,5 +1,5 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
-define(["units-required", "adventures-model", "text!html/der-schamane-adventure.html"], function(UnitsRequired, adventuresModel, adventureHtml) {
+define(["units-required/UnitsRequiredPageParser", "adventures-model", "text!html/der-schamane-adventure.html"], function(UnitsRequiredPageParser, adventuresModel, adventureHtml) {
     var AdventuresModel = adventuresModel;
 
     describe("Units Required", function() {
@@ -9,7 +9,7 @@ define(["units-required", "adventures-model", "text!html/der-schamane-adventure.
         });
 
         it("parses the html", function() {
-            var unitsRequired = UnitsRequired.getUnitsRequiredFromAdventurePageHtml(adventureHtml);
+            var unitsRequired = UnitsRequiredPageParser.getAttackPlanFromHtml(adventureHtml);
             expect(unitsRequired).not.toBeUndefined();
             expect(unitsRequired.sims.length).toEqual(17);
         });
