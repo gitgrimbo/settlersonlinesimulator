@@ -15,7 +15,7 @@
 	maybeDefine("jquery", window, "jQuery");
 }());
 
-require(["adventures-page", "full-adventure-info", "sort-adventures", "units-required"], function(adventuresPage, fai, sortAdventures, unitsRequired) {
+require(["adventures-page", "full-adventure-info", "sort-adventures", "units-required/units-required"], function(adventuresPage, fai, sortAdventures, unitsRequired) {
 	function match(action, location) {
 		var r = action.re.test(location[action.match]);
 		return r;

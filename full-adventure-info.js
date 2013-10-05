@@ -9,9 +9,9 @@ define([
 
 "./deferred-utils", "./console", "./ajax", "./ui-utils",
 
-"./adventures-model", "./units-required-model", "./units-required", "./adventures-page", "./thesettlersonline-wiki"
+"./adventures-model", "./units-required/units-required-model", "./units-required/units-required", "./units-required/UnitsRequiredService", "./adventures-page", "./thesettlersonline-wiki"
 
-], function(module, deferredUtils, _console, ajax, uiUtils, adventuresModel, unitsRequiredModel, unitsRequired, adventuresPage, wiki) {
+], function(module, deferredUtils, _console, ajax, uiUtils, adventuresModel, unitsRequiredModel, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -23,10 +23,6 @@ define([
     var AdventuresPage = adventuresPage.AdventuresPage;
     var UnitList = unitsRequiredModel.UnitList;
     var AdventuresModel = adventuresModel;
-
-    function get(url) {
-        return ajax.ajax(url);
-    }
 
 
 
@@ -87,10 +83,7 @@ define([
     };
 
     AdventureBox.loadAttackPlan = function(adventureInfo) {
-        var xhr = get(adventureInfo.href);
-        xhr.href = adventureInfo.href;
-        xhr.idx = adventureInfo.idx;
-        return xhr.pipe(mapHtmlToAttackPlan.bind(null, adventureInfo.idx));
+        return UnitsRequiredService.loadAttackPlan(adventureInfo);
     };
 
     AdventureBox.prototype.updateWithAttackPlan = function(status, details) {
@@ -111,7 +104,8 @@ define([
         var count = 0;
         var size = adventureBoxes.length;
         var dfds = adventureBoxes.map(function(box) {
-            return AdventureBox.loadAttackPlan(box.adventureInfo).then(function(status, details) {
+            var adventureInfo = box.adventureInfo;
+            return AdventureBox.loadAttackPlan(adventureInfo).then(function(status, details) {
                 progressCallback({
                     item: ++count,
                     size: size
@@ -176,67 +170,12 @@ define([
 
 
 
-    /**
-     * Remove the JS that tries to ensure the page is the top frame/window.
-     */
-    function preventNavigation(html) {
-        var len = html.length;
-        html = html.replace("if(top != self){top.location = self.location}", "");
-        if (html.length === len) {
-            log("Did not find 'top.location = self.location' code.");
-        }
-        return html;
-    }
-
-    function getAdventureDetails(html) {
-        try {
-            var attackPlan = unitsRequired.getUnitsRequiredFromAdventurePageHtml(html);
-            var title = "FAKE"; //$doc.find("title").text().trim();
-            return {
-                attackPlan: attackPlan,
-                title: title
-            };
-        } catch (e) {
-            return {
-                error: e
-            };
-        }
-    }
-
-    /**
-     * Processes the adventure page by returning a Deferred that is resolved with the adventure's
-     * details.
-     */
-    function handleAdventure(idx, html) {
-        log("handleAdventure.enter", arguments);
-
-        var dfd = $.Deferred();
-
-        var details = getAdventureDetails(html);
-        dfd.resolve(details);
-
-        log("handleAdventure.exit");
-
-        return dfd.promise();
-    }
-
     function toNdp(s, n) {
         var i = s.indexOf(".");
         if (i < 0) {
             return s;
         }
         return s.substring(0, i + n + 1);
-    }
-
-    function mapHtmlToAttackPlan(idx, html, status, xhr) {
-        log("processXhr", arguments);
-        if ("success" === status) {
-            return handleAdventure(idx, html).pipe(function(details) {
-                log("processXhr.success", arguments);
-                return deferredUtils.resolveWith(status, details).promise();
-            });
-        }
-        return deferredUtils.rejectWith("xhr error", xhr).promise();
     }
 
     function handleDetails(li, details) {

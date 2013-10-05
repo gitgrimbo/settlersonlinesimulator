@@ -1,6 +1,6 @@
-define(["module", "./console", "./string-utils"], function(module, console, StringUtils) {
+define(["module", "../console", "../string-utils"], function(module, _console, StringUtils) {
     var DEBUG = false;
-    var log = console.createLog(module.id, DEBUG);
+    var log = _console.createLog(module.id, DEBUG);
 
     function forEachOwnProperty(ob, fn, context) {
         for (var i in ob) {
@@ -160,7 +160,7 @@ define(["module", "./console", "./string-utils"], function(module, console, Stri
                 if (ob[prop]) {
                     items.push({
                         value: UnitList.unitValues[prop],
-                        html: '<span class="' + css + ' unit-sprite" title="' + UnitList.unitNames[prop] + '">&nbsp;</span><span style=padding-right:1em;>' + ob[prop] + '</span>'
+                        html: '<span style="display: inline-block" class="' + css + ' unit-sprite" title="' + UnitList.unitNames[prop] + '">&nbsp;</span><span style=padding-right:1em;>' + ob[prop] + '</span>'
                     });
                 }
             }, this);
