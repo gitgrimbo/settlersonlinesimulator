@@ -1,0 +1,66 @@
+<!-- jquery is 1.6.4 on the target page -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+
+<style>
+.outer {
+    font-size: 10pt;
+    font-family: Tahoma;
+    border: solid 1px black;
+    position: relative;
+    background: MediumSeaGreen;
+}
+.inner-bar {
+    text-align: center;
+    background: green;
+    height: 1.1em;
+}
+.inner-text {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    color: white;
+}
+</style>
+
+<div class="outer"><div class="inner-bar"><span class="inner-text">&nbsp;</span></div></div>
+
+<button>Start</button>
+
+<script>
+function ProgressBar(outer) {
+    this.outer = outer;
+    this.inner = outer.find(".inner-bar").first();
+}
+
+ProgressBar.prototype.update = function(percent) {
+    this.inner.css("width", Math.floor(percent) + "%");
+    this.outer.find(".inner-text").first().html(percent + "%");
+};
+
+var interval = null;
+var bar = new ProgressBar($(".outer").first());
+$("button").first().click(function(evt) {
+    var count;
+    var btn = $(evt.target);
+    if (interval) {
+        clearInterval(interval);
+        bar.update(0);
+        btn.html("Start");
+    } else {
+        count = 0;
+        interval = setInterval(function() {
+            count++;
+            var percent = Math.floor(100*count/10);
+            if (percent >= 100) {
+                clearInterval(interval);
+                btn.html("Start");
+                interval = null;
+                percent = 100;
+            }
+            bar.update(percent);
+        }, 500);
+        btn.html("Stop");
+    }
+});
+</script>
