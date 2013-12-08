@@ -38,8 +38,8 @@ define(["units-required/PageParser", "adventures-model", "text!html/der-schamane
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, REVERSE_FALSE, AdventuresModel.sortInfoByRatio);
             // only first and second items have xp and tuv defined, and therefore a valid ratio
-            expect(clone[0].idx).toBe(2);
-            expect(clone[1].idx).toBe(1);
+            expect(clone[2].idx).toBe(3);
+            expect(clone[3].idx).toBe(0);
         });
 
         it("sorts by xp", function() {
