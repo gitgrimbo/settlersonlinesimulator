@@ -10,10 +10,10 @@
 <script type="text/javascript" src="../jasmine/jasmine-html.js"></script>
 
 <!-- jquery is 1.6.4 on the target page -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+<script src="../lib/jquery-1.6.4.js"></script>
 
 <script src="requirejs-config.js"></script>
-<script src="http://requirejs.org/docs/release/2.1.8/comments/require.js"></script>
+<script src="../lib/require.js"></script>
 
 <script>
 // jQuery dance
@@ -32,7 +32,7 @@
 </script>
 
 <script>
-require(["spec/Main", "domReady!"], function(main) {
+require(["spec/UnitsRequired", "spec/AdventuresModel", "domReady!"], function() {
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
 

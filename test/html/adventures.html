@@ -1,0 +1,940 @@
+<!--
+grimbo:
+this page is basically a straight copy, but there are some -grimbo- comments to comment out advertising and facebook/google-plus, etc, to make the test page load faster.
+-->
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="Adventures of The Settlers Online: Here you find information about the available adventures of The Settlers Online!" />
+          <meta name="keywords" content="the settlers online, adventures" />
+          <meta name="author" content="Dennis Thielsch" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="http://settlersonlinesimulator.com/dso_kampfsimulator/images/favicon.ico"
+          type="image/vnd.microsoft.icon" />
+
+        <link rel="canonical" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/" /> 
+         
+
+    <title>
+      Adventures &#187; The Settlers Online    </title>
+
+    <!-- CSS-Files -->    
+    <link type="text/css" rel="stylesheet" href="http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&amp;f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css" />
+
+    <!-- Javascript-Files -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-15840690-6']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      // leave frames
+      if(top != self){top.location = self.location}
+
+      $(document).ready(function() {              
+        $('table.example-sim tr,#building-destruction tr').bind('mouseover', function(){
+          $(this).css("background", '#CFE1D1');
+        }).bind('mouseout', function(){
+          $(this).css("background", 'transparent');
+        });
+      });
+    </script>
+  </head>
+  <body class="non-javascript coda-slider-no-js">
+    <div id="page">
+            <div id="adsense_120x600">
+        <!--grimbo-iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="160" height="600" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3884" target="_blank"></iframe>
+              <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes-grimbo-->      </div>
+              <div id="content">
+
+        <p id="hint">
+          New GENERALS available! Some bugs like "starting a simulation from HOF always starts a simulation with normal general" exist. 
+          Please report more errors in the game forum.
+        </p>
+         
+
+                            <ul id="lang">
+          <li title="deutsch">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/">
+              <span id="german">&#160;</span>
+            </a>
+          </li>
+          <li title="english">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/">
+              <span id="english">&#160;</span>
+            </a>
+          </li>
+          <li title="american">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/us/">
+              <span id="american">&#160;</span>
+            </a>
+          </li>
+          <li title="français">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/fr/">
+              <span id="french">&#160;</span>
+            </a>
+          </li>
+          <li title="italiano">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/it/">
+              <span id="italian">&#160;</span>
+            </a>
+          </li>
+          <li title="español">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/es/">
+              <span id="spanish">&#160;</span>
+            </a>
+          </li>
+          <li title="português">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/pt/">
+              <span id="portuguese">&#160;</span>
+            </a>
+          </li>
+          <li title="português">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/pt/">
+              <span id="brasil">&#160;</span>
+            </a>
+          </li>
+          <li title="???????">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/ru/">
+              <span id="russian">&#160;</span>
+            </a>
+          </li>
+          <li title="ceský">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/cz/">
+              <span id="czech">&#160;</span>
+            </a>
+          </li>
+          <li title="polska">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/pl/">
+              <span id="polish">&#160;</span>
+            </a>
+          </li>
+          <li title="nederlands">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/nl/">
+              <span id="dutch">&#160;</span>
+            </a>
+          </li>
+          <li title="romanian">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/ro/">
+              <span id="romanian">&#160;</span>
+            </a>
+          </li>
+          <li title="greek">
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/gr/">
+              <span id="greek">&#160;</span>
+            </a>
+          </li>
+          <!--
+          <li title="dansk">
+            <a href="">
+              <span id="danish">&#160;</span>
+            </a>
+          </li>
+          -->
+        </ul>
+        <span id="num-sim">
+                <a class="normal" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">Partner</a>: <a target="_blank" href="http://settlersonlineeconomy.com/">SettlersOnlineEconomy</a>
+                  </span>
+
+        <div id="header">
+          <ul class="links">
+            <li>
+              <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/">
+                Combat Simulator              </a>
+            </li>
+            <li>
+              <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/">
+                Adventures              </a>
+            </li>
+            <li>
+              <a target="_blank" href="http://settlersonlinesimulator.com/tactic-maps/">
+                Tactical maps              </a>
+            </li>
+            <li>
+              <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/combat-system/">
+                The Combat System              </a>
+            </li>
+            <li>
+              <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/forum/">
+                Forum              </a>
+            </li>
+          </ul>
+          <!--grimbo-div id="facebook_like">
+            <iframe id="facebook" style="width:85px;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsettlersonlinesimulator.com%2Fdso_kampfsimulator%2F&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=21&amp;locale=en_US">
+            </iframe>
+            <div class="g-plusone" data-size="medium" data-annotation="none"></div>
+            <script type="text/javascript">
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+          </div-grimbo-->
+        </div>
+        <div class="clear"></div>
+
+        <h1>
+          Adventures - The Settlers Online        </h1>
+        <!-- last update -->
+        <p id="last_update">
+          (combat simulator for
+          <a target="_blank" href="http://forum.thesettlersonline.com/threads/15694-TSO-Combat-Siimulator">
+            The Settlers Online
+          </a>
+          -
+          <a target="_blank" href="http://forum.thesettlersonline.com/threads/15694-TSO-Combat-Siimulator">
+            discuss this tool
+          </a>
+          in the forum - last update: 2013-04-07 17:17)
+        </p>
+        <div class="clear"></div>
+        <div class="infobox">
+  <h2>
+    Adventures  </h2>
+  <p>
+    Here, you find a list of all the <strong>Adventures</strong> of The Settlers Online.  </p>
+  <ul id="adventures">
+        <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_the_shaman.png"
+             alt="" title="The Shaman" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Shaman" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schamane/">
+          The Shaman        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        14960      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_old_ruins.png"
+             alt="" title="Old Ruins" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Old Ruins" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/old-ruins/">
+          Old Ruins        </a>
+              </div>
+            
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icovaliantAT.png"
+             alt="" title="The Valiant Little Taylor" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Valiant Little Taylor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-valiant-little-tayler/">
+          The Valiant Little Taylor        </a>
+              </div>
+            
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icobetrayedAT.png"
+             alt="" title="The betrayed little Tailor" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The betrayed little Tailor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-betrayed-little-tailor/">
+          The betrayed little Tailor        </a>
+              </div>
+            
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_home-island.png"
+             alt="" title="Home Island" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Home Island" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/home-island/">
+          Home Island        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/home-island/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        26612      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        Here you will find an overview of the bandit camps on the home island.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Insel_der_Freibeuter.png"
+             alt="" title="Island of the Pirates" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Island of the Pirates" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/insel-der-freibeuter/">
+          Island of the Pirates        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/insel-der-freibeuter/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        2752      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        On a secluded island, a bunch of pirates have built their headquarters. Within a radius of hundreds of kilometers they attack helpless port cities and frighten inhabitants. If you want to earn fame and glory, visit the island and banish the pirates and their crazy ship's cook.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Sumpfhexe.png"
+             alt="" title="Witch of the Swamp" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Witch of the Swamp" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/sumpfhexe/">
+          Witch of the Swamp        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/sumpfhexe/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        5663      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        Rumours tell of a mighty witch.
+
+She lives in a poisonous swamp and is believed to have the ugliest face you can imagine, warts all over her deformed nose and a laughter that can freeze your spine. Anyone who dares to journey into her realm is sure to earn fame and glory.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Sattelfest.png"
+             alt="" title="Horseback" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Horseback" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/sattelfest/">
+          Horseback        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/sattelfest/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        7230      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        One of the rider clans has started terrorising the settlers in this region, taking their belongings and steal their flocks. If no-one helps them they will have to leave their homeland. The local population doesn't possess much, but they are willing to offer their most precious heirloom to anyone who can drive the rider clan away.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Verrater.png"
+             alt="" title="Traitors" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Traitors" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/verraeter/">
+          Traitors        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/verraeter/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        8710      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        Loyal men they were, but greed turned them into ruthless bandits. The nobles have turned to you for help against these deserters. Be careful if you approach them since these traitors are heavily armed, battle hardened men.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Beutelschneider.png"
+             alt="" title="Stealing from the rich" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Stealing from the rich" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/beutelschneider/">
+          Stealing from the rich        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/beutelschneider/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        11870      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A very concerned landlord has written a letter to you. One of his previously loyal master archers has turned rogue, living in the forest and stealing gold from rich merchants and nobles. With it, he bribes simple peasants into rioting. You have to stop this at once!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Die_schwarzen_Priester.png"
+             alt="" title="The Dark Priests" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Dark Priests" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/">
+          The Dark Priests        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/die-schwarzen-priester/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        5975      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        Rumour has it that a couple of dark priests are performing dark rituals. Very dark rituals. There have even been several cats reported missing recently. Understandably, your citizens are more than a little concerned about this. They have turned to you for help and are willing to give what they have in order to compensate you for your efforts.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Rauberbande.png"
+             alt="" title="Outlaws" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Outlaws" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/raeuberbande/">
+          Outlaws        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/raeuberbande/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        14020      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        It is a mark of troubled times when even captivity cannot stop wicked bandits from forming new groups of outlaws. Travellers tell of ffearsome raids in the nearby forests. The local knights cannot deal with this hardened group alone and have requested your assistance. Send your men and make the roads safe again!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Alte_Bekannte.png"
+             alt="" title="Old Friends" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Old Friends" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/alte-bekannte/">
+          Old Friends        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/alte-bekannte/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        6810      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        The last time you battled the witch of the swamp, you defeated her, but a Dark High Priest escaped. The priest retreated to an abandoned piece of land and performed a dark ritual to bring the witch back to life again. Now the witch of the swamp is regenerating and planning a vendetta against you. Defeat her, while she is still weak!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Sohne_der_Steppe.png"
+             alt="" title="Sons of the veldt" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Sons of the veldt" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/soehne-der-steppe/">
+          Sons of the veldt        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/soehne-der-steppe/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        33440      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        You have received a letter of challenge from a group called "The Sons Of The Veldt". Oviously a new rider clan has emerged and is overconfident its own strength. This challenge is an affront to your honour. You have to show these savages their place!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Das_Banditennest.png"
+             alt="" title="Bandit Nest" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Bandit Nest" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/das-raeubernest/">
+          Bandit Nest        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/das-raeubernest/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        9880      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        The Scouts have found a house hidden in the forest where they think the rogues Chuck, One-Eyed Bert and Metal Tooth are living. Travel to the dark part of the forest and check the rumour out. If you find the scoundrels there, catch them and bring them to justice.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Schiespulver.png"
+             alt="" title="Gunpowder" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Gunpowder" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/schiesspulver/">
+          Gunpowder        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/schiesspulver/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        38265      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A spy report tells of a secluded castle in a large valley far to the east. Obviously the knights there have got hold of some cannons. Those mighty weapons might prove very useful in the future. Yet, these knights surely won`t give them away freely. You may have to convince them with a little... manpower.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/the-lost-skull2.png"
+             alt="" title="The Lost Skull" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Lost Skull" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-lost-skull/">
+          The Lost Skull        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        3320      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A letter from King Damien arrived this morning. We are to travel to Skull Island and stop a bunch of young pirates finding a long lost treasure! I'll tell you more about it all when we arrive! Off we go to Skull Island!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/tropical_sun2.png"
+             alt="" title="Tropical Sun" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Tropical Sun" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/tropical-sun/">
+          Tropical Sun        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        6110      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A pigeon landed this morning, bringing news from your good friend Lord Walder the Bold. Or is it bald? Anyway, he requested your attention regarding a problem he has. His people live on an island ruled by a fierce pirate leader, but they get along well. Neither hurts the other, peace can be smelled the air. Then two weeks ago an unknown bandit gang appeared from the badlands, and they seem to want the island for themselves. Lord Walder needs your help! I say rally up some of our military forces and pay them a visit. Do you agree?      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Viktor_der_Verschlagene.png"
+             alt="" title="Victor the vicious" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Victor the vicious" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/viktor-der-verschlagene/">
+          Victor the vicious        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/viktor-der-verschlagene/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        27482      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        Victor The Vicious hails from a kingdom far away.
+
+His skills in archery are unparalleled. Some say he shot an apple from the head of his own son! Unfortunately he has claimed the nearby hunting valley of a friendly regent for his own. The regent cannot accept such bildness, and has placed a bounty on Victor's head.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Mutterliebe.png"
+             alt="" title="Mother Love" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Mother Love" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/mutterliebe/">
+          Mother Love        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/mutterliebe/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        3050      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        The last time you met the crazy ship's cook, you defeated him and his crew and banished them from the island. After that defeat the crazy ship's cook went back to his parent's house. Now his mother is watching over him. If you want to finish him off you'll have to overwhelm his mother first.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Die_Nordmanner.png"
+             alt="" title="The Nords" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Nords" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-nordmaenner/">
+          The Nords        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/die-nordmaenner/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        27530      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        You have received a threating letter containing the demans of a bunch of wild men that landed on the shore not long ago. Apparently, they are part of some kind of wild Nordic tribe that intends to go pillaging and plundering their way through the area. For the sake of your people's safety you should challenge this tribe. Drive them away and restore peace and order to your kingdom.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Einsame_Experimente.png"
+             alt="" title="Secluded Experiments" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Secluded Experiments" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/einsame-experimente/">
+          Secluded Experiments        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        39935      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        You have received word of a mad alchemist who performs experiments on living human being! He has hired an experienced troop of deadly mercenaries to protect him. You cannot allow this to happen in the vicinity of your realm! Send your troops and stop the madman!      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Die_Wilde_Waltraut.png"
+             alt="" title="Wild Mary" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Wild Mary" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-wilde-waltraud/">
+          Wild Mary        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/die-wilde-waltraud/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        19290      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A plea for help reaches your kingdom. Terrified citizens claim they have been repeatedly raided by a band of villains under the command of a once proud knight of the realm. He calls himself `Mad Henry` and dares anyone to challenge him. The villagers are in desperate need of help.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Uberraschungsangriff.png"
+             alt="" title="Surprise Attack" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Surprise Attack" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/ueberraschungsangriff/">
+          Surprise Attack        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/ueberraschungsangriff/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        41820      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A group of the notorious nords have built their camp on a small island nearby. It seems as if they are preparing an attack against you. However, they don’t know that their landing did not go unnoticed, so it would be a clever move to attack them now.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Die_dunkle_Bruderschaft.png"
+             alt="" title="The Dark Brotherhood" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Dark Brotherhood" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-dunkle-bruderschaft/">
+          The Dark Brotherhood        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/die-dunkle-bruderschaft/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        51978      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        More and more townsfolk are drawn to a mysterious order in the vicinity of your castle. After some investigation it turns out that a dark brotherhood is trying to undermine your regency. You cannot allow that to happen! Send your men to stop this foul corruption from spreading.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Die_schwarzen_Ritter.png"
+             alt="" title="The Black Knights" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Black Knights" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-ritter/">
+          The Black Knights        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/die-schwarzen-ritter/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        28175      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        A claim of sovereignty has arrived at your castle. Hector the Black and his brother Barnabas demand a whole mountain range as their new territory. They have already secretly built black castles and recruited numerous men to defend them. What will you do? Allow this treason to happen? Or will you put an end to this claim once and for all?      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Rasender_Bulle.png"
+             alt="" title="Roaring Bull" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Roaring Bull" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/rasender-bulle/">
+          Roaring Bull        </a>
+                <br />
+        <span class="map">
+          <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/maps/rasender-bulle/">(Map)</a>
+        </span> 
+                </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        37580      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+        The rider clans of the great veldt have requested your assistance. Apparently, an evil shaman called `Roaring Bull` has claimed regency over the whole area. He and his fellow shamans command dark magic and fierce warriors. Nobody can stand against them. You will have to send your finest men in order to defeat them.      </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_01.png"
+             alt="" title="EM - First Match (Lvl 26)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - First Match (Lvl 26)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-first-match-lvl26/">
+          EM - First Match (Lvl 26)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        10250      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_01.png"
+             alt="" title="EM - First Match (Lvl 36)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - First Match (Lvl 36)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-first-match-lvl36/">
+          EM - First Match (Lvl 36)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        12150      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_02.png"
+             alt="" title="EM - Second Match (Lvl 26)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - Second Match (Lvl 26)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-second-match-lvl26/">
+          EM - Second Match (Lvl 26)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        9300      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_02.png"
+             alt="" title="EM - Second Match (Lvl 36)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - Second Match (Lvl 36)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-second-match-lvl36/">
+          EM - Second Match (Lvl 36)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        11200      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_03.png"
+             alt="" title="EM - Third Match (Lvl 26)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - Third Match (Lvl 26)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-third-match-lvl26/">
+          EM - Third Match (Lvl 26)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        10250      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_03.png"
+             alt="" title="EM - Third Match (Lvl 36)" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - EM - Third Match (Lvl 36)" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/em-third-match-lvl36/">
+          EM - Third Match (Lvl 36)        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        12800      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Rettet_das_Weihnachtsfest_(Easy).png"
+             alt="" title="Save the Christmas Feast Lvl 26-35" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Save the Christmas Feast Lvl 26-35" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/rettet-das-weihnachtsfest-lvl-26-35/">
+          Save the Christmas Feast Lvl 26-35        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        3610      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Rettet_das_Weihnachtsfest_(Easy).png"
+             alt="" title="Save the Christmas Feast Lvl 36-50" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Save the Christmas Feast Lvl 36-50" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/rettet-das-weihnachtsfest-lvl-36-50/">
+          Save the Christmas Feast Lvl 36-50        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        4890      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/eow_adventure.png"
+             alt="" title="The end of the earth" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The end of the earth" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/end-of-the-earth/">
+          The end of the earth        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        8120      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+       
+  </ul>
+</div>        
+        <div id="footer">
+          <p>
+            This page was created in <span class="bold">0.01056 seconds</span>.
+          </p>
+          <p>
+            Copyright &copy; 2010-2013 by SettlersOnlineSimulator.com
+          </p>
+          <p>
+            All images &copy; 2010-2013 Ubisoft Entertainment.
+          </p>
+        </div>
+
+        <ul class="links">
+          <li>
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/privacy-policy/">
+              Privacy policy
+            </a>
+          </li>
+          <li>
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/imprint/">
+              Imprint
+            </a>
+          </li>
+          <li>
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">
+              Partner
+            </a>
+          </li>
+          <li>
+            <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/features/">
+              Features            </a>
+          </li>
+        </ul>
+        <p id="no-warranty">
+          Any warranty is excluded.
+        </p>
+
+      </div>
+      
+    </div>
+  </body>
+</html>

@@ -1,20 +1,9 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
-define(["units-required/PageParser", "adventures-model", "text!html/der-schamane-adventure.html"], function(UnitsRequiredPageParser, adventuresModel, adventureHtml) {
+define(["adventures-model", "text!html/adventures/der-schamane.html"], function(adventuresModel, adventureHtml) {
     var AdventuresModel = adventuresModel;
 
-    describe("Units Required", function() {
-
-        beforeEach(function() {
-            // nothing
-        });
-
-        it("parses the html", function() {
-            var unitsRequired = UnitsRequiredPageParser.getAttackPlanFromHtml(adventureHtml);
-            expect(unitsRequired).not.toBeUndefined();
-            expect(unitsRequired.sims.length).toEqual(17);
-        });
-
-    });
+    var NORMAL_ORDER = false;
+    var REVERSE_ORDER = true;
 
     describe("Adventures List", function() {
 
@@ -26,43 +15,35 @@ define(["units-required/PageParser", "adventures-model", "text!html/der-schamane
         });
 
         it("sorts by ratio", function() {
-            var REVERSE_FALSE = false;
-            var REVERSE = true;
-
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE, AdventuresModel.sortInfoByRatio);
+            AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByRatio);
             // only first and second items have xp and tuv defined, and therefore a valid ratio
             expect(clone[0].idx).toBe(0);
             expect(clone[1].idx).toBe(3);
 
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE_FALSE, AdventuresModel.sortInfoByRatio);
+            AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByRatio);
             // only first and second items have xp and tuv defined, and therefore a valid ratio
-            expect(clone[2].idx).toBe(3);
-            expect(clone[3].idx).toBe(0);
+            expect(clone[0].idx).toBe(3);
+            expect(clone[1].idx).toBe(0);
         });
 
         it("sorts by xp", function() {
-            var REVERSE_FALSE = false;
-            var REVERSE = true;
-
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE, AdventuresModel.sortInfoByXP);
+            console.log(clone.map(function(it,i){return i + ": " + it.tuv + "," + it.xp + "," + it.calculatedXP; }).join("\n"));
+            AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByXP);
             expect(clone[0].idx).toBe(23);
             expect(clone[1].idx).toBe(22);
 
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE_FALSE, AdventuresModel.sortInfoByXP);
-            expect(clone[0].idx).toBe(1);
-            expect(clone[1].idx).toBe(2);
+            AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByXP);
+            expect(clone[0].idx).toBe(4);
+            expect(clone[1].idx).toBe(18);
         });
 
         it("sorts by total losses", function() {
-            var REVERSE_FALSE = false;
-            var REVERSE = true;
-
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE, AdventuresModel.sortInfoByTotalLosses);
+            AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByTotalLosses);
             // only the first 4 items have total losses defined
             expect(clone[0].idx).toBe(2);
             expect(clone[1].idx).toBe(3);
@@ -70,7 +51,7 @@ define(["units-required/PageParser", "adventures-model", "text!html/der-schamane
             expect(clone[3].idx).toBe(1);
 
             var clone = adventures.slice();
-            AdventuresModel.sortInfo(clone, REVERSE_FALSE, AdventuresModel.sortInfoByTotalLosses);
+            AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByTotalLosses);
             // only the first 4 items have total losses defined
             expect(clone[0].idx).toBe(1);
             expect(clone[1].idx).toBe(0);
