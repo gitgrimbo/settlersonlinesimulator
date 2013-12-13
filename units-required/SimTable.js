@@ -68,17 +68,22 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
             return units;
         }
 
-        // Remove attack wave prefix, e.g. "1: ".
+        // Remove attack wave prefix, e.g. "1: 145R".
         // So remove everything before first ':'.
         match = str.match(/.*?\:(.*)/);
         if (match) {
             str = StringUtils.$trim(match[1]);
         }
 
+		// str will be like "47R 1S 80C 72B"
         str = str.split(/\s+/);
+
+		// str will be array like ["47R", "1S", "80C", "72B"]
         for (var i = 0; i < str.length; i++) {
             match = str[i].match(/([\d.]+)(.*)/);
-            units[match[2]] = parseFloat(match[1]);
+            var unitType = match[2];
+            var unitNumber = match[1];
+            units[unitType] = parseFloat(unitNumber);
         }
         return units;
     };
