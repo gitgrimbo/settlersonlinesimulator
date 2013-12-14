@@ -175,7 +175,7 @@ define([
 
         loader.loadLoader().then(function() {
             return loader.yepNopeDeferred({
-                test: window.JSON,
+                test: ("undefined" === typeof window.JSON),
                 nope: js.json3
             });
         }).done(function() {
