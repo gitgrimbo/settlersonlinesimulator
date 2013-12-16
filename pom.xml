@@ -5,8 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>temp</groupId>
-    <artifactId>temp</artifactId>
+    <groupId>grimbo.bookmarklets</groupId>
+    <artifactId>grimbo-bookmarklets-settlersonlinesimulator</artifactId>
     <version>0</version>
 
     <!--
@@ -22,13 +22,54 @@
     '/target/site/surefire-report.html'.
     -->
 
+    <properties>
+        <!--
+        Put in ./reports/junit by the
+        ./tests/ReporterToHandleJasmineJunitReports.js Jasmine reporter.
+        -->
+        <jstestdriver.reportsPath>${basedir}/reports/junit</jstestdriver.reportsPath>
+
+        <!-- Put here by theintern. Doesn't seem an easy way to change. -->
+        <!--
+        The intern uses full filenames for the lcov file which seems to be in
+        accordance with the spec.
+            https://github.com/theintern/intern/issues/95
+        -->
+        <lcov.reportPath>${basedir}/lcov.info</lcov.reportPath>
+
+        <!-- These sonar.xxx properties are the Maven equivalent of sonar-project.properties -->
+        <!-- I think projectKey/projectName/projectVersion may be ignored, and the POM's GAV is used instead -->
+        <sonar.projectKey>grimbo-settlersonlinesimulator-bookmarklet</sonar.projectKey>
+        <sonar.projectName>grimbo-settlersonlinesimulator-bookmarklet</sonar.projectName>
+        <sonar.projectVersion>1.0</sonar.projectVersion>
+
+        <!-- Think these are not used, and the Maven sourceDirectory and testSourceDirectory are used instead. -->
+        <sonar.sources>src</sonar.sources>
+        <sonar.tests>test</sonar.tests>
+
+        <sonar.language>js</sonar.language>
+        <sonar.javascript.jstestdriver.reportsPath>${jstestdriver.reportsPath}</sonar.javascript.jstestdriver.reportsPath>
+        <sonar.javascript.lcov.reportPath>${lcov.reportPath}</sonar.javascript.lcov.reportPath>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    </properties>
+
     <build>
+        <!-- Let sonar maven plugin know where the sources are. -->
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <testSourceDirectory>${basedir}/test</testSourceDirectory>
+
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>2.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>
