@@ -1,2 +1,6 @@
 # The r.js generated file
 all.js
+node_modules/
+reports/
+target/
+tmp/
