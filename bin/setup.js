@@ -15,23 +15,39 @@ NOTE! Uses Windows-specific commands such as 'cmd' and 'copy'.
 
 // config for the script
 var config = {
-    seleniumserver: {
-        url: "http://selenium.googlecode.com/files/selenium-server-standalone-2.38.0.jar"
+    selenium: {
+        server: {
+            url: "http://selenium.googlecode.com/files/selenium-server-standalone-2.38.0.jar"
+        },
+        chromedriver: {
+            url: "http://chromedriver.storage.googleapis.com/2.7/chromedriver_win32.zip"
+        },
+        iedriver: {
+            url: "https://selenium.googlecode.com/files/IEDriverServer_Win32_2.38.0.zip"
+        }
     },
-    chromedriver: {
-        url: "http://chromedriver.storage.googleapis.com/2.7/chromedriver_win32.zip"
-    },
-    iedriver: {
-        url: "https://selenium.googlecode.com/files/IEDriverServer_Win32_2.38.0.zip"
+    sonar: {
+        server: {
+            url: "http://dist.sonar.codehaus.org/sonar-3.7.3.zip"
+        },
+        runner: {
+            url: "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.3/sonar-runner-dist-2.3.zip"
+        },
+        javascript: {
+            url: "http://repository.codehaus.org/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/1.4/sonar-javascript-plugin-1.4.jar"
+        }
     }
 };
 
 // If you have local copies of the required files, set them here and set useLocal=true.
 var useLocal = true;
 if (useLocal) {
-    config.seleniumserver.url = "file:///X:/backup/apps/dev/testing/selenium-server-standalone-2.38.0.jar";
-    config.chromedriver.url = "file:///X:/backup/apps/dev/testing/chromedriver/2.7/chromedriver_win32.zip";
-    config.iedriver.url = "file:///X:/backup/apps/dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip";
+    config.selenium.server.url = "file:///X:/backup/apps/dev/testing/selenium-server-standalone-2.38.0.jar";
+    config.selenium.chromedriver.url = "file:///X:/backup/apps/dev/testing/chromedriver/2.7/chromedriver_win32.zip";
+    config.selenium.iedriver.url = "file:///X:/backup/apps/dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip";
+    config.sonar.server.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-3.7.3.zip";
+    config.sonar.runner.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-runner-dist-2.3.zip";
+    config.sonar.javascript.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-javascript-plugin-1.4.jar";
 }
 
 // IMPORTS
@@ -62,6 +78,10 @@ function urlFilename(url) {
     return url.substring(url.lastIndexOf('/') + 1, url.length);
 }
 
+function removeExtension(filename) {
+    return new java.lang.String(filename).replaceFirst("[.][^.]+$", "");
+}
+
 function download(url, file) {
     var website = new URL(url);
     var rbc = Channels.newChannel(website.openStream());
@@ -77,6 +97,19 @@ function maybeDownload(url, file) {
     return false;
 }
 
+function doCommandIn(dir, command) {
+    exec('cmd /c cd ' + dir + ' && ' + command);
+}
+
+function unzip(zip) {
+    var dir = zip.getParentFile().getAbsolutePath();
+    doCommandIn(dir, 'jar xvf ' + zip.getName());
+}
+
+function copy(from, to) {
+    doCommand();
+}
+
 
 
 
@@ -87,22 +120,52 @@ var tmp = new File(f, "tmp");
 
 tmp.mkdirs();
 
-var chromeDriverZip = new File(tmp, urlFilename(config.chromedriver.url));
-var ieDriverZip = new File(tmp, urlFilename(config.iedriver.url));
-var seleniumJar = new File(tmp, urlFilename(config.seleniumserver.url));
+/**
+ * - Downloads the sonar zip.
+ * - Expects the sonar extraction folder to be the same name as the zip name (with .zip removed).
+ * - If the sonar extraction folder does not exist, extract the sonar zip.
+ */
+function downloadAndInstallSonar() {
+    var sonarZip = new File(tmp, urlFilename(config.sonar.server.url));
+    var sonarJavascriptJar = new File(tmp, urlFilename(config.sonar.javascript.url));
 
-maybeDownload(config.seleniumserver.url, seleniumJar);
-maybeDownload(config.chromedriver.url, chromeDriverZip);
-maybeDownload(config.iedriver.url, ieDriverZip);
+    var foldername = removeExtension(sonarZip.getName());
+    var folder = new File(sonarZip.getParentFile(), foldername);
+    if (!folder.exists()) {
+        maybeDownload(config.sonar.server.url, sonarZip);
+        // Windows-specific!
+        unzip(sonarZip);
+    } else {
+        println('Not downloading ' + config.sonar.server.url + ' as it seems it has already been extracted here ' + folder.getAbsolutePath() + '.\n');
+    }
 
-// Windows-specific!
-exec('cmd /c cd tmp && jar xvf ' + chromeDriverZip.getName());
-exec('cmd /c cd tmp && jar xvf ' + ieDriverZip.getName());
-exec('cmd /c cd tmp && copy ' + seleniumJar.getName() + ' selenium-server-standalone.jar');
+    maybeDownload(config.sonar.javascript.url, sonarJavascriptJar);
+}
+
+function downloadAndInstallSeleniumAndDrivers() {
+    var seleniumJar = new File(tmp, urlFilename(config.selenium.server.url));
+    var chromeDriverZip = new File(tmp, urlFilename(config.selenium.chromedriver.url));
+    var ieDriverZip = new File(tmp, urlFilename(config.selenium.iedriver.url));
+
+    maybeDownload(config.selenium.server.url, seleniumJar);
+    maybeDownload(config.selenium.chromedriver.url, chromeDriverZip);
+    maybeDownload(config.selenium.iedriver.url, ieDriverZip);
+
+    // Windows-specific!
+    // Overwrite existing drivers and selenium server.
+    unzip(chromeDriverZip);
+    unzip(ieDriverZip);
+}
+
+downloadAndInstallSeleniumAndDrivers();
+downloadAndInstallSonar();
 
 var chromeDriverExe = new File(tmp, "chromedriver.exe");
 
 println('Now you MAYBE need to add chromedriver and/or iedriver to PATH (if it is not already there).');
 println("This is not required if you pass the webdriver.chrome.driver and/or webdriver.ie.driver options to selenium-server-standalone.jar");
+println("  (and isn't required in the provided bin/start-selenium.bat script)");
 println('E.g.');
 println('SET PATH=%PATH%' + System.getProperty("path.separator") + chromeDriverExe.getParentFile().getAbsolutePath());
+println('');
+println('You MAYBE need to alter the bin/ scripts to point to the version of selenium downloaded.');
