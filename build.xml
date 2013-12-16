@@ -1,0 +1,69 @@
+<project name="reports" basedir="." default="info">
+    <description>
+        Generate JUnit HTML reports.
+    </description>
+
+    <!-- set global properties for this build -->
+    <property name="xml-reports" location="reports/junit"/>
+    <property name="ant-reports" location="reports/ant"/>
+    <property name="html-reports" location="reports/html"/>
+
+    <target name="info">
+        <echo>
+This Ant project generates HTML reports from JUnit XML.
+These JUnit XML files should be placed in $${xml-reports} by Intern reporters.
+$${xml-reports} for this project is: '${xml-reports}'.
+        </echo>
+    </target>
+
+    <target name="fix-xml-reports-for-junitreport">
+        <copy todir="${ant-reports}">
+            <fileset dir="${xml-reports}">
+                <include name="TEST*.xml"/>
+            </fileset>
+        </copy>
+
+        <replace dir="${ant-reports}" value="">
+            <!-- Ensure there is no whitespace between the replacetoken tag and the CDATA start/end. -->
+            <replacetoken><![CDATA[<testsuites>]]></replacetoken>
+        </replace>
+
+        <replace dir="${ant-reports}" value="">
+            <!-- Ensure there is no whitespace between the replacetoken tag and the CDATA start/end. -->
+            <replacetoken><![CDATA[</testsuites>]]></replacetoken>
+        </replace>
+    </target>
+
+    <target name="reports" depends="fix-xml-reports-for-junitreport">
+        <mkdir dir="${html-reports}"/>
+
+        <junitreport todir="${html-reports}">
+            <fileset dir="${ant-reports}">
+                <include name="*"/>
+            </fileset>
+            <report format="frames" todir="${html-reports}"/>
+        </junitreport>
+    </target>
+
+    <target name="clean-ant" description="clean up">
+        <echo message="Deleting ${ant-reports}"/>
+        <delete dir="${ant-reports}"/>
+    </target>
+
+    <target name="clean-html" description="clean up">
+        <echo message="Deleting ${html-reports}"/>
+        <delete dir="${html-reports}"/>
+    </target>
+
+    <target name="clean-xml" description="clean up">
+        <echo message="Deleting ${xml-reports}"/>
+        <delete dir="${xml-reports}"/>
+    </target>
+
+    <target name="clean-generated" description="clean up" depends="clean-ant, clean-html">
+    </target>
+
+    <target name="clean-all" description="clean up" depends="clean-generated, clean-xml">
+    </target>
+
+</project>
