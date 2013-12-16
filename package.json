@@ -1,0 +1,11 @@
+{
+  "name": "grimbo-settlersonlinesimulator-bookmarklet",
+  "version": "0.0.1",
+  "description": "grimbo-settlersonlinesimulator-bookmarklet",
+  "devDependencies": {
+    "intern": "~1.3.0"
+  },
+  "scripts": {
+    "test": "node node_modules/intern/runner.js config=tests/intern"
+  }
+}
