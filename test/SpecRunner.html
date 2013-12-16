@@ -6,11 +6,9 @@
 
 <link rel="shortcut icon" type="image/png" href="../lib/jasmine_favicon.png">
 <link rel="stylesheet" type="text/css" href="../lib/jasmine/jasmine.css">
-<!--[if lt IE 9]>
-<script src="../lib/json3.js"></script>
-<![endif]-->
 <script type="text/javascript" src="../lib/jasmine/jasmine.js"></script>
 <script type="text/javascript" src="../lib/jasmine/jasmine-html.js"></script>
+<!-- My own reporters -->
 <script type="text/javascript" src="../lib/jasmine/jasmine.JUnitXMLReporter.js"></script>
 <script type="text/javascript" src="../lib/jasmine/jasmine.JUnitJSONReporter.js"></script>
 
@@ -19,22 +17,7 @@
 
 <script src="requirejs-config.js"></script>
 <script src="../lib/require.js"></script>
-
-<script>
-// jQuery dance
-// jQuery should be on the page already, but we want to use it as a module.
-(function() {
-	function maybeDefine(moduleName, scope, property) {
-		var ob = scope[property];
-		if (ob) {
-			define(moduleName, [], function() {
-				return ob;
-			});
-		}
-	}
-	maybeDefine("jquery", window, "jQuery");
-}());
-</script>
+<script src="fix-amd-jquery-like-on-real-page.js"></script>
 
 <script>
 var jasmineEnv = jasmine.getEnv();

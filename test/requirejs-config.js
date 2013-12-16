@@ -1,3 +1,4 @@
+// Actual requirejs config
 require = {
     baseUrl: "../src",
     paths: {
