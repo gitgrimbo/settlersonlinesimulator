@@ -5,8 +5,8 @@
 
     <!-- set global properties for this build -->
     <property name="xml-reports" location="reports/junit"/>
-    <property name="ant-reports" location="reports/ant"/>
-    <property name="html-reports" location="reports/html"/>
+    <property name="ant-reports" location="reports/junit-mod-for-ant"/>
+    <property name="html-reports" location="reports/anthtml"/>
 
     <target name="info">
         <echo>
