@@ -5,7 +5,7 @@ define([
 ], function (Collector, Reporter) {
     var collector = new Collector(),
         reporter = new Reporter({
-            dir: './reports/istanbulhtml'
+            dir: './target/site/reports/istanbulhtml'
         });
 
     return {
