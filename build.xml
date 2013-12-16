@@ -1,13 +1,27 @@
 <project name="reports" basedir="." default="info">
-    <description>
-        Generate JUnit HTML reports.
-    </description>
 
-    <!-- set global properties for this build -->
-    <property name="xml-reports" location="reports/junit"/>
-    <property name="ant-reports" location="reports/junit-mod-for-ant"/>
-    <property name="html-reports" location="reports/anthtml"/>
+    <description>Generate JUnit HTML reports.</description>
 
+    <!--
+    If ${project.reporting.outputDirectory} is provided by Maven "ant-run"
+    then use it, else use a different folder.
+    -->
+    <condition property="project.reporting.outputDirectory" value="${project.reporting.outputDirectory}" else="${basedir}/target">
+        <isset property="project.reporting.outputDirectory"/>
+    </condition>
+
+    <!--
+    Set global properties for this build.
+    -->
+    <property name="xml-reports" location="${basedir}/reports/junit"/>
+    <property name="ant-reports" location="${basedir}/target/junit-mod-for-ant"/>
+    <property name="html-reports" location="${project.reporting.outputDirectory}/reports/antjunitreport"/>
+
+
+
+    <!--
+    Print info about the file.
+    -->
     <target name="info">
         <echo>
 This Ant project generates HTML reports from JUnit XML.
@@ -16,6 +30,27 @@ $${xml-reports} for this project is: '${xml-reports}'.
         </echo>
     </target>
 
+
+
+    <!--
+    Do the reporting.
+    -->
+    <target name="junitreport" depends="fix-xml-reports-for-junitreport">
+        <mkdir dir="${html-reports}"/>
+
+        <junitreport todir="${html-reports}">
+            <fileset dir="${ant-reports}">
+                <include name="*"/>
+            </fileset>
+            <report format="frames" todir="${html-reports}"/>
+        </junitreport>
+    </target>
+
+
+
+    <!--
+    Internal target.
+    -->
     <target name="fix-xml-reports-for-junitreport">
         <copy todir="${ant-reports}">
             <fileset dir="${xml-reports}">
@@ -32,38 +67,6 @@ $${xml-reports} for this project is: '${xml-reports}'.
             <!-- Ensure there is no whitespace between the replacetoken tag and the CDATA start/end. -->
             <replacetoken><![CDATA[</testsuites>]]></replacetoken>
         </replace>
-    </target>
-
-    <target name="reports" depends="fix-xml-reports-for-junitreport">
-        <mkdir dir="${html-reports}"/>
-
-        <junitreport todir="${html-reports}">
-            <fileset dir="${ant-reports}">
-                <include name="*"/>
-            </fileset>
-            <report format="frames" todir="${html-reports}"/>
-        </junitreport>
-    </target>
-
-    <target name="clean-ant" description="clean up">
-        <echo message="Deleting ${ant-reports}"/>
-        <delete dir="${ant-reports}"/>
-    </target>
-
-    <target name="clean-html" description="clean up">
-        <echo message="Deleting ${html-reports}"/>
-        <delete dir="${html-reports}"/>
-    </target>
-
-    <target name="clean-xml" description="clean up">
-        <echo message="Deleting ${xml-reports}"/>
-        <delete dir="${xml-reports}"/>
-    </target>
-
-    <target name="clean-generated" description="clean up" depends="clean-ant, clean-html">
-    </target>
-
-    <target name="clean-all" description="clean up" depends="clean-generated, clean-xml">
     </target>
 
 </project>
