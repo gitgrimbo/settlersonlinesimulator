@@ -30,6 +30,7 @@ var config = {
         server: {
             url: "http://dist.sonar.codehaus.org/sonar-3.7.3.zip"
         },
+        // I don't use runner, I use the sonar maven plugin.
         runner: {
             url: "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.3/sonar-runner-dist-2.3.zip"
         },
@@ -106,9 +107,11 @@ function unzip(zip) {
     doCommandIn(dir, 'jar xvf ' + zip.getName());
 }
 
-function copy(from, to) {
-    doCommand();
+// Caller is reponsible for quoting from and to if required.
+function copy(dir, from, to) {
+    doCommandIn(dir, 'copy ' + from + ' ' + to);
 }
+
 
 
 
@@ -126,20 +129,36 @@ tmp.mkdirs();
  * - If the sonar extraction folder does not exist, extract the sonar zip.
  */
 function downloadAndInstallSonar() {
-    var sonarZip = new File(tmp, urlFilename(config.sonar.server.url));
-    var sonarJavascriptJar = new File(tmp, urlFilename(config.sonar.javascript.url));
-
-    var foldername = removeExtension(sonarZip.getName());
-    var folder = new File(sonarZip.getParentFile(), foldername);
-    if (!folder.exists()) {
-        maybeDownload(config.sonar.server.url, sonarZip);
-        // Windows-specific!
-        unzip(sonarZip);
-    } else {
-        println('Not downloading ' + config.sonar.server.url + ' as it seems it has already been extracted here ' + folder.getAbsolutePath() + '.\n');
+    // Use for downloading and unzipping a zip that has a version-specific folder when unzipped.
+    // e.g. sonar-runner-dist-2.3.zip contains contents like:
+    //   sonar-runner-2.3/...
+    // And sonar server is distributed the same way.
+    // The folder returned is this version-specific folder.
+    function maybeDownloadAndUnzip(file, url) {
+        var foldername = removeExtension(file.getName());
+        var folder = new File(file.getParentFile(), foldername);
+        if (!folder.exists()) {
+            maybeDownload(url, file);
+            // Windows-specific!
+            unzip(file);
+        } else {
+            println('Not downloading ' + url + ' as it seems it has already been extracted here ' + folder.getAbsolutePath() + '.\n');
+        }
+        return folder;
     }
 
+    var sonarZip = new File(tmp, urlFilename(config.sonar.server.url));
+    var sonarRunnerZip = new File(tmp, urlFilename(config.sonar.runner.url));
+    var sonarJavascriptJar = new File(tmp, urlFilename(config.sonar.javascript.url));
+
+    var sonarFolder = maybeDownloadAndUnzip(sonarZip, config.sonar.server.url);
+
+    maybeDownloadAndUnzip(sonarRunnerZip, config.sonar.runner.url);
+
+    // Download the javascript plugin, and copy to the right place in sonar.
     maybeDownload(config.sonar.javascript.url, sonarJavascriptJar);
+    var sonarPluginsFolder = new File(sonarFolder, 'extensions/plugins');
+    copy(sonarZip.getParentFile(), sonarJavascriptJar.getAbsolutePath(), sonarPluginsFolder.getAbsolutePath());
 }
 
 function downloadAndInstallSeleniumAndDrivers() {
