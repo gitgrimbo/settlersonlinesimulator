@@ -8,6 +8,8 @@
 <link rel="stylesheet" type="text/css" href="../lib/jasmine/jasmine.css">
 <script type="text/javascript" src="../lib/jasmine/jasmine.js"></script>
 <script type="text/javascript" src="../lib/jasmine/jasmine-html.js"></script>
+<script type="text/javascript" src="../lib/jasmine/jasmine.JUnitXMLReporter.js"></script>
+<script type="text/javascript" src="../lib/jasmine/jasmine.JUnitJSONReporter.js"></script>
 
 <!-- jquery is 1.6.4 on the target page -->
 <script src="../lib/jquery-1.6.4.js"></script>
@@ -32,6 +34,10 @@
 </script>
 
 <script>
+var jasmineEnv = jasmine.getEnv();
+jasmineEnv.addReporter(new jasmine.JUnitXMLReporter());
+jasmineEnv.addReporter(new jasmine.JUnitJSONReporter());
+
 require(["spec/UnitsRequired", "spec/AdventuresModel", "domReady!"], function() {
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
