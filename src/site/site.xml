@@ -14,8 +14,9 @@
     <body>
         <menu ref="reports"/>
         <menu name="Code Coverage">
-            <item name="istanbul" href="/reports/istanbulhtml/index.html"/>
-            <item name="junitreport" href="/reports/antjunitreport/index.html"/>
+            <item name="Istanbul (JS)" href="/reports/istanbulhtml/index.html"/>
+            <item name="JUnitReport (Ant)" href="/reports/antjunitreport/index.html"/>
+            <item name="JSHint (Checkstyle)" href="/reports/checkstyle/checkstyle.html"/>
         </menu>
     </body>
 </project>

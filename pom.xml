@@ -30,6 +30,11 @@
         <maven-site-plugin.version>3.3</maven-site-plugin.version>
         <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
         <maven-surefire-report-plugin.version>2.16</maven-surefire-report-plugin.version>
+        <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
+
+        <doxia-module-markdown.version>1.5</doxia-module-markdown.version>
+        <jshint-maven-plugin.version>1.1</jshint-maven-plugin.version>
+        <jshint.version>2.1.9</jshint.version>
 
         <ant.version>1.9.2</ant.version>
         <sonar-maven-plugin.version>2.2</sonar-maven-plugin.version>
@@ -90,6 +95,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven-site-plugin.version}</version>
+                    <!-- We use Markdown -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-markdown</artifactId>
+                            <version>${doxia-module-markdown.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -115,6 +133,21 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <!--
+        There are two main tasks of the plugins here, and everything happens
+        in the "pre-site" phase.
+
+        1. Generate an Ant "junitreport" from the Intern's JUnit xml files.
+           These get published to target/site/reports/antjunitreport.
+
+        2. Generate a Checkstyle report.
+           a) First we create the folder target/site/reports/checkstyle.
+           b) Then we run jshint-maven-plugin to create a checkstyle.xml file
+              in that folder.
+           c) Then we apply a stylesheet to checkstyle.xml to make
+              checkstyle.html.
+        -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -127,6 +160,9 @@
                     </dependency>
                 </dependencies>
                 <executions>
+                    <!--
+                    Call out to build.xml to use the junitreport task.
+                    -->
                     <execution>
                         <id>generate-junitreport</id>
                         <phase>pre-site</phase>
@@ -143,6 +179,84 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <!--
+                    jshint-maven-plugin won't create folders itself, so have to
+                    do it here.
+                    -->
+                    <execution>
+                        <id>create-folder-for-checkstyle-report</id>
+                        <phase>pre-site</phase>
+                        <configuration>
+                            <tasks>
+                                <mkdir dir="${project.reporting.outputDirectory}/reports/checkstyle"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.cj.jshintmojo</groupId>
+                <artifactId>jshint-maven-plugin</artifactId>
+                <version>${jshint-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>jlint</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>lint</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <version>${jshint.version}</version>
+                    <options>maxparams:3,indent,camelcase,eqeqeq,forin,immed,latedef,noarg,noempty,nonew</options>
+                    <globals>require,define</globals>
+                    <configFile>${basedir}/jshint.conf.js</configFile>
+                    <directories>
+                        <directory>src</directory>
+                    </directories>
+                    <reporter>checkstyle</reporter>
+                    <reportFile>${project.reporting.outputDirectory}/reports/checkstyle/checkstyle.xml</reportFile>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>transform</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>${project.reporting.outputDirectory}/reports/checkstyle</dir>
+                            <outputDir>${project.reporting.outputDirectory}/reports/checkstyle</outputDir>
+                            <includes>
+                                <include>checkstyle.xml</include>
+                            </includes>
+                            <stylesheet>${basedir}/checkstyle.xsl</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.html</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
             </plugin>
         </plugins>
     </build>
