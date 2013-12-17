@@ -35,6 +35,7 @@
         <doxia-module-markdown.version>1.5</doxia-module-markdown.version>
         <jshint-maven-plugin.version>1.1</jshint-maven-plugin.version>
         <jshint.version>2.1.9</jshint.version>
+        <xml-maven-plugin.version>1.0</xml-maven-plugin.version>
 
         <ant.version>1.9.2</ant.version>
         <sonar-maven-plugin.version>2.2</sonar-maven-plugin.version>
@@ -131,6 +132,11 @@
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <version>${xml-maven-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -178,12 +184,6 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
                     <!--
                     jshint-maven-plugin won't create folders itself, so have to
                     do it here.
