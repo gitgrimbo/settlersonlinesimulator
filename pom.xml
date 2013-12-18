@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>grimbo.bookmarklets</groupId>
-    <artifactId>grimbo-bookmarklets-settlersonlinesimulator</artifactId>
+    <artifactId>settlersonlinesimulator</artifactId>
     <version>0</version>
     <packaging>pom</packaging>
 
@@ -23,7 +23,40 @@
     reports go in '/target/site/surefire-report.html'.
     -->
 
+    <url>http://gitgrimbo.github.io/settlersonlinesimulator/</url>
+
+    <issueManagement>
+        <url>https://github.com/gitgrimbo/settlersonlinesimulator/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/gitgrimbo/settlersonlinesimulator</url>
+        <connection>scm:git:git://github.com/gitgrimbo/settlersonlinesimulator.git</connection>
+        <developerConnection>scm:git:git@github.com:gitgrimbo/settlersonlinesimulator.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <email>gitgrimbo@gmail.com</email>
+            <name>Paul Grime</name>
+            <url>https://github.com/gitgrimbo</url>
+            <id>gitgrimbo</id>
+        </developer>
+    </developers>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
         <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
         <maven-release-plugin.version>2.4.2</maven-release-plugin.version>
