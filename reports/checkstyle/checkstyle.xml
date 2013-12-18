@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<checkstyle version="4.3">
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\WikiAdventurePage.js">
+		<error line="8" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="18" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="22" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-model.js">
+		<error line="5" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="11" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="19" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="26" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="33" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="37" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-page.js">
+		<error line="4" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="8" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="13" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="14" column="17" message="Expected &apos;val&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="15" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="16" column="13" message="Expected &apos;el&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="17" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="20" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="24" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="28" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="32" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="36" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="40" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="44" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="48" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="52" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="60" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="61" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="66" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="69" column="9" message="Expected &apos;Adventure&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="70" column="9" message="Expected &apos;AdventuresPage&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="72" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-page\AdventureBox.js">
+		<error line="8" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="10" column="1" message="Expected &apos;../deferred-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="12" column="1" message="Expected &apos;../adventures-model&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="14" column="12" message="This function has too many parameters. (11)" source="jshint.W072" severity="warning" />
+		<error line="32" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="35" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="44" column="13" message="Expected &apos;totalLosses&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="45" column="13" message="Expected &apos;title&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="46" column="13" message="Expected &apos;calculatedXP&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="47" column="13" message="Expected &apos;tuv&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="49" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="61" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="67" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="68" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="69" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="70" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="71" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="72" column="17" message="Expected &apos;width&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="73" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="74" column="17" message="Expected &apos;width&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="75" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="76" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="77" column="17" message="Expected &apos;display&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="78" column="17" message="Expected &apos;width&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="79" column="17" message="Expected &apos;text-align&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="80" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="81" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="82" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="83" column="13" message="Expected &apos;li&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="84" column="13" message="Expected &apos;li&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="85" column="13" message="Expected &apos;log&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="86" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="89" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="95" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="101" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="107" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="111" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="122" column="13" message="Expected &apos;$&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="123" column="13" message="Expected &apos;link&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="125" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="134" column="21" message="Expected &apos;item&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="135" column="21" message="Expected &apos;size&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="138" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="139" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="142" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="148" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="162" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="165" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="171" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="183" column="13" message="Expected &apos;wiki&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="183" column="13" message="Too many errors. (93% scanned)." source="jshint.E043" severity="error" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\ajax.js">
+		<error line="16" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="21" column="13" message="Expected &apos;type&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="22" column="13" message="Expected &apos;id&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="23" column="13" message="Expected &apos;url&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="24" column="13" message="Expected &apos;opts&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="26" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="33" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="37" column="13" message="Expected &apos;console&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="38" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="41" column="13" message="Expected &apos;throw&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="45" column="13" message="Expected &apos;throw&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="48" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="56" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="57" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="62" column="9" message="Expected &apos;ajax&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="63" column="9" message="Expected &apos;crossDomainAjax&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="65" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\conditional-script-loader.js">
+		<error line="11" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="12" column="13" message="Expected &apos;opts&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="13" column="17" message="Expected &apos;load&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="14" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="20" column="17" message="Expected &apos;complete&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="23" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="27" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="32" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="39" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="41" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="45" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="59" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="63" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="66" column="13" message="Expected &apos;dfds&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="69" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="73" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\console.js">
+		<error line="8" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="14" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="19" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="28" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="29" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="32" column="9" message="Expected &apos;createLog&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="34" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\context.js">
+		<error line="3" column="24" message="[&apos;GRIMBO&apos;] is better written in dot notation." source="jshint.W069" severity="warning" />
+		<error line="3" column="43" message="[&apos;GRIMBO&apos;] is better written in dot notation." source="jshint.W069" severity="warning" />
+		<error line="6" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\deferred-utils.js">
+		<error line="6" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="12" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="15" column="9" message="Expected &apos;rejectWith&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="16" column="9" message="Expected &apos;resolveWith&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="18" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info-init.js">
+		<error line="17" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info.js">
+		<error line="8" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="10" column="1" message="Expected &apos;./deferred-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="12" column="1" message="Expected &apos;./adventures-model&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="14" column="12" message="This function has too many parameters. (12)" source="jshint.W072" severity="warning" />
+		<error line="17" column="9" message="Expected &apos;throw&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="34" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="37" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="38" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="49" column="17" message="Expected &apos;if&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="50" column="21" message="Expected &apos;div&apos; to have an indentation at 15 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="51" column="17" message="Expected &apos;}&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="52" column="17" message="Expected &apos;div&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="62" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="73" column="21" message="Expected &apos;adventureBoxes&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="78" column="17" message="Expected &apos;}&apos; to have an indentation at 20 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="84" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="85" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="91" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="101" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="112" column="15" message="[&apos;adventureInfoList&apos;] is better written in dot notation." source="jshint.W069" severity="warning" />
+		<error line="132" column="17" message="Expected &apos;idx&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="133" column="17" message="Expected &apos;href&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="134" column="17" message="Expected &apos;xp&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="150" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="155" column="17" message="Expected &apos;width&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="156" column="17" message="Expected &apos;fontSize&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="157" column="17" message="Expected &apos;marginBottom&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="159" column="17" message="Expected &apos;width&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="167" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="168" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="176" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="179" column="9" message="Expected &apos;execute&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="181" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\sort-adventures-init.js">
+		<error line="4" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\sort-adventures.js">
+		<error line="1" column="72" message="This function has too many parameters. (4)" source="jshint.W072" severity="warning" />
+		<error line="7" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="17" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="18" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="21" column="9" message="Expected &apos;sort&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="23" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\string-utils.js">
+		<error line="5" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="6" column="17" message="Expected &apos;fn&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="7" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="9" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="20" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="22" column="17" message="Expected &apos;return&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="25" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="30" column="17" message="Expected &apos;str&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="32" column="17" message="Expected &apos;str&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="35" column="17" message="Expected &apos;str&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="39" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="41" column="13" message="Expected &apos;simpleToString&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="42" column="13" message="Expected &apos;$trim&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="44" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="47" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\thesettlersonline-wiki.js">
+		<error line="3" column="9" message="Expected &apos;Island of the Pirates&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="4" column="9" message="Expected &apos;Stealing from the rich&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="5" column="9" message="Expected &apos;The Dark Priests&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="6" column="9" message="Expected &apos;Sons of the veldt&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="7" column="9" message="Expected &apos;Victor the vicious&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="8" column="9" message="Expected &apos;Mother Love&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="9" column="9" message="Expected &apos;The end of the earth&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="16" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="24" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="25" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="28" column="9" message="Expected &apos;getLink&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="29" column="9" message="Expected &apos;getRewardsImageSrc&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="32" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\ui-utils.js">
+		<error line="8" column="13" message="Expected &apos;cssStr&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="13" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="20" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="23" column="9" message="Expected &apos;addStyles&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="24" column="9" message="Expected &apos;createBar&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="26" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\PageParser.js">
+		<error line="6" column="91" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
+		<error line="18" column="13" message="Expected &apos;tableHtmlList&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="19" column="13" message="Expected &apos;match&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="24" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="27" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="49" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="52" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="55" column="9" message="Expected &apos;getAttackPlanFromHtml&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="56" column="9" message="Expected &apos;getAttackPlanFromSimTables&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="59" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\Service.js">
+		<error line="6" column="103" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
+		<error line="12" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="19" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="26" column="17" message="Expected &apos;attackPlan&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="27" column="17" message="Expected &apos;title&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="29" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="31" column="17" message="Expected &apos;error&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="33" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="34" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="36" column="33" message="This function has too many parameters. (4)" source="jshint.W072" severity="warning" />
+		<error line="39" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="40" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="44" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="47" column="9" message="Expected &apos;loadAttackPlan&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="48" column="9" message="Expected &apos;getAdventureDetails&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="51" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\SimTable.js">
+		<error line="10" column="96" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
+		<error line="23" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="31" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="38" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="42" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="54" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="61" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="68" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="75" column="13" message="Expected &apos;str&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="83" column="13" message="Expected &apos;match&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="84" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="85" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="86" column="13" message="Expected &apos;units&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="89" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="107" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="108" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="109" column="17" message="Expected &apos;enemy&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="110" column="17" message="Expected &apos;enemy&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="111" column="17" message="Expected &apos;sim&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="115" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="124" column="17" message="Expected &apos;log&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="125" column="17" message="Expected &apos;return&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="131" column="21" message="Expected &apos;prop&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="132" column="21" message="Expected &apos;lines&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="134" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="139" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="140" column="17" message="Expected &apos;for&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="141" column="21" message="Expected &apos;option&apos; to have an indentation at 15 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="142" column="17" message="Expected &apos;}&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="143" column="17" message="Expected &apos;waves&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="147" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="148" column="17" message="Expected &apos;e&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="149" column="17" message="Expected &apos;throw&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="153" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="162" column="17" message="Expected &apos;return&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="166" column="17" message="Expected &apos;sim&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="168" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="171" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="172" column="13" message="Expected &apos;e&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="178" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="182" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="191" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="195" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="203" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="207" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="215" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="216" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="217" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="219" column="39" message="This function has too many parameters. (5)" source="jshint.W072" severity="warning" />
+		<error line="224" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="224" column="17" message="Too many errors. (81% scanned)." source="jshint.E043" severity="error" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\bookmarklet.js">
+		<error line="17" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\model.js">
+		<error line="7" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="8" column="17" message="Expected &apos;fn&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="9" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="11" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="27" column="13" message="Expected &apos;forEachOwnProperty&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="29" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="31" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="37" column="9" message="Expected &apos;R&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="38" column="9" message="Expected &apos;B&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="39" column="9" message="Expected &apos;LB&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="40" column="9" message="Expected &apos;M&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="41" column="9" message="Expected &apos;C&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="42" column="9" message="Expected &apos;S&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="43" column="9" message="Expected &apos;E&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="44" column="9" message="Expected &apos;A&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="45" column="9" message="Expected &apos;K&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="52" column="9" message="Expected &apos;G&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="53" column="9" message="Expected &apos;R&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="54" column="9" message="Expected &apos;B&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="55" column="9" message="Expected &apos;LB&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="56" column="9" message="Expected &apos;M&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="57" column="9" message="Expected &apos;C&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="58" column="9" message="Expected &apos;S&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="59" column="9" message="Expected &apos;E&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="60" column="9" message="Expected &apos;A&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="61" column="9" message="Expected &apos;K&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="71" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="73" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="84" column="17" message="Expected &apos;value&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="86" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="88" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="98" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="100" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="110" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="112" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="127" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="129" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="140" column="13" message="Expected &apos;G&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="141" column="13" message="Expected &apos;R&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="142" column="13" message="Expected &apos;M&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="143" column="13" message="Expected &apos;C&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="144" column="13" message="Expected &apos;S&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="145" column="13" message="Expected &apos;E&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="146" column="13" message="Expected &apos;B&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="147" column="13" message="Expected &apos;LB&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="148" column="13" message="Expected &apos;A&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="149" column="13" message="Expected &apos;K&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="154" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="161" column="21" message="Expected &apos;items&apos; to have an indentation at 18 instead at 21." source="jshint.W015" severity="warning" />
+		<error line="162" column="25" message="Expected &apos;value&apos; to have an indentation at 19 instead at 25." source="jshint.W015" severity="warning" />
+		<error line="162" column="25" message="Too many errors. (42% scanned)." source="jshint.E043" severity="error" />
+	</file>
+	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\ui-app.js">
+		<error line="5" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="7" column="1" message="Expected &apos;../context&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="9" column="1" message="Expected &apos;../ui-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
+		<error line="11" column="12" message="This function has too many parameters. (9)" source="jshint.W072" severity="warning" />
+		<error line="56" column="17" message="Expected &apos;return&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="69" column="17" message="Expected &apos;return&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="74" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="76" column="17" message="Expected &apos;thisWaveLosses&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="78" column="17" message="Expected &apos;totalActive&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="80" column="17" message="Expected &apos;totalActive&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="91" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="94" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="108" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="109" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="114" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="115" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="125" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="132" column="17" message="Expected &apos;attackPlan&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="135" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="148" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="151" column="9" message="Expected &apos;tr.grimbo.attack-option.selected {&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="152" column="9" message="Expected &apos;  border-left: solid red 4px;&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="153" column="9" message="Expected &apos;}&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="154" column="9" message="Expected &apos;input.grimbo.repeat-sim {&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="155" column="9" message="Expected &apos;  width: 2em;&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="156" column="9" message="Expected &apos;}&apos; to have an indentation at 10 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="156" column="12" message="Expected &apos;]&apos; to have an indentation at 9 instead at 12." source="jshint.W015" severity="warning" />
+		<error line="166" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="170" column="13" message="Expected &apos;json3&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="171" column="13" message="Expected &apos;storeJs&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="178" column="17" message="Expected &apos;test&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="179" column="17" message="Expected &apos;nope&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
+		<error line="181" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="183" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="186" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="188" column="13" message="Expected &apos;}&apos; to have an indentation at 16 instead at 13." source="jshint.W015" severity="warning" />
+		<error line="189" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="191" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="192" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
+		<error line="195" column="9" message="Expected &apos;doUnitsRequiredUI&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="196" column="9" message="Expected &apos;execute&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
+		<error line="198" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
+	</file>
+</checkstyle>

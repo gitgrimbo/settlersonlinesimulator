@@ -1,0 +1,1442 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\units-required\model.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">src\units-required\model.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">57.79% <small>(89 / 154)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">61.54% <small>(16 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">54.35% <small>(25 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">57.79% <small>(89 / 154)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+    </h2>
+    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">src\units-required\</a> &#187; model.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380</td><td class="line-coverage"><span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">561</span>
+<span class="cline-any cline-yes">4647</span>
+<span class="cline-any cline-yes">720</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1125</span>
+<span class="cline-any cline-yes">162</span>
+<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">84</span>
+<span class="cline-any cline-yes">84</span>
+<span class="cline-any cline-yes">216</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">84</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-yes">240</span>
+<span class="cline-any cline-yes">240</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">231</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">162</span>
+<span class="cline-any cline-yes">162</span>
+<span class="cline-any cline-yes">243</span>
+<span class="cline-any cline-yes">243</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">162</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">162</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">153</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">84</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-yes">78</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">51</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(["module", "../console", "../string-utils"], function(module, _console, StringUtils) {
+    var DEBUG = false;
+    var log = _console.createLog(module.id, DEBUG);
+&nbsp;
+    function forEachOwnProperty(ob, fn, context) {
+        for (var i in ob) {
+            if (ob.hasOwnProperty(i)) {
+                fn.call(context, ob, i);
+            }
+        }
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+    // UnitList
+&nbsp;
+&nbsp;
+&nbsp;
+    /**
+     * Constructs a new UnitList, 'cloned' from "unitList" if provided.
+     * A UnitList is a collection of units, where a unit is represented by a code,
+     * e.g. {R: 100, S: 200}.
+     */
+    function UnitList(unitList) {
+        if (unitList) {
+            forEachOwnProperty(unitList, function(ob, prop) {
+                this[prop] = unitList[prop];
+            }, this);
+        }
+    }
+&nbsp;
+    /**
+     * Unit values. Scaled up by x1000.
+     */
+    UnitList.unitValues = {
+        "R": 1250,
+        "B": 1000,
+        "LB": 2875,
+        "M": 3375,
+        "C": 3375,
+        "S": 6000,
+        "E": 11875,
+        "A": 21875,
+        "K": 26875
+    };
+&nbsp;
+    /**
+     *
+     */
+    UnitList.unitNames = {
+        "G": "General",
+        "R": "Recruit",
+        "B": "Bowman",
+        "LB": "Longbowman",
+        "M": "Militia",
+        "C": "Cavalry",
+        "S": "Soldier",
+        "E": "Elite Soldier",
+        "A": "Crossbowman",
+        "K": "Cannoneer"
+    };
+&nbsp;
+    /**
+     * @return The total number of units.
+     */
+    UnitList.prototype.totalUnits = function() {
+        var count = 0;
+        forEachOwnProperty(this, function(ob, prop) {
+            count += this[prop];
+        }, this);
+        return count;
+    };
+&nbsp;
+    /**
+     * @return The total value of units.
+     */
+    UnitList.prototype.totalUnitValue = function() {
+        var value = 0;
+        forEachOwnProperty(this, function(ob, prop) {
+            var unitValue = UnitList.unitValues[prop];
+            if (unitValue) {
+                // if not falsey
+                value += (this[prop] * unitValue);
+            }
+        }, this);
+        return value / 1000;
+    };
+&nbsp;
+    /**
+     * @return a new UnitList.
+     */
+    UnitList.prototype.add = function(unitList) {
+        var res = new UnitList(this);
+        forEachOwnProperty(unitList, function(ob, prop) {
+            var val = unitList[prop];
+            res[prop] = this.hasOwnProperty(prop) ? res[prop] + val : val;
+        }, this);
+        return res;
+    };
+&nbsp;
+    /**
+     * @return a new UnitList.
+     */
+    UnitList.prototype.subtract = <span class="fstat-no" title="function not covered" >function(unitList) {</span>
+<span class="cstat-no" title="statement not covered" >        var res = new UnitList(this);</span>
+<span class="cstat-no" title="statement not covered" >        forEachOwnProperty(unitList, <span class="fstat-no" title="function not covered" >function(ob, prop) {</span></span>
+<span class="cstat-no" title="statement not covered" >            var val = unitList[prop];</span>
+<span class="cstat-no" title="statement not covered" >            res[prop] = this.hasOwnProperty(prop) ? res[prop] - val : -val;</span>
+        }, this);
+<span class="cstat-no" title="statement not covered" >        return res;</span>
+    };
+&nbsp;
+    /**
+     * Ensure that the returned UnitList has enough units to satisfy the
+     * "recruitmentUnitList" unit requirements. I.e., the returned UnitList may be
+     * exactly the same as "this" if there are enough units to satisfy
+     * "recruitmentUnitList".
+     *
+     * @return a new UnitList.
+     */
+    UnitList.prototype.recruit = <span class="fstat-no" title="function not covered" >function(recruitmentUnitList) {</span>
+<span class="cstat-no" title="statement not covered" >        var res = new UnitList(this);</span>
+<span class="cstat-no" title="statement not covered" >        forEachOwnProperty(recruitmentUnitList, <span class="fstat-no" title="function not covered" >function(ob, prop) {</span></span>
+<span class="cstat-no" title="statement not covered" >            var val = recruitmentUnitList[prop];</span>
+<span class="cstat-no" title="statement not covered" >            res[prop] = this.hasOwnProperty(prop) ? Math.max(val, this[prop]) : val;</span>
+        }, this);
+<span class="cstat-no" title="statement not covered" >        return res;</span>
+    };
+&nbsp;
+    UnitList.prototype.toString = StringUtils.simpleToString;
+&nbsp;
+    /**
+     * Returns a HTML string that has a sprited span followed by a unit count for each unit type in the UnitList.
+     */
+    UnitList.prototype.toHtmlString = (function() {
+        // CSS defined in
+        // http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&amp;f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css
+        var cssMappings = {
+            "G": "general",
+            "R": "recruit",
+            "M": "militia",
+            "C": "cavalry",
+            "S": "soldier",
+            "E": "elitesoldier",
+            "B": "bowman",
+            "LB": "longbowman",
+            "A": "crossbowman",
+            "K": "cannoneer"
+        };
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function sortByValue(a, b) {</span>
+<span class="cstat-no" title="statement not covered" >            return a.value - b.value;</span>
+        }
+&nbsp;
+        return <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var items = [];</span>
+<span class="cstat-no" title="statement not covered" >            forEachOwnProperty(this, <span class="fstat-no" title="function not covered" >function(ob, prop) {</span></span>
+<span class="cstat-no" title="statement not covered" >                var css = cssMappings[prop];</span>
+<span class="cstat-no" title="statement not covered" >                if (ob[prop]) {</span>
+<span class="cstat-no" title="statement not covered" >                    items.push({</span>
+                        value: UnitList.unitValues[prop],
+                        html: '&lt;span style="display: inline-block" class="' + css + ' unit-sprite" title="' + UnitList.unitNames[prop] + '"&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=padding-right:1em;&gt;' + ob[prop] + '&lt;/span&gt;'
+                    });
+                }
+            }, this);
+<span class="cstat-no" title="statement not covered" >            var s = '&lt;div style="display:inline-block;padding:0;margin:0;height:30px;"&gt;';</span>
+<span class="cstat-no" title="statement not covered" >            items.sort(sortByValue).forEach(<span class="fstat-no" title="function not covered" >function(it) {</span></span>
+<span class="cstat-no" title="statement not covered" >                s += it.html;</span>
+            });
+<span class="cstat-no" title="statement not covered" >            return s + "&lt;/div&gt;";</span>
+        };
+    }());
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+    // SimTable
+    // Utility operations to perform on a sim table DOM element.
+    function Sim(campEnemies, exp, attackOptions) {
+        this.campEnemies = campEnemies;
+        this.exp = exp;
+        this.attackOptions = attackOptions;
+        this.chosenAttackOption = null;
+        this.ignore = null;
+    }
+&nbsp;
+    Sim.getUnitsReqdUnitValueForAttack = <span class="fstat-no" title="function not covered" >function(attackOption) {</span>
+        // Count up the units required for this attack option.
+<span class="cstat-no" title="statement not covered" >        return attackOption.reduce(<span class="fstat-no" title="function not covered" >function(unitValue, wave) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return unitValue + wave.units.totalUnitValue();</span>
+        }, 0);
+    };
+&nbsp;
+    Sim.getMaxLossesForAttack = function(attackOption) {
+        return attackOption.reduce(function(prev, wave) {
+            // add this wave losses
+            return prev.add(wave.maxLoss);
+        }, new UnitList());
+    };
+&nbsp;
+    Sim.prototype.getMaxLossesForAttackOptions = function() {
+        return this.attackOptions.map(Sim.getMaxLossesForAttack);
+    };
+&nbsp;
+    Sim.prototype.findLowestMaxLossAttackOption = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        var opts = this.findLowestMaxLossAttackOptions();</span>
+<span class="cstat-no" title="statement not covered" >        return opts[0].idx;</span>
+    };
+&nbsp;
+    /**
+     * Returns the attack options which have the lowest losses.
+     * @return Array of {idx,unitValue}.
+     */
+    Sim.prototype.findLowestMaxLossAttackOptions = function() {
+        var lowestCost = null;
+        var costsAndIdxs = this.getMaxLossesForAttackOptions().map(function(cost, idx) {
+            // map the costs to preserve index after sorting
+            return {
+                idx: idx,
+                unitValue: cost.totalUnitValue()
+            };
+        }).sort(function(cost1, cost2) {
+            // sort based on unitValue
+            return cost1.unitValue - cost2.unitValue;
+        }).filter(function(cost) {
+            // remove all costs that aren't the lowest
+            if (null === lowestCost) {
+                lowestCost = cost;
+            }
+            // keep those costs that share the same lowest value.
+            return (cost.unitValue &lt;= lowestCost.unitValue);
+        });
+        return costsAndIdxs;
+    };
+&nbsp;
+    /**
+     * @return The total number of units required for the specified attack.
+     */
+    Sim.prototype.fewestReqdUnitsStrategy = function(attackOption) {
+        return attackOption.reduce(function(prev, wave) {
+            return prev + wave.units.totalUnits();
+        }, 0);
+    };
+&nbsp;
+    /**
+     * @return The total unit value for the units required.
+     */
+    Sim.prototype.lowestReqdUnitsValueStrategy = <span class="fstat-no" title="function not covered" >function(attackOption) {</span>
+<span class="cstat-no" title="statement not covered" >        return Sim.getUnitsReqdUnitValueForAttack(attackOption);</span>
+    };
+&nbsp;
+    /**
+     * Attempts to calculate the 'best' attack option based on a strategy.
+     * The best option will always have fewest max losses, but the chosen
+     * option can differ based on choices such as using fewest number of
+     * units, or using an attack based on the total unit value of the option's
+     * units.
+     * @param strategy {string} The name of the strategy to use. Default "lowestReqdUnitsValue".
+     */
+    Sim.prototype.findBestAttackOption = function(strategy) {
+        strategy = strategy || "lowestReqdUnitsValue";
+        strategy = "fewestReqdUnits";
+        var strategyFn = this[strategy + "Strategy"];
+        var costsAndIdxs = this.findLowestMaxLossAttackOptions();
+        var unitsReqdUnitValues = costsAndIdxs.map(function(costAndIdx) {
+            var attackOption = this.attackOptions[costAndIdx.idx];
+            return strategyFn(attackOption);
+        }, this);
+        var idxOfCheapest = -1;
+        var cheapest = null;
+        unitsReqdUnitValues.forEach(function(unitValue, idx) {
+            if (null === cheapest || unitValue &lt; cheapest) {
+                idxOfCheapest = idx;
+                cheapest = unitValue;
+            }
+        });
+        return idxOfCheapest;
+    };
+&nbsp;
+    Sim.fromJSON = <span class="fstat-no" title="function not covered" >function(json) {</span>
+<span class="cstat-no" title="statement not covered" >        var sim = new Sim(json.campEnemies, json.exp, json.attackOptions);</span>
+<span class="cstat-no" title="statement not covered" >        sim.chosenAttackOption = json.chosenAttackOption;</span>
+<span class="cstat-no" title="statement not covered" >        sim.ignore = json.ignore;</span>
+<span class="cstat-no" title="statement not covered" >        return sim;</span>
+    };
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+    /**
+     * Represents the chosen Sims. This should be the model of what is on screen.
+     */
+    function AttackPlan(sims) {
+        this.sims = sims;
+    }
+&nbsp;
+    AttackPlan.prototype.doCalcs = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >        var totalLosses = new UnitList();</span>
+<span class="cstat-no" title="statement not covered" >        var totalActive = new UnitList();</span>
+<span class="cstat-no" title="statement not covered" >        var totalXP = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.sims.forEach(<span class="fstat-no" title="function not covered" >function(sim, idx) {</span></span>
+<span class="cstat-no" title="statement not covered" >            var chosenAttackOption = sim.chosenAttackOption;</span>
+<span class="cstat-no" title="statement not covered" >            log("sim", idx, "chosenAttackOption", chosenAttackOption);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var option1waves = sim.attackOptions[chosenAttackOption];</span>
+<span class="cstat-no" title="statement not covered" >            if (!option1waves) {</span>
+                // There are no waves for this sim for some reason.
+                // Probably because no data has been logged for this sim and the chosen unit types.
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var thisWaveLosses = new UnitList();</span>
+<span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; option1waves.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                var wave = option1waves[i];</span>
+                // add this wave losses
+<span class="cstat-no" title="statement not covered" >                thisWaveLosses = thisWaveLosses.add(wave.maxLoss);</span>
+                // recruit enough units for this wave (may already have them active)
+<span class="cstat-no" title="statement not covered" >                totalActive = totalActive.recruit(wave.units);</span>
+                // the dead are not active any more!
+<span class="cstat-no" title="statement not covered" >                totalActive = totalActive.subtract(wave.maxLoss);</span>
+            }
+&nbsp;
+            // Reset generals after each camp attack.
+            // The loss of general(s) has been taken into account above in totalWaveLosses.
+<span class="cstat-no" title="statement not covered" >            totalActive.G = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            totalLosses = totalLosses.add(thisWaveLosses);</span>
+<span class="cstat-no" title="statement not covered" >            totalXP += sim.exp;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            callback(sim, idx, totalLosses, totalActive, totalXP);</span>
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this;</span>
+    };
+&nbsp;
+    AttackPlan.prototype.getTotalLosses = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        var lastSimIdx = this.sims.length - 1;</span>
+<span class="cstat-no" title="statement not covered" >        var result = new UnitList();</span>
+<span class="cstat-no" title="statement not covered" >        this.doCalcs(<span class="fstat-no" title="function not covered" >function(sim, idx, totalLosses, totalActive, totalXP) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (lastSimIdx === idx) {</span>
+<span class="cstat-no" title="statement not covered" >                result = totalLosses;</span>
+            }
+        });
+<span class="cstat-no" title="statement not covered" >        return result;</span>
+    };
+&nbsp;
+    AttackPlan.prototype.ignore = <span class="fstat-no" title="function not covered" >function(simIndex, ignore) {</span>
+        // normalise in case ignore is undefined or falsey rather than false.
+<span class="cstat-no" title="statement not covered" >        ignore = false !== ignore;</span>
+<span class="cstat-no" title="statement not covered" >        this.sims[simIndex].ignore = ignore;</span>
+    };
+&nbsp;
+    AttackPlan.prototype.isIgnored = <span class="fstat-no" title="function not covered" >function(simIndex) {</span>
+<span class="cstat-no" title="statement not covered" >        return this.sims[simIndex].ignore;</span>
+    };
+&nbsp;
+    AttackPlan.prototype.save = <span class="fstat-no" title="function not covered" >function(store) {</span>
+<span class="cstat-no" title="statement not covered" >        var name = "attackPlan";</span>
+<span class="cstat-no" title="statement not covered" >        store.set(name, this);</span>
+    };
+&nbsp;
+    AttackPlan.prototype.load = <span class="fstat-no" title="function not covered" >function(store) {</span>
+<span class="cstat-no" title="statement not covered" >        var name = "attackPlan";</span>
+<span class="cstat-no" title="statement not covered" >        var attackPlan = store.get(name);</span>
+<span class="cstat-no" title="statement not covered" >        this.sims = [];</span>
+<span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; attackPlan.sims.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            this.sims[i] = Sim.fromJSON(attackPlan.sims[i]);</span>
+        }
+    };
+&nbsp;
+    return {
+        UnitList: UnitList,
+        Sim: Sim,
+        AttackPlan: AttackPlan
+    };
+});</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Dec 18 2013 13:22:30 GMT+0000 (GMT Standard Time)</div>
+</div>
+
+<script src="../../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>
