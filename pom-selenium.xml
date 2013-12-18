@@ -242,6 +242,9 @@ Caused by: java.lang.ClassNotFoundException: com.google.common.net.MediaType
                         </dependency>
                     </dependencies>
                     <configuration>
+                        <!--
+                        Required, or org.openqa.selenium.chrome.ChromeDriverService fails.
+                        -->
                         <systemProperties>
                             <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                         </systemProperties>

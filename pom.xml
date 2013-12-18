@@ -24,6 +24,11 @@
     -->
 
     <url>http://gitgrimbo.github.io/settlersonlinesimulator/</url>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>Paul Grime</name>
+        <url>https://github.com/gitgrimbo/</url>
+    </organization>
 
     <issueManagement>
         <url>https://github.com/gitgrimbo/settlersonlinesimulator/issues</url>
@@ -33,13 +38,13 @@
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <url>LICENSE.md</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
-        <url>https://github.com/gitgrimbo/settlersonlinesimulator</url>
+        <url>https://github.com/gitgrimbo/settlersonlinesimulator/</url>
         <connection>scm:git:git://github.com/gitgrimbo/settlersonlinesimulator.git</connection>
         <developerConnection>scm:git:git@github.com:gitgrimbo/settlersonlinesimulator.git</developerConnection>
     </scm>
@@ -199,33 +204,27 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <!--
-                    Call out to build.xml to use the junitreport task.
-                    -->
                     <execution>
-                        <id>generate-junitreport</id>
+                        <id>pre-site</id>
                         <phase>pre-site</phase>
                         <configuration>
                             <target>
+                                <!--
+                                1. Copy README.md to src/site/markdown/index.md
+                                -->
+                                <copy file="${basedir}/README.md" tofile="${basedir}/src/site/markdown/index.md"/>
+
+                                <!--
+                                2. Call out to build.xml to use the junitreport task.
+                                -->
                                 <property name="project.reporting.outputDirectory" value="${project.reporting.outputDirectory}"/>
                                 <ant antfile="${basedir}/build.xml">
                                     <target name="junitreport"/>
                                 </ant>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                    <!--
-                    jshint-maven-plugin won't create folders itself, so have to
-                    do it here.
-                    -->
-                    <execution>
-                        <id>create-folder-for-checkstyle-report</id>
-                        <phase>pre-site</phase>
-                        <configuration>
-                            <target>
+
+                                <!--
+                                3. jshint-maven-plugin won't create folders itself, so have to do it here.
+                                -->
                                 <mkdir dir="${project.reporting.outputDirectory}/reports/checkstyle"/>
                             </target>
                         </configuration>
@@ -301,6 +300,10 @@
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>${maven-surefire-report-plugin.version}</version>
                 <configuration>
+                    <!--
+                    The reports will (should) have been generated already by
+                    running the Intern integration tests, so just point to them.
+                    -->
                     <reportsDirectory>${basedir}/reports/junit</reportsDirectory>
                 </configuration>
             </plugin>
