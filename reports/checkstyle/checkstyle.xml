@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <checkstyle version="4.3">
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\WikiAdventurePage.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\WikiAdventurePage.js">
 		<error line="8" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="18" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="22" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-model.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\adventures-model.js">
 		<error line="5" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="11" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="19" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
@@ -13,7 +13,7 @@
 		<error line="33" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="37" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-page.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\adventures-page.js">
 		<error line="4" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="8" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="13" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -37,7 +37,7 @@
 		<error line="70" column="9" message="Expected &apos;AdventuresPage&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="72" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\adventures-page\AdventureBox.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\adventures-page\AdventureBox.js">
 		<error line="8" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="10" column="1" message="Expected &apos;../deferred-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="12" column="1" message="Expected &apos;../adventures-model&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
@@ -90,7 +90,7 @@
 		<error line="183" column="13" message="Expected &apos;wiki&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="183" column="13" message="Too many errors. (93% scanned)." source="jshint.E043" severity="error" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\ajax.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\ajax.js">
 		<error line="16" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="21" column="13" message="Expected &apos;type&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="22" column="13" message="Expected &apos;id&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -109,7 +109,7 @@
 		<error line="63" column="9" message="Expected &apos;crossDomainAjax&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="65" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\conditional-script-loader.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\conditional-script-loader.js">
 		<error line="11" column="13" message="Expected &apos;var&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="12" column="13" message="Expected &apos;opts&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="13" column="17" message="Expected &apos;load&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
@@ -127,7 +127,7 @@
 		<error line="69" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="73" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\console.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\console.js">
 		<error line="8" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="14" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="19" column="13" message="Expected &apos;return&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -136,22 +136,22 @@
 		<error line="32" column="9" message="Expected &apos;createLog&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="34" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\context.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\context.js">
 		<error line="3" column="24" message="[&apos;GRIMBO&apos;] is better written in dot notation." source="jshint.W069" severity="warning" />
 		<error line="3" column="43" message="[&apos;GRIMBO&apos;] is better written in dot notation." source="jshint.W069" severity="warning" />
 		<error line="6" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\deferred-utils.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\deferred-utils.js">
 		<error line="6" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="12" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="15" column="9" message="Expected &apos;rejectWith&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="16" column="9" message="Expected &apos;resolveWith&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="18" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info-init.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info-init.js">
 		<error line="17" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\full-adventure-info.js">
 		<error line="8" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="10" column="1" message="Expected &apos;./deferred-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="12" column="1" message="Expected &apos;./adventures-model&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
@@ -186,10 +186,10 @@
 		<error line="179" column="9" message="Expected &apos;execute&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="181" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\sort-adventures-init.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\sort-adventures-init.js">
 		<error line="4" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\sort-adventures.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\sort-adventures.js">
 		<error line="1" column="72" message="This function has too many parameters. (4)" source="jshint.W072" severity="warning" />
 		<error line="7" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="17" column="9" message="Expected &apos;}&apos; to have an indentation at 12 instead at 9." source="jshint.W015" severity="warning" />
@@ -197,7 +197,7 @@
 		<error line="21" column="9" message="Expected &apos;sort&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="23" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\string-utils.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\string-utils.js">
 		<error line="5" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="6" column="17" message="Expected &apos;fn&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
 		<error line="7" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -214,7 +214,7 @@
 		<error line="44" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="47" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\thesettlersonline-wiki.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\thesettlersonline-wiki.js">
 		<error line="3" column="9" message="Expected &apos;Island of the Pirates&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="4" column="9" message="Expected &apos;Stealing from the rich&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="5" column="9" message="Expected &apos;The Dark Priests&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
@@ -229,7 +229,7 @@
 		<error line="29" column="9" message="Expected &apos;getRewardsImageSrc&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="32" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\ui-utils.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\ui-utils.js">
 		<error line="8" column="13" message="Expected &apos;cssStr&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="13" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="20" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
@@ -237,7 +237,7 @@
 		<error line="24" column="9" message="Expected &apos;createBar&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="26" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\PageParser.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\PageParser.js">
 		<error line="6" column="91" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
 		<error line="18" column="13" message="Expected &apos;tableHtmlList&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="19" column="13" message="Expected &apos;match&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -249,7 +249,7 @@
 		<error line="56" column="9" message="Expected &apos;getAttackPlanFromSimTables&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="59" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\Service.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\Service.js">
 		<error line="6" column="103" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
 		<error line="12" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="19" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
@@ -267,7 +267,7 @@
 		<error line="48" column="9" message="Expected &apos;getAdventureDetails&apos; to have an indentation at 6 instead at 9." source="jshint.W015" severity="warning" />
 		<error line="51" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\SimTable.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\SimTable.js">
 		<error line="10" column="96" message="This function has too many parameters. (6)" source="jshint.W072" severity="warning" />
 		<error line="23" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
 		<error line="31" column="5" message="Expected &apos;}&apos; to have an indentation at 8 instead at 5." source="jshint.W015" severity="warning" />
@@ -320,10 +320,10 @@
 		<error line="224" column="17" message="Expected &apos;var&apos; to have an indentation at 14 instead at 17." source="jshint.W015" severity="warning" />
 		<error line="224" column="17" message="Too many errors. (81% scanned)." source="jshint.E043" severity="error" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\bookmarklet.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\bookmarklet.js">
 		<error line="17" column="1" message="Expected &apos;}&apos; to have an indentation at 4 instead at 1." source="jshint.W015" severity="warning" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\model.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\model.js">
 		<error line="7" column="13" message="Expected &apos;if&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
 		<error line="8" column="17" message="Expected &apos;fn&apos; to have an indentation at 11 instead at 17." source="jshint.W015" severity="warning" />
 		<error line="9" column="13" message="Expected &apos;}&apos; to have an indentation at 10 instead at 13." source="jshint.W015" severity="warning" />
@@ -376,7 +376,7 @@
 		<error line="162" column="25" message="Expected &apos;value&apos; to have an indentation at 19 instead at 25." source="jshint.W015" severity="warning" />
 		<error line="162" column="25" message="Too many errors. (42% scanned)." source="jshint.E043" severity="error" />
 	</file>
-	<file name="D:\dev\git_repos\settlersonlinesimulator\src\units-required\ui-app.js">
+	<file name="d:\dev\git_repos\settlersonlinesimulator\src\units-required\ui-app.js">
 		<error line="5" column="1" message="Expected &apos;module&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="7" column="1" message="Expected &apos;../context&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
 		<error line="9" column="1" message="Expected &apos;../ui-utils&apos; to have an indentation at 2 instead at 1." source="jshint.W015" severity="warning" />
