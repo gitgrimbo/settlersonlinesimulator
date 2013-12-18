@@ -192,9 +192,9 @@
                         <id>create-folder-for-checkstyle-report</id>
                         <phase>pre-site</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <mkdir dir="${project.reporting.outputDirectory}/reports/checkstyle"/>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
