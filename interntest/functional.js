@@ -1,9 +1,8 @@
 define([
     'intern!object',
-    'intern/chai!assert',
     'require',
     './JasmineFunctionalHelper'
-], function (registerSuite, assert, require, Helper) {
+], function (registerSuite, require, Helper) {
 
     registerSuite({
         name: 'Functional',
