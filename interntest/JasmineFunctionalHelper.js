@@ -27,7 +27,7 @@ define([
         // object, whereas firefox and chrome were fine.
         // The browser needs JSON for this to work (so IE may need a shim, or
         // be in standards mode).
-        //jsExpression = 'JSON.stringify(' + jsExpression + ')';
+        jsExpression = 'JSON.stringify(' + jsExpression + ')';
         // NOTE[1] - end
 
         return promise.eval(jsExpression, this.timeout)
@@ -35,7 +35,7 @@ define([
                 console.log(MID, typeof results, results);
 
                 // Convert the stringified expression back to JSON
-                //results = JSON.parse(results);
+                results = JSON.parse(results);
                 // @NOTE[1]
 
                 // Create the holder if it does not exist
