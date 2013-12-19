@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="1" id="0" name="Adventures List" package="" tests="4" time="0.005" timestamp="2013-12-18T13:22:33">
-      <testcase classname="Adventures List" name="checks the adventures length" time="0" />
+  <testsuite errors="0" failures="1" id="0" name="Adventures List" package="" tests="4" time="0.009" timestamp="2013-12-18T23:55:33">
+      <testcase classname="Adventures List" name="checks the adventures length" time="0.003" />
 
       <testcase classname="Adventures List" name="sorts by ratio" time="0" />
 
@@ -12,7 +12,7 @@
       <testcase classname="Adventures List" name="sorts by total losses" time="0" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="1" name="Adventures List" package="" tests="4" time="0" timestamp="2013-12-18T13:22:36">
+  <testsuite errors="0" failures="0" id="1" name="Adventures List" package="" tests="4" time="0" timestamp="2013-12-18T23:55:35">
       <testcase classname="Adventures List" name="checks the adventures length" time="0" />
 
       <testcase classname="Adventures List" name="sorts by ratio" time="0" />
@@ -22,26 +22,26 @@
       <testcase classname="Adventures List" name="sorts by total losses" time="0" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="2" name="Adventures List" package="" tests="4" time="0.005" timestamp="2013-12-18T13:22:36">
+  <testsuite errors="0" failures="0" id="2" name="Adventures List" package="" tests="4" time="0.005" timestamp="2013-12-18T23:55:35">
       <testcase classname="Adventures List" name="checks the adventures length" time="0" />
 
       <testcase classname="Adventures List" name="sorts by ratio" time="0.001" />
 
-      <testcase classname="Adventures List" name="sorts by xp" time="0.001" />
+      <testcase classname="Adventures List" name="sorts by xp" time="0.002" />
 
-      <testcase classname="Adventures List" name="sorts by total losses" time="0.002" />
-
-  </testsuite>
-  <testsuite errors="0" failures="0" id="3" name="Units Required" package="" tests="1" time="0.032" timestamp="2013-12-18T13:22:33">
-      <testcase classname="Units Required" name="parses the html" time="0.03" />
+      <testcase classname="Adventures List" name="sorts by total losses" time="0.001" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="4" name="Units Required" package="" tests="1" time="0.032" timestamp="2013-12-18T13:22:36">
-      <testcase classname="Units Required" name="parses the html" time="0.032" />
+  <testsuite errors="0" failures="0" id="3" name="Units Required" package="" tests="1" time="0.027" timestamp="2013-12-18T23:55:33">
+      <testcase classname="Units Required" name="parses the html" time="0.026" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="5" name="Units Required" package="" tests="1" time="0.033" timestamp="2013-12-18T13:22:36">
-      <testcase classname="Units Required" name="parses the html" time="0.032" />
+  <testsuite errors="0" failures="0" id="4" name="Units Required" package="" tests="1" time="0.046" timestamp="2013-12-18T23:55:35">
+      <testcase classname="Units Required" name="parses the html" time="0.046" />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" id="5" name="Units Required" package="" tests="1" time="0.029" timestamp="2013-12-18T23:55:35">
+      <testcase classname="Units Required" name="parses the html" time="0.028" />
 
   </testsuite>
 </testsuites>
