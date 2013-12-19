@@ -1,47 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="1" id="0" name="Adventures List" package="" tests="4" time="0.009" timestamp="2013-12-18T23:55:33">
-      <testcase classname="Adventures List" name="checks the adventures length" time="0.003" />
+  <testsuite errors="0" failures="0" id="0" name="Adventures_List" package="WINDOWS.internet_explorer.10" tests="4" time="0.022" timestamp="2013-12-19T12:44:22">
+      <testcase classname="WINDOWS.internet_explorer.10.Adventures_List" name="checks the adventures length" time="0.01" />
 
-      <testcase classname="Adventures List" name="sorts by ratio" time="0" />
+      <testcase classname="WINDOWS.internet_explorer.10.Adventures_List" name="sorts by ratio" time="0.003" />
 
-      <testcase classname="Adventures List" name="sorts by xp" time="0.001">
-      <failure message="ReferenceError: &apos;console&apos; is undefined" type="expect">ReferenceError: &apos;console&apos; is undefined</failure>
+      <testcase classname="WINDOWS.internet_explorer.10.Adventures_List" name="sorts by xp" time="0.002" />
+
+      <testcase classname="WINDOWS.internet_explorer.10.Adventures_List" name="sorts by total losses" time="0.003" />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" id="1" name="Adventures_List" package="WINDOWS.internet_explorer.9" tests="4" time="0.004" timestamp="2013-12-19T20:44:17">
+      <testcase classname="WINDOWS.internet_explorer.9.Adventures_List" name="checks the adventures length" time="0" />
+
+      <testcase classname="WINDOWS.internet_explorer.9.Adventures_List" name="sorts by ratio" time="0" />
+
+      <testcase classname="WINDOWS.internet_explorer.9.Adventures_List" name="sorts by xp" time="0.001" />
+
+      <testcase classname="WINDOWS.internet_explorer.9.Adventures_List" name="sorts by total losses" time="0" />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" id="2" name="Adventures_List" package="XP.chrome.31_0_1650_63" tests="4" time="0" timestamp="2013-12-19T20:44:15">
+      <testcase classname="XP.chrome.31_0_1650_63.Adventures_List" name="checks the adventures length" time="0" />
+
+      <testcase classname="XP.chrome.31_0_1650_63.Adventures_List" name="sorts by ratio" time="0" />
+
+      <testcase classname="XP.chrome.31_0_1650_63.Adventures_List" name="sorts by xp" time="0" />
+
+      <testcase classname="XP.chrome.31_0_1650_63.Adventures_List" name="sorts by total losses" time="0" />
+
+  </testsuite>
+  <testsuite errors="0" failures="0" id="3" name="Adventures_List" package="XP.firefox.25_0_1" tests="4" time="0.005" timestamp="2013-12-19T20:44:14">
+      <testcase classname="XP.firefox.25_0_1.Adventures_List" name="checks the adventures length" time="0" />
+
+      <testcase classname="XP.firefox.25_0_1.Adventures_List" name="sorts by ratio" time="0.001" />
+
+      <testcase classname="XP.firefox.25_0_1.Adventures_List" name="sorts by xp" time="0.001" />
+
+      <testcase classname="XP.firefox.25_0_1.Adventures_List" name="sorts by total losses" time="0" />
+
+  </testsuite>
+  <testsuite errors="0" failures="3" id="4" name="Adventures_List" package="XP.firefox.3_6_28" tests="4" time="0.025" timestamp="2013-12-19T12:44:17">
+      <testcase classname="XP.firefox.3_6_28.Adventures_List" name="checks the adventures length" time="0.018" />
+
+      <testcase classname="XP.firefox.3_6_28.Adventures_List" name="sorts by ratio" time="0.001">
+      <failure message="TypeError: fn.bind is not a function in http://192.168.1.68:9001/src/adventures-model.js (line 21)" type="expect">([object Array],true,(function (reverse, a, b) {__cov_lFpG5ChKH548BXH12Bdf2A.f[4]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[8]++;if ((__cov_lFpG5ChKH548BXH12Bdf2A.b[3][0]++, undef(a.xp)) || (__cov_lFpG5ChKH548BXH12Bdf2A.b[3][1]++, undef(a.tuv)) || (__cov_lFpG5ChKH548BXH12Bdf2A.b[3][2]++, 0 === a.tuv)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[2][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[9]++;return 1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[2][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[10]++;if ((__cov_lFpG5ChKH548BXH12Bdf2A.b[5][0]++, undef(b.xp)) || (__cov_lFpG5ChKH548BXH12Bdf2A.b[5][1]++, undef(b.tuv)) || (__cov_lFpG5ChKH548BXH12Bdf2A.b[5][2]++, 0 === b.tuv)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[4][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[11]++;return -1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[4][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[12]++;var val = a.xp / a.tuv - b.xp / b.tuv;__cov_lFpG5ChKH548BXH12Bdf2A.s[13]++;return true === reverse ? (__cov_lFpG5ChKH548BXH12Bdf2A.b[6][0]++, - val) : (__cov_lFpG5ChKH548BXH12Bdf2A.b[6][1]++, val);}))@http://192.168.1.68:9001/src/adventures-model.js:21
+()@http://192.168.1.68:9001/test/spec/AdventuresModel.js:19
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:1064
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+((function () {spec.finish(onComplete);}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2049
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2376
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2092
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2350
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2377
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2106
+(6)@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2086
+</failure>
     </testcase>
 
-      <testcase classname="Adventures List" name="sorts by total losses" time="0" />
+      <testcase classname="XP.firefox.3_6_28.Adventures_List" name="sorts by xp" time="0">
+      <failure message="TypeError: fn.bind is not a function in http://192.168.1.68:9001/src/adventures-model.js (line 21)" type="expect">([object Array],true,(function (reverse, a, b) {__cov_lFpG5ChKH548BXH12Bdf2A.f[5]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[15]++;if (undef(a.xp)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[7][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[16]++;return 1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[7][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[17]++;if (undef(b.xp)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[8][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[18]++;return -1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[8][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[19]++;var val = a.xp - b.xp;__cov_lFpG5ChKH548BXH12Bdf2A.s[20]++;return true === reverse ? (__cov_lFpG5ChKH548BXH12Bdf2A.b[9][0]++, - val) : (__cov_lFpG5ChKH548BXH12Bdf2A.b[9][1]++, val);}))@http://192.168.1.68:9001/src/adventures-model.js:21
+()@http://192.168.1.68:9001/test/spec/AdventuresModel.js:33
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:1064
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+((function () {spec.finish(onComplete);}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2049
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2376
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2092
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2350
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2377
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2106
+(6)@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2086
+</failure>
+    </testcase>
+
+      <testcase classname="XP.firefox.3_6_28.Adventures_List" name="sorts by total losses" time="0">
+      <failure message="TypeError: fn.bind is not a function in http://192.168.1.68:9001/src/adventures-model.js (line 21)" type="expect">([object Array],true,(function (reverse, a, b) {__cov_lFpG5ChKH548BXH12Bdf2A.f[6]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[22]++;if (undef(a.tuv)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[10][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[23]++;return 1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[10][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[24]++;if (undef(b.tuv)) {__cov_lFpG5ChKH548BXH12Bdf2A.b[11][0]++;__cov_lFpG5ChKH548BXH12Bdf2A.s[25]++;return -1;} else {__cov_lFpG5ChKH548BXH12Bdf2A.b[11][1]++;}__cov_lFpG5ChKH548BXH12Bdf2A.s[26]++;var val = a.tuv - b.tuv;__cov_lFpG5ChKH548BXH12Bdf2A.s[27]++;return true === reverse ? (__cov_lFpG5ChKH548BXH12Bdf2A.b[12][0]++, - val) : (__cov_lFpG5ChKH548BXH12Bdf2A.b[12][1]++, val);}))@http://192.168.1.68:9001/src/adventures-model.js:21
+()@http://192.168.1.68:9001/test/spec/AdventuresModel.js:45
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:1064
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+((function () {spec.finish(onComplete);}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2049
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2376
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2096
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2092
+((function () {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; calledSynchronously) {completedSynchronously = true;return;}if (self.blocks[self.index].abort) {self.abort = true;}self.offset = 0;self.index++;var now = (new Date).getTime();if (self.env.updateInterval &amp;&amp; now - self.env.lastUpdate &gt; self.env.updateInterval) {self.env.lastUpdate = now;self.env.setTimeout(function () {self.next_();}, 0);} else {if (jasmine.Queue.LOOP_DONT_RECURSE &amp;&amp; completedSynchronously) {goAgain = true;} else {self.next_();}}}))@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2350
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2377
+()@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2106
+(6)@http://192.168.1.68:9001/lib/jasmine/jasmine.js:2086
+</failure>
+    </testcase>
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="1" name="Adventures List" package="" tests="4" time="0" timestamp="2013-12-18T23:55:35">
-      <testcase classname="Adventures List" name="checks the adventures length" time="0" />
-
-      <testcase classname="Adventures List" name="sorts by ratio" time="0" />
-
-      <testcase classname="Adventures List" name="sorts by xp" time="0" />
-
-      <testcase classname="Adventures List" name="sorts by total losses" time="0" />
+  <testsuite errors="0" failures="0" id="5" name="Units_Required" package="WINDOWS.internet_explorer.10" tests="1" time="0.041" timestamp="2013-12-19T12:44:22">
+      <testcase classname="WINDOWS.internet_explorer.10.Units_Required" name="parses the html" time="0.04" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="2" name="Adventures List" package="" tests="4" time="0.005" timestamp="2013-12-18T23:55:35">
-      <testcase classname="Adventures List" name="checks the adventures length" time="0" />
-
-      <testcase classname="Adventures List" name="sorts by ratio" time="0.001" />
-
-      <testcase classname="Adventures List" name="sorts by xp" time="0.002" />
-
-      <testcase classname="Adventures List" name="sorts by total losses" time="0.001" />
+  <testsuite errors="0" failures="0" id="6" name="Units_Required" package="WINDOWS.internet_explorer.9" tests="1" time="0.029" timestamp="2013-12-19T20:44:17">
+      <testcase classname="WINDOWS.internet_explorer.9.Units_Required" name="parses the html" time="0.027" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="3" name="Units Required" package="" tests="1" time="0.027" timestamp="2013-12-18T23:55:33">
-      <testcase classname="Units Required" name="parses the html" time="0.026" />
+  <testsuite errors="0" failures="0" id="7" name="Units_Required" package="XP.chrome.31_0_1650_63" tests="1" time="0.047" timestamp="2013-12-19T20:44:15">
+      <testcase classname="XP.chrome.31_0_1650_63.Units_Required" name="parses the html" time="0.031" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="4" name="Units Required" package="" tests="1" time="0.046" timestamp="2013-12-18T23:55:35">
-      <testcase classname="Units Required" name="parses the html" time="0.046" />
+  <testsuite errors="0" failures="0" id="8" name="Units_Required" package="XP.firefox.25_0_1" tests="1" time="0.031" timestamp="2013-12-19T20:44:14">
+      <testcase classname="XP.firefox.25_0_1.Units_Required" name="parses the html" time="0.03" />
 
   </testsuite>
-  <testsuite errors="0" failures="0" id="5" name="Units Required" package="" tests="1" time="0.029" timestamp="2013-12-18T23:55:35">
-      <testcase classname="Units Required" name="parses the html" time="0.028" />
+  <testsuite errors="0" failures="0" id="9" name="Units_Required" package="XP.firefox.3_6_28" tests="1" time="0.037" timestamp="2013-12-19T12:44:17">
+      <testcase classname="XP.firefox.3_6_28.Units_Required" name="parses the html" time="0.036" />
 
   </testsuite>
 </testsuites>
