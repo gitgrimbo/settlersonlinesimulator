@@ -30,7 +30,6 @@ define(["adventures-model", "text!html/adventures/der-schamane.html"], function(
 
         it("sorts by xp", function() {
             var clone = adventures.slice();
-            console.log(clone.map(function(it,i){return i + ": " + it.tuv + "," + it.xp + "," + it.calculatedXP; }).join("\n"));
             AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByXP);
             expect(clone[0].idx).toBe(23);
             expect(clone[1].idx).toBe(22);
