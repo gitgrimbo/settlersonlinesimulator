@@ -11,6 +11,14 @@ NOTE! Uses Windows-specific commands such as 'cmd' and 'copy'.
 
 */
 
+// IMPORTS
+
+importClass(java.lang.System);
+importPackage(java.io);
+importPackage(java.net);
+importPackage(java.nio.channels);
+importPackage(java.util);
+
 // CONFIG
 
 // config for the script
@@ -23,7 +31,7 @@ var config = {
             url: "http://chromedriver.storage.googleapis.com/2.7/chromedriver_win32.zip"
         },
         iedriver: {
-            url: "https://selenium.googlecode.com/files/IEDriverServer_Win32_2.38.0.zip"
+            url: "https://selenium.googlecode.com/files/IEDriverServer_x64_2.38.0.zip"
         }
     },
     sonar: {
@@ -40,24 +48,29 @@ var config = {
     }
 };
 
-// If you have local copies of the required files, set them here and set useLocal=true.
-var useLocal = true;
-if (useLocal) {
-    config.selenium.server.url = "file:///X:/backup/apps/dev/testing/selenium-server-standalone-2.38.0.jar";
-    config.selenium.chromedriver.url = "file:///X:/backup/apps/dev/testing/chromedriver/2.7/chromedriver_win32.zip";
-    config.selenium.iedriver.url = "file:///X:/backup/apps/dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip";
-    config.sonar.server.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-3.7.3.zip";
-    config.sonar.runner.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-runner-dist-2.3.zip";
-    config.sonar.javascript.url = "file:///X:/backup/apps/dev/testing/sonar/sonar-javascript-plugin-1.4.jar";
+// Overrides if we've chosen a local install, or if we're running in a VirtualBox instance
+var useLocalIfAvailable = true;
+
+// The shared folder we expose to VirtualBox VMs and
+// The local app cache
+// These two folders must have the same sub-structure (and they should, as they *are* effectively the same folder)
+var vmAppsRoot = new File("\\\\vboxsrv\\APPS");
+var localAppsRoot = new File("X:/backup/apps");
+
+// Simple test to see if we're on a VirtualBox VM
+var isVBox = vmAppsRoot.exists() && vmAppsRoot.isDirectory();
+
+var appsRoot = isVBox ? vmAppsRoot : (useLocalIfAvailable ? localAppsRoot : null);
+if (appsRoot) {
+    (function(appsRoot) {
+        config.selenium.server.url = new File(appsRoot, "dev/testing/selenium-server-standalone-2.38.0.jar").toURI();
+        config.selenium.chromedriver.url = new File(appsRoot, "dev/testing/chromedriver/2.7/chromedriver_win32.zip").toURI();
+        config.selenium.iedriver.url = new File(appsRoot, "dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip").toURI();
+        config.sonar.server.url = new File(appsRoot, "dev/testing/sonar/sonar-3.7.3.zip").toURI();
+        config.sonar.runner.url = new File(appsRoot, "dev/testing/sonar/sonar-runner-dist-2.3.zip").toURI();
+        config.sonar.javascript.url = new File(appsRoot, "dev/testing/sonar/sonar-javascript-plugin-1.4.jar").toURI();
+    }(appsRoot));
 }
-
-// IMPORTS
-
-importClass(java.lang.System);
-importPackage(java.io);
-importPackage(java.net);
-importPackage(java.nio.channels);
-importPackage(java.util);
 
 // UTIL
 
@@ -181,10 +194,5 @@ downloadAndInstallSonar();
 
 var chromeDriverExe = new File(tmp, "chromedriver.exe");
 
-println('Now you MAYBE need to add chromedriver and/or iedriver to PATH (if it is not already there).');
-println("This is not required if you pass the webdriver.chrome.driver and/or webdriver.ie.driver options to selenium-server-standalone.jar");
-println("  (and isn't required in the provided bin/start-selenium.bat script)");
-println('E.g.');
-println('SET PATH=%PATH%' + System.getProperty("path.separator") + chromeDriverExe.getParentFile().getAbsolutePath());
-println('');
-println('You MAYBE need to alter the bin/ scripts to point to the version of selenium downloaded.');
+println("Remember to pass the webdriver.chrome.driver and/or webdriver.ie.driver options to selenium-server-standalone.jar");
+println("  (bin/start-selenium.bat script shows you how)");
