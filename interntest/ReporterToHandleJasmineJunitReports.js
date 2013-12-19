@@ -113,7 +113,7 @@ define([
      */
     function fixJUnitXmlForReporting(session) {
         // Very simple regex that 'does enough' in terms of fixing a string for java name compatibility.
-        var JAVA_NAME_RE = /\s+|[:;-.]/gi;
+        var JAVA_NAME_RE = /\s+|[:;.\-]/gi;
 
         // Capture both the name and the bit before the name, for ease of replacement.
         // Simplistic regex for matching test suite or test case names.
@@ -189,27 +189,33 @@ define([
         },
 
         '/runner/end': function () {
-            console.log(MID, '/runner/end');
+            console.log(MID, '/runner/end', 'enter');
             var numEnvironments = 0,
                 numTests = 0,
                 numFailedTests = 0;
 
-            for (var k in sessions) {
-                //console.log(MID, k);
-                var session = sessions[k];
-                ++numEnvironments;
-                numTests += session.suite.numTests;
-                numFailedTests += session.suite.numFailedTests;
+            try{
+                for (var k in sessions) {
+                    //console.log(MID, k);
+                    var session = sessions[k];
+                    ++numEnvironments;
+                    numTests += session.suite.numTests;
+                    numFailedTests += session.suite.numFailedTests;
 
-                // Save the JUnit XML as it is used by mvn site
-                fixJUnitXmlForReporting(session);
-                new FileHelper('./reports/junit').saveResults(session);
+                    // Save the JUnit XML as it is used by mvn site
+                    fixJUnitXmlForReporting(session);
+                    new FileHelper('./reports/junit').saveResults(session);
 
-                // Save the JSON results, although we don't use them yet.
-                new FileHelper('./reports/junit').saveResults(session, "jsonResults");
+                    // Save the JSON results, although we don't use them yet.
+                    new FileHelper('./reports/junit').saveResults(session, "jsonResults");
 
-                //console.log(MID, session.remote.jsonResults);
+                    //console.log(MID, session.remote.jsonResults);
+                }
+            } catch (e) {
+                console.log(MID, e);
             }
+
+            console.log(MID, '/runner/end', 'exit');
         }
     };
 });
