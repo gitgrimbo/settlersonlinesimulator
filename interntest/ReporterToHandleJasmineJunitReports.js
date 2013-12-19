@@ -38,16 +38,18 @@ define([
         // jasmine.junit_reporter.js passes filename with xml extension.
         // We want to preserve that extension, so we remove it to add it
         // again after the wnv details.
-        var idx = filename.indexOf(".xml");
+        var idx = filename.lastIndexOf(".");
+        var extension = null;
         if (idx > -1) {
+            extension = filename.substring(idx);
             filename = filename.substring(0, idx);
         }
 
-        var file = filename + "-" + env.platform + "-" + env.browserName + "-" + env.version + ".xml";
+        var file = filename + "-" + env.platform + "-" + env.browserName + "-" + env.version + (extension ? extension : "");
         return path.join(dir, file);
     };
 
-    FileHelper.saveResult = function (filename, dir, env, xml) {
+    FileHelper.saveResult = function (filename, dir, env, content) {
         //console.log(MID, filename, dir);
 
         try {
@@ -62,7 +64,7 @@ define([
         filename = FileHelper.makeFilename(filename, dir, env);
         //console.log(MID, p);
 
-        fs.writeFileSync(filename, xml, {
+        fs.writeFileSync(filename, content, {
             encoding: 'utf8',
             flags: 'w+'
         });
@@ -70,8 +72,9 @@ define([
         console.log(MID, filename + " written");
     };
 
-    FileHelper.prototype.saveResults = function (session) {
-        var results = session.remote.xmlResults;
+    FileHelper.prototype.saveResults = function (session, remotePropertyToSave) {
+        remotePropertyToSave = remotePropertyToSave || "xmlResults";
+        var results = session.remote[remotePropertyToSave];
         //console.log(MID, results);
         var env = session.remote.environmentType;
         for (sessionid in results) {
@@ -81,9 +84,10 @@ define([
                 var filenames = paths[testpath];
                 for (filename in filenames) {
                     try {
-                        var xml = filenames[filename];
-                        //console.log(MID, xml);
-                        FileHelper.saveResult(filename, this.dir, env, xml);
+                        var content = filenames[filename];
+                        //console.log(MID, content);
+                        var contentStr = ("string" === typeof content) ? content : JSON.stringify(content);
+                        FileHelper.saveResult(filename, this.dir, env, contentStr);
                     } catch (e) {
                         console.log(MID, filename, this.dir, e);
                     }
@@ -91,6 +95,62 @@ define([
             }
         }
     };
+
+    /**
+     * README!
+     *
+     * The mvn site tool that processes the XML doesn't like spaces or dots in
+     * the test suites and test case names.
+     *
+     * So we turn the names from names like:
+     *   "Adventures List"
+     * to names like:
+     *   "WINDOWS.internet_explorer.10.Adventures_List", or
+     *   "XP.firefox.3_6_28.Units_Required"
+     *
+     * Maybe there is a better way of post-processing the XML that comes from
+     * "jasmine.JUnitXMLReporter"?
+     */
+    function fixJUnitXmlForReporting(session) {
+        // Very simple regex that 'does enough' in terms of fixing a string for java name compatibility.
+        var JAVA_NAME_RE = /\s+|[:;-.]/gi;
+
+        // Capture both the name and the bit before the name, for ease of replacement.
+        // Simplistic regex for matching test suite or test case names.
+        // e.g. if there is a ">" in the attribute value, it won't work.
+        var TESTSUITE_NAME_RE = /(<testsuite[^>]name=")([^"]*)"/gi;
+        var TESTCASE_NAME_RE = /(<testcase[^>]classname=")([^"]*)"/gi;
+
+        function javaName(s) {
+            return s.replace(JAVA_NAME_RE, "_");
+        }
+
+        function processXmlStr(xml) {
+            [TESTSUITE_NAME_RE, TESTCASE_NAME_RE].forEach(function(re) {
+                xml = xml.replace(re, function(match, $1, $2, offset, original) {
+                    // synthesize a Java package name + class name.
+                    var newSuiteName = javaName(env.platform) + "." + javaName(env.browserName) + "." + javaName(env.version) + "." + javaName($2);
+                    return $1 + newSuiteName + '"';
+                });
+            });
+            return xml;
+        }
+
+        var results = session.remote.xmlResults;
+        //console.log(MID, results);
+        var env = session.remote.environmentType;
+        for (sessionid in results) {
+            var paths = results[sessionid];
+            for (testpath in paths) {
+                // testpath will always be blank for our jasmine reporter
+                var filenames = paths[testpath];
+                for (filename in filenames) {
+                    var xml = filenames[filename];
+                    filenames[filename] = processXmlStr(xml);
+                }
+            }
+        }
+    }
 
     return {
         '/session/start': function (remote) {
@@ -140,7 +200,14 @@ define([
                 ++numEnvironments;
                 numTests += session.suite.numTests;
                 numFailedTests += session.suite.numFailedTests;
+
+                // Save the JUnit XML as it is used by mvn site
+                fixJUnitXmlForReporting(session);
                 new FileHelper('./reports/junit').saveResults(session);
+
+                // Save the JSON results, although we don't use them yet.
+                new FileHelper('./reports/junit').saveResults(session, "jsonResults");
+
                 //console.log(MID, session.remote.jsonResults);
             }
         }
