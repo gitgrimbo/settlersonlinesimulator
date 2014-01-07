@@ -88,6 +88,27 @@ E.g. the files generated are:
 
 (the Ant junitreport files are generated during `mvn site`)
 
+### Older browsers
+
+Firefox 3.6 can be supported (at least for the tests, if not for the actual bookmarklet - as
+the bookmarklet currently does not include the same shims as the tests) by adding the
+following to the `<HEAD>` element of Intern's `client.html` runner:
+
+    <script>
+    if ("function" !== typeof Function.bind) {
+        document.writeln('<script src="//rawgithub.com/es-shims/es5-shim/v2.3.0/es5-shim.js"></scr' + 'ipt>');
+        document.writeln('<script src="//rawgithub.com/es-shims/es5-shim/v2.3.0/es5-sham.js"></scr' + 'ipt>');
+    }
+    if (!document.head) {
+        document.head = document.getElementsByTagName("HEAD")[0];
+    }
+    </script>
+
+The same fix will not work for IE8, as IE8 cannot support the shamming of `Object.create()` by
+`es-sham.js`.
+
+(*Alternatively, the Geezer branch of Intern could be used*)
+
 ## Sonar Code Quality
 
 Start Sonar:

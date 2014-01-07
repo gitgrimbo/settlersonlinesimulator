@@ -7,13 +7,16 @@ The SimTable is represented on the page as a table with attack options.
 This module provided utility functions for reading from and manipulating this table.
 
 */
-define(["module", "jquery", "../context", "../console", "../string-utils", "./model"], function(module, $, GRIMBO, console, StringUtils, model) {
+define([
+
+"module", "jquery", "context", "console", "string-utils", "ui-utils",
+
+"./model/UnitList", "./model/Sim", "./model/AttackPlan"
+
+], function(module, $, GRIMBO, console, StringUtils, uiUtils, UnitList, Sim, AttackPlan) {
 
     var DEBUG = GRIMBO.debug;
     var log = console.createLog(module.id, DEBUG);
-    var UnitList = model.UnitList;
-    var Sim = model.Sim;
-    var AttackPlan = model.AttackPlan;
 
     // SimTable
     // Utility operations to perform on a sim table DOM element.
@@ -54,6 +57,14 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
     };
 
     /**
+     * Update the table UI to match "attackOptionIndex". 
+     */
+    SimTable.getSelectedAttackOptionRow = function($simTable) {
+        // Get the row to be selected.
+        return $simTable.find(".grimbo.attack-option .selected");
+    };
+
+    /**
      * @return The "attack-option-index" for the passed-in row.
      */
     SimTable.getRowAttackOptionIndex = function(tr) {
@@ -75,10 +86,10 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
             str = StringUtils.$trim(match[1]);
         }
 
-		// str will be like "47R 1S 80C 72B"
+        // str will be like "47R 1S 80C 72B"
         str = str.split(/\s+/);
 
-		// str will be array like ["47R", "1S", "80C", "72B"]
+        // str will be array like ["47R", "1S", "80C", "72B"]
         for (var i = 0; i < str.length; i++) {
             match = str[i].match(/([\d.]+)(.*)/);
             var unitType = match[2];
@@ -154,6 +165,9 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
 
         var sim = {};
         var $h = SimTable.getSimHeader($simTable);
+        if ($h.length < 1) {
+            throw new Error("Expected to find a header associated with the Sim <table>.");
+        }
         parseEnemiesFromHeader(sim, $h);
         sim.attackOptions = [];
         $simTable.find("tr").each(function(i, tr) {
@@ -229,11 +243,11 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
             }
             return $tr;
         }
-        var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", thisWaveLosses.toHtmlString() + " [" + thisWaveLosses.totalUnitValue() + "]"]);
-        var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", totalLosses.toHtmlString() + " [" + totalLosses.totalUnitValue() + "]"]);
+        var $tr1 = createRow("grimbo summary wave-losses", ["Wave losses: [" + thisWaveLosses.totalUnits() + "]", uiUtils.unitListToHtml(thisWaveLosses) + " [" + thisWaveLosses.totalUnitValue() + "]"]);
+        var $tr2 = createRow("grimbo summary total-losses", ["Total losses: [" + totalLosses.totalUnits() + "]", uiUtils.unitListToHtml(totalLosses) + " [" + totalLosses.totalUnitValue() + "]"]);
         var totalRequired = totalActive.add(totalLosses);
         log(totalActive, totalLosses, totalRequired);
-        var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", totalRequired.toHtmlString()]);
+        var $tr3 = createRow("grimbo summary total-required", ["Total required: [" + totalRequired.totalUnits() + "]", uiUtils.unitListToHtml(totalRequired)]);
         var $tr4 = createRow("grimbo summary total-exp", ["Total XP:", totalXP]);
         var $trs = $tr1.add($tr2).add($tr3).add($tr4).css("border", "solid black 1px");
         $simTable.append($trs);
@@ -266,7 +280,9 @@ define(["module", "jquery", "../context", "../console", "../string-utils", "./mo
 
     "parseToSim", "parseSimTable", "getSimHeader", "showTableAndHeader", "hideTableAndHeader",
 
-    "getChosenAttackOption", "addSummaryRows", "removeSummaryRows", "getSimIndex", "setSimIndex", "setAttackOptionIndex"
+    "getChosenAttackOption", "addSummaryRows", "removeSummaryRows", "getSimIndex", "setSimIndex",
+
+    "setAttackOptionIndex", "getSelectedAttackOptionRow"
 
     ]);
 

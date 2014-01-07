@@ -3,27 +3,27 @@
 Parser for a single adventure page.
 
 */
-define(["module", "jquery", "../context", "../console", "./SimTable", "./model"], function(module, $, GRIMBO, _console, SimTable, model) {
+define(["module", "jquery", "context", "console", "./SimTable", "./model/AttackPlan"], function(module, $, GRIMBO, _console, SimTable, AttackPlan) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
-    var AttackPlan = model.AttackPlan;
 
     function getAttackPlanFromHtml(html) {
-        // non-greedy regex to capture the tables
-        var re = /<table class="example-sim">[\s\S]*?<\/table>/g;
+        // non-greedy regex to capture the table container
+        var re = /<div class="infobox">[\s\S]*?<\/div>/g;
 
-        var tableHtmlList = [];
         var match = re.exec(html);
-        while (match) {
-            tableHtmlList.push(match[0]);
-            match = re.exec(html);
+        if (match.length < 1) {
+            throw new Error("Could not parse Adventure page.");
         }
 
-        var simTables = tableHtmlList.map(function(html) {
-            return $("<div>").html(html).find("table").first();
-        });
+        var container = $(match[0]);
 
-        return getAttackPlanFromSimTables($(simTables));
+        var tables = container.find("table.example-sim");
+        if (tables.length < 1) {
+            throw new Error("Found no Sim tables.");
+        }
+
+        return getAttackPlanFromSimTables(tables);
     }
 
     /**

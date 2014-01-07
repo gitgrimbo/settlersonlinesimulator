@@ -9,9 +9,9 @@ define([
 
 "./deferred-utils", "./console", "./ajax", "./ui-utils", "./adventures-page/AdventureBox",
 
-"./adventures-model", "./units-required/model", "./units-required/ui-app", "./units-required/Service", "./adventures-page", "./thesettlersonline-wiki"
+"./adventures-model", "./units-required/model/UnitList", "./units-required/ui-app", "./units-required/Service", "./adventures-page", "./thesettlersonline-wiki"
 
-], function(module, deferredUtils, _console, ajax, uiUtils, AdventureBox, adventuresModel, unitsRequiredModel, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
+], function(module, deferredUtils, _console, ajax, uiUtils, AdventureBox, adventuresModel, UnitList, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -21,7 +21,6 @@ define([
     var log = _console.createLog(module.id, DEBUG);
 
     var AdventuresPage = adventuresPage.AdventuresPage;
-    var UnitList = unitsRequiredModel.UnitList;
     var AdventuresModel = adventuresModel;
 
 

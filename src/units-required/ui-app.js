@@ -4,16 +4,15 @@ define([
 
 "module", "jquery",
 
-"../context", "../console", "../conditional-script-loader",
+"context", "console", "conditional-script-loader",
 
-"../ui-utils", "./PageParser", "./SimTable", "./model"
+"ui-utils", "./PageParser", "./SimTable",
 
-], function(module, $, GRIMBO, console, ScriptLoader, uiUtils, UnitsRequiredPageParser, SimTable, model) {
+"./model/UnitList", "./model/Sim", "./model/AttackPlan"
+
+], function(module, $, GRIMBO, console, ScriptLoader, uiUtils, UnitsRequiredPageParser, SimTable, UnitList, Sim, AttackPlan) {
     var DEBUG = GRIMBO.debug;
     var log = console.createLog(module.id, DEBUG);
-    var UnitList = model.UnitList;
-    var Sim = model.Sim;
-    var AttackPlan = model.AttackPlan;
 
     // Example URL:
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/die-schwarzen-priester/ */

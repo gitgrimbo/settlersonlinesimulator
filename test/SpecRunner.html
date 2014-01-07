@@ -24,7 +24,7 @@ var jasmineEnv = jasmine.getEnv();
 jasmineEnv.addReporter(new jasmine.JUnitXMLReporter());
 jasmineEnv.addReporter(new jasmine.JUnitJSONReporter());
 
-require(["spec/UnitsRequired", "spec/AdventuresModel", "domReady!"], function() {
+require(["spec/UnitsRequiredPageParser", "spec/UnitList", "spec/AttackPlan", "spec/AdventuresModel", "domReady!"], function() {
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
 
