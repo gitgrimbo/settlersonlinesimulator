@@ -12,7 +12,8 @@ REM   http://requirejs.org/docs/optimization.html#empty
 
 REM r.js.cmd is the npm globally installed r.js command file.
 
-r.js.cmd -o baseUrl=../src name=../chrome/almond include=../chrome/main out=../all.js wrap=true optimize=none paths.jquery=empty:
+call r.js.cmd -o baseUrl=../src name=../chrome/almond include=../chrome/main out=../all.min.js wrap=true paths.jquery=empty:
+call r.js.cmd -o baseUrl=../src name=../chrome/almond include=../chrome/main out=../all.js wrap=true optimize=none paths.jquery=empty:
 
 REM ----------
 REM Sample output:
