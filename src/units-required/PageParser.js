@@ -9,7 +9,7 @@ define(["module", "jquery", "context", "console", "./SimTable", "./model/AttackP
 
     function getAttackPlanFromHtml(html) {
         // non-greedy regex to capture the table container
-        var re = /<div class="infobox">[\s\S]*?<\/div>/g;
+        var re = /<div class="infobox">[\s\S]*?id="proposals"[\s\S]*?<\/div>/g;
 
         var match = re.exec(html);
         if (match.length < 1) {

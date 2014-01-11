@@ -78,11 +78,13 @@ define([
                 "text-align": "center"
             }).append(ratioStr);
             var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
-            var lossesEl = $("<div>").attr("style", "padding: 2px;").append(info.totalLosses.toHtmlString()).append("Total Losses: " + info.tuv);
+            var lossesEl = $("<div>").attr("style", "padding: 2px;").append(uiUtils.unitListToHtml(info.totalLosses)).append("Total Losses: " + info.tuv);
             li.find(".wiki-link").before(lossesEl);
             li.find(".camp-ep").append(ratioEl);
             log([info.title].concat(arr).join("\t"));
             return info;
+        } else if (details.error) {
+            li.find(".wiki-link").before(details.error.message);
         }
         return null;
     };
