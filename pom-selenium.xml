@@ -297,7 +297,7 @@ Caused by: java.lang.ClassNotFoundException: com.google.common.net.MediaType
                     <executable>node</executable>
                     <arguments>
                         <argument>node_modules/intern/runner.js</argument>
-                        <argument>config=interntest/intern</argument>
+                        <argument>config=interntest/intern-standalone</argument>
                     </arguments>
                 </configuration>
             </plugin>
