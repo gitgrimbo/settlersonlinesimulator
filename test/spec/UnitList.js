@@ -71,7 +71,6 @@ define(["./jasmine-matchers", "units-required/model/UnitList"], function(customJ
             var u1 = new UnitList();
             var u2 = UnitList.fromUnits("R", 99, "C", 11);
             var u3 = u1.missing(u2);
-            console.log(u1, u2, u2);
             expect(u3.count("R")).toBe(99);
             expect(u3.count("C")).toBe(11);
             expect(u3.totalUnits()).toBe(110);
