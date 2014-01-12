@@ -167,6 +167,7 @@ define(["module", "console", "./UnitList", "./UnitListArr", "./Sim"], function(m
 
             while (waitingToBoard.totalUnits() >= general.capacity) {
                 var nextBoat = waitingToBoard.removeFromStart(general.capacity);
+                nextBoat.battleIdx = battleIdx;
                 log("nextBoat", ""+nextBoat);
                 transportRequired.push(nextBoat);
                 onIsland = onIsland.add(nextBoat);

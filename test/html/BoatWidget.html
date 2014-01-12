@@ -1,0 +1,31 @@
+<!-- Import the standard site CSS -->
+<link type="text/css" rel="stylesheet" href="http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&amp;f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css" />
+
+<script src="/lib/jquery-1.6.4.js"></script>
+
+<script src="/lib/require.js"></script>
+
+<script>
+require.config({
+    baseUrl: "/src/"
+});
+
+define("jquery", [], function() { return jQuery; });
+</script>
+
+<div id="page">
+
+<div id="content">
+</div>
+
+</div>
+
+<script>
+require(["units-required/model/UnitList", "ui-utils"], function(UnitList, uiUtils) {
+    var BoatWidget = uiUtils.BoatWidget;
+    var unitList = UnitList.fromUnits("R", 100, "C", 99, "S", 98, "M", 97, "LB", 96, "B", 95);
+    var w = new BoatWidget(unitList);
+    var el = w.toJQEl();
+    $("#content").append(el);
+});
+</script>

@@ -47,7 +47,7 @@ define([
             simTable.removeSummaryRows();
 
             var sim = attackPlan.sims[tableIdx];
-            log("tableIdx", tableIdx, "sim", sim);
+            log(M, "tableIdx", tableIdx, "sim", sim);
 
             var ignore = attackPlan.isIgnored(tableIdx);
             log(M, "ignore", tableIdx, ignore);
@@ -59,7 +59,7 @@ define([
 
             var chosenAttackOption = sim.chosenAttackOption;
             simTable.setAttackOptionIndex(chosenAttackOption);
-            log("sim", tableIdx, "chosenAttackOption", chosenAttackOption);
+            log(M, "sim", tableIdx, "chosenAttackOption", chosenAttackOption);
 
             var option1waves = sim.attackOptions[chosenAttackOption];
             if (!option1waves) {
@@ -93,6 +93,8 @@ define([
     }
 
     function doUnitsRequiredUI(simTables) {
+        var M = "doUnitsRequiredUI";
+
         var attackPlan = UnitsRequiredPageParser.getAttackPlanFromSimTables(simTables);
 
         function addSimControls() {
@@ -118,7 +120,7 @@ define([
             var simIndex = SimTable.getSimIndexForHeading($(this));
             // checkbox has already changed value, so reverse.
             var ignore = !this.checked;
-            log("ignore", simIndex, ignore);
+            log(M, "ignore", simIndex, ignore);
             attackPlan.ignore(simIndex, ignore);
             doCalcs(simTables, attackPlan);
         });
@@ -126,7 +128,7 @@ define([
         // Ignore-prev-sims button click
         $(document).delegate("button.ignore-prev-sims", "click", function(evt) {
             var simIndex = SimTable.getSimIndexForHeading($(this));
-            log("simIndex", simIndex);
+            log(M, "simIndex", simIndex);
             for (var i = 0; i < simIndex; i++) {
                 attackPlan.ignore(i);
             }
@@ -139,7 +141,7 @@ define([
             var chosenAttackOption = SimTable.getRowAttackOptionIndex(this);
             var simIndex = SimTable.getSimIndex($simTable);
             attackPlan.sims[simIndex].chosenAttackOption = chosenAttackOption;
-            log("chosenAttackOption", chosenAttackOption, "simIndex", simIndex);
+            log(M, "chosenAttackOption", chosenAttackOption, "simIndex", simIndex);
 
             // doCalcs will refresh the UI
             // a bit inefficient to do all the calcs again?
@@ -157,6 +159,18 @@ define([
         addAttackOptionClasses();
         addSimControls();
         doCalcs(simTables, attackPlan);
+
+        var generals = [{
+            capacity: 200
+        }];
+        var transportRequired = attackPlan.calculateTransportRequired(generals);
+        log(M, transportRequired);
+        transportRequired.forEach(function(boat, boatIdx) {
+            var boatWidget = new uiUtils.BoatWidget(boat);
+            var boatEl = boatWidget.toJQEl();
+            boatEl.css("width", "100%");
+            simTables.eq(boat.battleIdx).after(boatEl);
+        });
 
         // GLOBAL!
         GRIMBO.attackPlan = attackPlan;
