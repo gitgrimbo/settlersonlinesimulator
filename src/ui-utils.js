@@ -1,5 +1,7 @@
-define(["jquery", "./units-required/model/UnitList"], function($, UnitList) {
+define(["jquery", "env", "./units-required/model/UnitList"], function($, env, UnitList) {
     var NO_OPTS = {};
+    var env = env.defaultEnv;
+    var imgRoot = env.isLive() ? "https://rawgithub.com/gitgrimbo/settlersonlinesimulator/master/" : "/";
 
     function addStyles(cssStr, opts) {
         opts = opts || NO_OPTS;
@@ -78,12 +80,12 @@ define(["jquery", "./units-required/model/UnitList"], function($, UnitList) {
     }
 
     BoatWidget.prototype.toJQEl = function() {
-        var boatHtml = '<span style="display: inline-block; width: 30px; height: 30px; background: url(/src/img/boat.png) 0 0 no-repeat; padding-right: 1em;">&nbsp;</span>';
+        var boatHtml = '<span style="display: inline-block; width: 30px; height: 30px; background: url(' + imgRoot + 'src/img/boat.png) 0 0 no-repeat; padding-right: 1em;">&nbsp;</span>';
         var el = $(unitListToHtml(this.boat));
         el.prepend(boatHtml);
         el.css("margin-top", "1em");
         el.css("height", "48px");
-        el.css("background", "url(/src/img/wave.png) repeat-x left bottom");
+        el.css("background", "url(" + imgRoot + "src/img/wave.png) repeat-x left bottom");
         return el;
     }
 
