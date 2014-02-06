@@ -27,6 +27,9 @@
 This Ant project generates HTML reports from JUnit XML.
 These JUnit XML files should be placed in $${xml-reports} by Intern reporters.
 $${xml-reports} for this project is: '${xml-reports}'.
+
+Usage:
+    ant junitreport
         </echo>
     </target>
 
