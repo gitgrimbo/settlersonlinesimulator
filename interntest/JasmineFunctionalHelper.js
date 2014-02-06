@@ -32,7 +32,7 @@ define([
 
         return promise.eval(jsExpression, this.timeout)
             .then(function(results) {
-                console.log(MID, typeof results, results);
+                //console.log(MID, typeof results, results);
 
                 // Convert the stringified expression back to JSON
                 results = JSON.parse(results);
@@ -45,13 +45,30 @@ define([
                 // Set the holder
                 test.remote[remotePropName] = remoteOb;
 
-                //console.log(remotePropName, results);
+                //console.log(MID, remotePropName, results);
 
                 assert.ok(true);
             }, function(e) {
                 console.error(MID, test.name, e);
                 assert.ok(false);
             });
+    }
+
+    // Do not have final semi-colon in this function,
+    // as it will be toString'd and then the source eval'd in parens.
+    // So "(CODE;)" is not valid to be eval'd.
+    function navigatorToJSON() {
+        (function(o) {
+            var val = null, t = null;
+            for (var i = 1; i < arguments.length; i++) {
+                for (var k in arguments[i]) {
+                    val = arguments[i][k];
+                    t = typeof val;
+                    if ("string" === t || "number" === t || "boolean" === t) o[k] = val;
+                }
+            }
+            return o;
+        }({}, window.navigator))
     }
 
     Helper.prototype.runJasmineSpecRunner = function(url, test) {
@@ -63,6 +80,14 @@ define([
             .waitForCondition('"undefined" !== typeof jasmine.JUnitJSONReporter.results', this.timeout);
         promise = this.saveBrowserObjectToRemote(promise, test, 'jasmine.JUnitXMLReporter.results', 'xmlResults');
         promise = this.saveBrowserObjectToRemote(promise, test, 'jasmine.JUnitJSONReporter.results', 'jsonResults');
+
+        var nav1 = navigatorToJSON.toString();
+        //console.log(nav1);
+        nav1 = /\{([\s\S]*)\}/.exec(nav1)[1].trim();
+        //console.log(nav1);
+
+        promise = this.saveBrowserObjectToRemote(promise, test, nav1, '__navigator');
+        promise = this.saveBrowserObjectToRemote(promise, test, 'navigator.userAgent', '__userAgent');
         return promise;
     };
 

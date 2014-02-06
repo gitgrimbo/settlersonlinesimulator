@@ -24,11 +24,35 @@ define([
     'intern/lib/util',
     'dojo/node!path',
     'dojo/node!fs',
-    './mkdirp'
-], function (module, args, util, path, fs, mkdirp) {
+    './mkdirp',
+    './browser-detection'
+], function (module, args, util, path, fs, mkdirp, browserDetection) {
     var MID = module.id,
         sessions = {},
         hasErrors = false;
+
+    function envWithRealOperatingSystem(env, navigator) {
+        var browser = browserDetection(navigator);
+        //console.log(MID, "browser", browser);
+
+        var fakeEnv = {
+            //platform: env.platform,
+            platform: browser.os + browser.osVersion,
+            browserName: env.browserName,
+            version: env.version
+        };
+
+        return fakeEnv;
+    }
+
+
+
+
+
+
+
+
+
 
     function FileHelper(dir) {
         this.dir = dir || './reports';
@@ -75,10 +99,16 @@ define([
     FileHelper.prototype.saveResults = function (session, remotePropertyToSave) {
         remotePropertyToSave = remotePropertyToSave || "xmlResults";
         var results = session.remote[remotePropertyToSave];
-        //console.log(MID, results);
+        //console.log("\n\n", MID, results);
+
+        var navigator = session.remote["__navigator"];
+
         var env = session.remote.environmentType;
         for (sessionid in results) {
             var paths = results[sessionid];
+            var nav = navigator[sessionid];
+            var fakeEnv = envWithRealOperatingSystem(env, nav);
+
             for (testpath in paths) {
                 // testpath will always be blank for our jasmine reporter
                 var filenames = paths[testpath];
@@ -87,7 +117,8 @@ define([
                         var content = filenames[filename];
                         //console.log(MID, content);
                         var contentStr = ("string" === typeof content) ? content : JSON.stringify(content);
-                        FileHelper.saveResult(filename, this.dir, env, contentStr);
+
+                        FileHelper.saveResult(filename, this.dir, fakeEnv, contentStr);
                     } catch (e) {
                         console.log(MID, filename, this.dir, e);
                     }
@@ -125,7 +156,7 @@ define([
             return s.replace(JAVA_NAME_RE, "_");
         }
 
-        function processXmlStr(xml) {
+        function processXmlStr(xml, env) {
             [TESTSUITE_NAME_RE, TESTCASE_NAME_RE].forEach(function(re) {
                 xml = xml.replace(re, function(match, $1, $2, offset, original) {
                     // synthesize a Java package name + class name.
@@ -137,16 +168,24 @@ define([
         }
 
         var results = session.remote.xmlResults;
-        //console.log(MID, results);
+        //console.log(MID, "results", results);
+
+        var navigator = session.remote["__navigator"];
+        console.log(MID, "navigator", navigator);
+
         var env = session.remote.environmentType;
+
         for (sessionid in results) {
             var paths = results[sessionid];
+            var nav = navigator[sessionid];
+            var fakeEnv = envWithRealOperatingSystem(env, nav);
+
             for (testpath in paths) {
                 // testpath will always be blank for our jasmine reporter
                 var filenames = paths[testpath];
                 for (filename in filenames) {
                     var xml = filenames[filename];
-                    filenames[filename] = processXmlStr(xml);
+                    filenames[filename] = processXmlStr(xml, fakeEnv);
                 }
             }
         }
