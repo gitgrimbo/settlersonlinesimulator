@@ -183,16 +183,16 @@
     <h1>Code coverage report for <span class="entity">src\units-required\PageParser.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">100% <small>(27 / 27)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">92.31% <small>(24 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">50% <small>(2 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(4 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">100% <small>(27 / 27)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">92.31% <small>(24 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">src\units-required\</a> &#187; PageParser.js</div>
@@ -265,49 +265,49 @@
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-yes">85</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">85</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">85</span>
-<span class="cline-any cline-yes">85</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-yes">185</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5</span>
@@ -320,27 +320,27 @@
 Parser for a single adventure page.
 &nbsp;
 */
-define(["module", "jquery", "../context", "../console", "./SimTable", "./model"], function(module, $, GRIMBO, _console, SimTable, model) {
+define(["module", "jquery", "context", "console", "./SimTable", "./model/AttackPlan"], function(module, $, GRIMBO, _console, SimTable, AttackPlan) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
-    var AttackPlan = model.AttackPlan;
 &nbsp;
     function getAttackPlanFromHtml(html) {
-        // non-greedy regex to capture the tables
-        var re = /&lt;table class="example-sim"&gt;[\s\S]*?&lt;\/table&gt;/g;
+        // non-greedy regex to capture the table container
+        var re = /&lt;div class="infobox"&gt;[\s\S]*?id="proposals"[\s\S]*?&lt;\/div&gt;/g;
 &nbsp;
-        var tableHtmlList = [];
         var match = re.exec(html);
-        while (match) {
-            tableHtmlList.push(match[0]);
-            match = re.exec(html);
+        <span class="missing-if-branch" title="if path not taken"" >I</span>if (match.length &lt; 1) {
+<span class="cstat-no" title="statement not covered" >            throw new Error("Could not parse Adventure page.");</span>
         }
 &nbsp;
-        var simTables = tableHtmlList.map(function(html) {
-            return $("&lt;div&gt;").html(html).find("table").first();
-        });
+        var container = $(match[0]);
 &nbsp;
-        return getAttackPlanFromSimTables($(simTables));
+        var tables = container.find("table.example-sim");
+        <span class="missing-if-branch" title="if path not taken"" >I</span>if (tables.length &lt; 1) {
+<span class="cstat-no" title="statement not covered" >            throw new Error("Found no Sim tables.");</span>
+        }
+&nbsp;
+        return getAttackPlanFromSimTables(tables);
     }
 &nbsp;
     /**
@@ -378,7 +378,7 @@ define(["module", "jquery", "../context", "../console", "./SimTable", "./model"]
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Dec 19 2013 20:44:10 GMT+0000 (GMT Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 05 2014 23:56:26 GMT+0000 (GMT Standard Time)</div>
 </div>
 
 <script src="../../prettify.js"></script>
