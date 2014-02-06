@@ -19,59 +19,6 @@ importPackage(java.net);
 importPackage(java.nio.channels);
 importPackage(java.util);
 
-// CONFIG
-
-// config for the script
-var config = {
-    selenium: {
-        server: {
-            url: "http://selenium.googlecode.com/files/selenium-server-standalone-2.38.0.jar"
-        },
-        chromedriver: {
-            url: "http://chromedriver.storage.googleapis.com/2.7/chromedriver_win32.zip"
-        },
-        iedriver: {
-            url: "https://selenium.googlecode.com/files/IEDriverServer_x64_2.38.0.zip"
-        }
-    },
-    sonar: {
-        server: {
-            url: "http://dist.sonar.codehaus.org/sonar-3.7.3.zip"
-        },
-        // I don't use runner, I use the sonar maven plugin.
-        runner: {
-            url: "http://repo1.maven.org/maven2/org/codehaus/sonar/runner/sonar-runner-dist/2.3/sonar-runner-dist-2.3.zip"
-        },
-        javascript: {
-            url: "http://repository.codehaus.org/org/codehaus/sonar-plugins/javascript/sonar-javascript-plugin/1.4/sonar-javascript-plugin-1.4.jar"
-        }
-    }
-};
-
-// Overrides if we've chosen a local install, or if we're running in a VirtualBox instance
-var useLocalIfAvailable = true;
-
-// The shared folder we expose to VirtualBox VMs and
-// The local app cache
-// These two folders must have the same sub-structure (and they should, as they *are* effectively the same folder)
-var vmAppsRoot = new File("\\\\vboxsrv\\APPS");
-var localAppsRoot = new File("X:/backup/apps");
-
-// Simple test to see if we're on a VirtualBox VM
-var isVBox = vmAppsRoot.exists() && vmAppsRoot.isDirectory();
-
-var appsRoot = isVBox ? vmAppsRoot : (useLocalIfAvailable ? localAppsRoot : null);
-if (appsRoot) {
-    (function(appsRoot) {
-        config.selenium.server.url = new File(appsRoot, "dev/testing/selenium-server-standalone-2.38.0.jar").toURI();
-        config.selenium.chromedriver.url = new File(appsRoot, "dev/testing/chromedriver/2.7/chromedriver_win32.zip").toURI();
-        config.selenium.iedriver.url = new File(appsRoot, "dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip").toURI();
-        config.sonar.server.url = new File(appsRoot, "dev/testing/sonar/sonar-3.7.3.zip").toURI();
-        config.sonar.runner.url = new File(appsRoot, "dev/testing/sonar/sonar-runner-dist-2.3.zip").toURI();
-        config.sonar.javascript.url = new File(appsRoot, "dev/testing/sonar/sonar-javascript-plugin-1.4.jar").toURI();
-    }(appsRoot));
-}
-
 // UTIL
 
 function isInPath(path) {
@@ -129,13 +76,6 @@ function copy(dir, from, to) {
 
 
 
-// START
-
-var f = new File(".");
-var tmp = new File(f, "tmp");
-
-tmp.mkdirs();
-
 /**
  * - Downloads the sonar zip.
  * - Expects the sonar extraction folder to be the same name as the zip name (with .zip removed).
@@ -188,6 +128,17 @@ function downloadAndInstallSeleniumAndDrivers() {
     unzip(chromeDriverZip);
     unzip(ieDriverZip);
 }
+
+// START
+
+if ("undefined" === typeof config) {
+    throw new Error("config does not exist");
+}
+
+var f = new File(".");
+var tmp = new File(f, "tmp");
+
+tmp.mkdirs();
 
 downloadAndInstallSeleniumAndDrivers();
 downloadAndInstallSonar();
