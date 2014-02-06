@@ -41,9 +41,12 @@ To run the tests manually, start a web server in the root directory (e.g. if usi
 
 http://localhost/test/SpecRunner.html
 
-### Selenium
+### Selenium (standalone, not Grid)
 
-The Selenium tests are run using the
+This section is for standalone Selenium tests. By *standalone* we mean there is no Selenium Grid.
+For the *standalone* tests, the Maven POM is configured to start Selenium locally and to only control browsers available to the local PC.
+
+The standalone Selenium tests are run using the
 [selenium-maven-plugin](http://mojo.codehaus.org/selenium-maven-plugin/) Maven plugin which is
 declared in the `pom-selenium.xml` POM file.
 There are lots of nasty overrides in this POM to force the plugin to use a later version of
@@ -88,6 +91,38 @@ E.g. the files generated are:
 
 (the Ant junitreport files are generated during `mvn site`)
 
+### Selenium Grid
+
+Follow these steps (run all scripts from project root):
+
+- Run `bin\start-selenium-hub.bat`. This will start the Selenium hub that will control the Grid.
+- Run `bin\node-setup\node.bat`. This will start a Selenium node for the local PC. In the default case, this is configured with Firefox, Chrome and IE (see *capabilities* config file `Desktop_NodeWebDriver.json`).
+- Start Selenium nodes on each PC or VM that you want. I have been using XP+IE8 and Win7+IE10 [VirtualBox](https://www.virtualbox.org/) VMs from [modern.ie](http://modern.ie).
+- Run `bin\intern-tests.bat`
+
+The final `intern-tests.bat` command will run the tests through Intern and will use the Selenium hub to distribute the tests to all nodes.
+
+### Older browsers
+
+Firefox 3.6 can be supported (at least for the tests, if not for the actual bookmarklet - as
+the bookmarklet currently does not include the same shims as the tests) by adding the
+following to the `<HEAD>` element of Intern's `client.html` runner:
+
+    <script>
+    if ("function" !== typeof Function.bind) {
+        document.writeln('<script src="//rawgithub.com/es-shims/es5-shim/v2.3.0/es5-shim.js"></scr' + 'ipt>');
+        document.writeln('<script src="//rawgithub.com/es-shims/es5-shim/v2.3.0/es5-sham.js"></scr' + 'ipt>');
+    }
+    if (!document.head) {
+        document.head = document.getElementsByTagName("HEAD")[0];
+    }
+    </script>
+
+The same fix will not work for IE8, as IE8 cannot support the shamming of `Object.create()` by
+`es-sham.js`.
+
+(*Alternatively, the Geezer branch of Intern could be used*)
+
 ## Sonar Code Quality
 
 Start Sonar:
@@ -103,6 +138,8 @@ Run the Sonar Maven plugin:
 Building the Chrome plugin requires the
 [requirejs Node module to be installed](http://requirejs.org/docs/optimization.html#download).
 To build the Chrome plugin, `cd` into the `chrome/` folder and run `build.bat`.
+
+A minified and non-minified version of the plugin will be built.
 
 ## Generating the Maven Site
 
