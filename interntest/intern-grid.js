@@ -10,7 +10,7 @@ define({
     // Why not localhost? Because we're connecting VMs to this and they need a full address.
     // grimbo - Beware that this doesn't clash with Sonar, which also likes port 9000!
     //proxyUrl: 'http://localhost:9001/',
-    proxyUrl: 'http://192.168.1.68:9001/',
+    proxyUrl: 'http://192.168.1.65:9001/',
 
     // Default desired capabilities for all environments. Individual capabilities can be overridden by any of the
     // specified browser environments in the `environments` array below as well. See
@@ -27,14 +27,14 @@ define({
     // capabilities options specified for an environment will be copied as-is
     environments: [
         { browserName: 'chrome' }
-        , { browserName: 'firefox', version: ['3.6', '25'] }
-        // { browserName: 'internet explorer' }
+        , { browserName: 'firefox', version: [ '26', '27'] }
 
         // version: version: ['9', ''] or ['', '9'] *seems* to work for 2 IEs,
         // when the IE9 node has a specific version '9' in its capability file,
         // and I also have an IE10 available
         // But when I omit version, I just get one IE running, rather than both.
-        , { browserName: 'internet explorer', version: [/*'8',*/ '9', '10'] }
+        // IE9 is min supported for the bookmarklet
+        , { browserName: 'internet explorer', version: [ '9', '10'] }
 
         //,{ browserName: 'internet explorer', version: '9' }
         // grimbo - can't get phantomjs to work (see pom-selenium.xml)
