@@ -91,7 +91,7 @@ define(["./jasmine-matchers", "units-required/model/UnitList"], function(customJ
 
         beforeEach(function() {
             // adds toEqualUnitList()
-            this.addMatchers(customJasmineMatchers);
+            customJasmineMatchers.addMatchers(this);
         });
 
         it("[R, 99, C, 11]", function() {

@@ -33,7 +33,7 @@ define(["./jasmine-matchers", "units-required/model/UnitList", "units-required/m
 
         beforeEach(function() {
             // adds toEqualUnitList()
-            this.addMatchers(customJasmineMatchers);
+            customJasmineMatchers.addMatchers(this);
         });
 
         function checkTransportRequired(expected, actual) {
