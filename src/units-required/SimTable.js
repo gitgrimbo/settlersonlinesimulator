@@ -140,7 +140,7 @@ define([
             var unitInfo = $.map(["units", "avgLoss", "maxLoss", "minKill", "maxKill"], function(prop, i) {
                 return {
                     prop: prop,
-                    lines: StringUtils.$trim($td.eq(i)).split("\n")
+                    lines: StringUtils.$trim($td.eq(i + 1)).split("\n")
                 };
             });
 

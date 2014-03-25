@@ -2,6 +2,7 @@
 grimbo:
 this page is basically a straight copy, but there are some -grimbo- comments to comment out advertising and facebook/google-plus, etc, to make the test page load faster.
 -->
+
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -24,13 +25,12 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <!-- CSS-Files -->    
     <link type="text/css" rel="stylesheet" href="http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&amp;f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css" />
 
-    <!-- Javascript-Files -->
-    <script type="text/javascript"
-            src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-15840690-6']);
+      _gaq.push(['_gat._anonymizeIp']);
       _gaq.push(['_trackPageview']);
 
       (function() {
@@ -41,29 +41,19 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
 
       // leave frames
       if(top != self){top.location = self.location}
-
-      $(document).ready(function() {              
-        $('table.example-sim tr,#building-destruction tr').bind('mouseover', function(){
-          $(this).css("background", '#CFE1D1');
-        }).bind('mouseout', function(){
-          $(this).css("background", 'transparent');
-        });
-      });
     </script>
   </head>
   <body class="non-javascript coda-slider-no-js">
     <div id="page">
             <div id="adsense_120x600">
-        <!--grimbo-iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="160" height="600" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3884" target="_blank"></iframe>
-              <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes-grimbo-->      </div>
+        <iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="160" height="600" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3884&subid=" target="_blank"></iframe><noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes>      </div>
               <div id="content">
 
-        <p id="hint">
-          New GENERALS available! Some bugs like "starting a simulation from HOF always starts a simulation with normal general" exist. 
-          Please report more errors in the game forum.
-        </p>
+<!--        <p id="hint">
+    
+        </p>-->
          
-
+        
                             <ul id="lang">
           <li title="deutsch">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/">
@@ -105,12 +95,12 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
               <span id="brasil">&#160;</span>
             </a>
           </li>
-          <li title="???????">
+          <li title="русский">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/ru/">
               <span id="russian">&#160;</span>
             </a>
           </li>
-          <li title="ceský">
+          <li title="český">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/cz/">
               <span id="czech">&#160;</span>
             </a>
@@ -144,7 +134,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
           -->
         </ul>
         <span id="num-sim">
-                <a class="normal" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">Partner</a>: <a target="_blank" href="http://settlersonlineeconomy.com/">SettlersOnlineEconomy</a>
+                <a class="normal" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">Partner</a>: <a target="_blank" href="http://settlersonlinesimulator.com/dso_kampfsimulator/leave/dso-planer/">DSO Planer</a>
                   </span>
 
         <div id="header">
@@ -170,8 +160,8 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
                 Forum              </a>
             </li>
           </ul>
-          <!--grimbo-div id="facebook_like">
-            <iframe id="facebook" style="width:85px;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsettlersonlinesimulator.com%2Fdso_kampfsimulator%2F&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=21&amp;locale=en_US">
+          <div id="facebook_like">
+            <iframe id="facebook" style="width:90px;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsettlersonlinesimulator.com%2Fdso_kampfsimulator%2F&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=21&amp;locale=en_US">
             </iframe>
             <div class="g-plusone" data-size="medium" data-annotation="none"></div>
             <script type="text/javascript">
@@ -181,7 +171,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
               })();
             </script>
-          </div-grimbo-->
+          </div>
         </div>
         <div class="clear"></div>
 
@@ -200,6 +190,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
           in the forum - last update: 2013-04-07 17:17)
         </p>
         <div class="clear"></div>
+                <!-- Javascript-Files -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
         <div class="infobox">
   <h2>
     Adventures  </h2>
@@ -208,59 +201,17 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
   <ul id="adventures">
         <li>
       <span class="adventure-icon">
-        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_the_shaman.png"
-             alt="" title="The Shaman" />
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/easter2014_garrun2.png"
+             alt="" title="Garrun the Trapper" />
       </span>
       <div class="adventure-title">
-        <a title="Adventures - The Shaman" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schamane/">
-          The Shaman        </a>
+        <a title="Adventures - Garrun the Trapper" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/garrun-the-trapper/">
+          Garrun the Trapper        </a>
               </div>
             <span class="camp-ep">
         <span title="Experience">&#160;</span>
-        14960      </span>
+        8296      </span>
               
-      <div class="clear"></div>
-      <p class="adventure-info">
-              </p>
-    </li>
-          <li>
-      <span class="adventure-icon">
-        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_old_ruins.png"
-             alt="" title="Old Ruins" />
-      </span>
-      <div class="adventure-title">
-        <a title="Adventures - Old Ruins" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/old-ruins/">
-          Old Ruins        </a>
-              </div>
-            
-      <div class="clear"></div>
-      <p class="adventure-info">
-              </p>
-    </li>
-          <li>
-      <span class="adventure-icon">
-        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icovaliantAT.png"
-             alt="" title="The Valiant Little Taylor" />
-      </span>
-      <div class="adventure-title">
-        <a title="Adventures - The Valiant Little Taylor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-valiant-little-tayler/">
-          The Valiant Little Taylor        </a>
-              </div>
-            
-      <div class="clear"></div>
-      <p class="adventure-info">
-              </p>
-    </li>
-          <li>
-      <span class="adventure-icon">
-        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icobetrayedAT.png"
-             alt="" title="The betrayed little Tailor" />
-      </span>
-      <div class="adventure-title">
-        <a title="Adventures - The betrayed little Tailor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-betrayed-little-tailor/">
-          The betrayed little Tailor        </a>
-              </div>
-            
       <div class="clear"></div>
       <p class="adventure-info">
               </p>
@@ -555,6 +506,57 @@ She lives in a poisonous swamp and is believed to have the ugliest face you can 
     </li>
           <li>
       <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/the_sleeping_volcano2.png"
+             alt="" title="Der schlafende Vulkan" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Der schlafende Vulkan" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schlafende-vulkan/">
+          Der schlafende Vulkan        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        4960      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_old_ruins.png"
+             alt="" title="Old Ruins" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - Old Ruins" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/old-ruins/">
+          Old Ruins        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        5340      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icon_the_shaman.png"
+             alt="" title="The Shaman" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Shaman" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schamane/">
+          The Shaman        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        14960      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
         <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Icon_Viktor_der_Verschlagene.png"
              alt="" title="Victor the vicious" />
       </span>
@@ -742,6 +744,57 @@ His skills in archery are unparalleled. Some say he shot an apple from the head 
     </li>
           <li>
       <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icocleverAT.png"
+             alt="" title="The clever little Tailor" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The clever little Tailor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-clever-little-tailor/">
+          The clever little Tailor        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        80402      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icobetrayedAT.png"
+             alt="" title="The betrayed little Tailor" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The betrayed little Tailor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-betrayed-little-tailor/">
+          The betrayed little Tailor        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        82560      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
+        <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/icovaliantAT.png"
+             alt="" title="The Valiant Little Taylor" />
+      </span>
+      <div class="adventure-title">
+        <a title="Adventures - The Valiant Little Taylor" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/the-valiant-little-tayler/">
+          The Valiant Little Taylor        </a>
+              </div>
+            <span class="camp-ep">
+        <span title="Experience">&#160;</span>
+        76790      </span>
+              
+      <div class="clear"></div>
+      <p class="adventure-info">
+              </p>
+    </li>
+          <li>
+      <span class="adventure-icon">
         <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/resources/adventures/Em2012_01.png"
              alt="" title="EM - First Match (Lvl 26)" />
       </span>
@@ -896,15 +949,27 @@ His skills in archery are unparalleled. Some say he shot an apple from the head 
        
   </ul>
 </div>        
+        
+            
+    <script type="text/javascript">
+      $(document).ready(function() {              
+        $('table.example-sim tr,#building-destruction tr').bind('mouseover', function(){
+          $(this).css("background", '#CFE1D1');
+        }).bind('mouseout', function(){
+          $(this).css("background", 'transparent');
+        });
+      });
+    </script>
+        
         <div id="footer">
           <p>
-            This page was created in <span class="bold">0.01056 seconds</span>.
+            This page was created in <span class="bold">0.01023 seconds</span>.
           </p>
           <p>
-            Copyright &copy; 2010-2013 by SettlersOnlineSimulator.com
+            Copyright &copy; 2010-2014 by SettlersOnlineSimulator.com
           </p>
           <p>
-            All images &copy; 2010-2013 Ubisoft Entertainment.
+            All images &copy; 2010-2014 Ubisoft Entertainment.
           </p>
         </div>
 

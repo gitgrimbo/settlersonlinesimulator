@@ -2,6 +2,7 @@
 grimbo:
 this page is basically a straight copy, but there are some -grimbo- comments to comment out advertising and facebook/google-plus, etc, to make the test page load faster.
 -->
+
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -24,46 +25,34 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <!-- CSS-Files -->    
     <link type="text/css" rel="stylesheet" href="http://settlersonlinesimulator.com/min/b=dso_kampfsimulator&amp;f=css/style.min.css,js/fancybox/jquery.fancybox-1.3.4.css" />
 
-    <!-- Javascript-Files -->
-    <script type="text/javascript"
-            src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    
 
     <script type="text/javascript">
-      //grimbo-var _gaq = _gaq || [];
-      //grimbo-_gaq.push(['_setAccount', 'UA-15840690-6']);
-      //grimbo-_gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-15840690-6']);
+      _gaq.push(['_gat._anonymizeIp']);
+      _gaq.push(['_trackPageview']);
 
-      //grimbo-(function() {
-      //grimbo-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      //grimbo-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      //grimbo-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      //grimbo-})();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
       // leave frames
       if(top != self){top.location = self.location}
-
-      $(document).ready(function() {              
-        $('table.example-sim tr,#building-destruction tr').bind('mouseover', function(){
-          $(this).css("background", '#CFE1D1');
-        }).bind('mouseout', function(){
-          $(this).css("background", 'transparent');
-        });
-      });
     </script>
   </head>
   <body class="non-javascript coda-slider-no-js">
     <div id="page">
             <div id="adsense_120x600">
-        <!--grimbo-iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="160" height="600" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3884" target="_blank"></iframe>
-              <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes-grimbo-->      </div>
+        <iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="160" height="600" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3884" target="_blank"></iframe>
+              <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes>      </div>
               <div id="content">
 
-        <!--
-        <p id="hint">
-          New GENERALS available! Some bugs like "starting a simulation from HOF always starts a simulation with normal general" exist. 
-          Please report more errors in the game forum.
-        </p>
-        -->
+<!--        <p id="hint">
+    
+        </p>-->
          
         
                             <ul id="lang">
@@ -82,7 +71,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
               <span id="american">&#160;</span>
             </a>
           </li>
-          <li title="fran�ais">
+          <li title="français">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/fr/">
               <span id="french">&#160;</span>
             </a>
@@ -92,27 +81,27 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
               <span id="italian">&#160;</span>
             </a>
           </li>
-          <li title="espa�ol">
+          <li title="español">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/es/">
               <span id="spanish">&#160;</span>
             </a>
           </li>
-          <li title="portugu�s">
+          <li title="português">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/pt/">
               <span id="portuguese">&#160;</span>
             </a>
           </li>
-          <li title="portugu�s">
+          <li title="português">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/pt/">
               <span id="brasil">&#160;</span>
             </a>
           </li>
-          <li title="???????">
+          <li title="русский">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/ru/">
               <span id="russian">&#160;</span>
             </a>
           </li>
-          <li title="cesk�">
+          <li title="český">
             <a href="http://settlersonlinesimulator.com/dso_kampfsimulator/cz/">
               <span id="czech">&#160;</span>
             </a>
@@ -146,7 +135,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
           -->
         </ul>
         <span id="num-sim">
-                <a class="normal" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">Partner</a>: <a target="_blank" href="http://settlersonlineeconomy.com/">SettlersOnlineEconomy</a>
+                <a class="normal" href="http://settlersonlinesimulator.com/dso_kampfsimulator/en/partner/">Partner</a>: <a target="_blank" href="http://settlersonlinesimulator.com/dso_kampfsimulator/leave/dso-planer/">DSO Planer</a>
                   </span>
 
         <div id="header">
@@ -172,7 +161,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
                 Forum              </a>
             </li>
           </ul>
-          <!--grimbo-div id="facebook_like">
+          <div id="facebook_like">
             <iframe id="facebook" style="width:90px;" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsettlersonlinesimulator.com%2Fdso_kampfsimulator%2F&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=21&amp;locale=en_US">
             </iframe>
             <div class="g-plusone" data-size="medium" data-annotation="none"></div>
@@ -183,7 +172,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
               })();
             </script>
-          </div-grimbo-->
+          </div>
         </div>
         <div class="clear"></div>
 
@@ -199,9 +188,12 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
           <a target="_blank" href="http://forum.thesettlersonline.com/threads/15694-TSO-Combat-Siimulator">
             discuss this tool
           </a>
-          in the forum - last update: 2013-10-05 12:50)
+          in the forum - last update: 2014-03-24 14:07)
         </p>
         <div class="clear"></div>
+                <!-- Javascript-Files -->
+    <script type="text/javascript"
+            src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
         <div class="infobox">
   <h2>
     Information  </h2>
@@ -287,6 +279,14 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     Select your available units and submit the form. 
   Then the most efficient troops will be calculated for the selected adventure.  </p>
   <form id="filter" method="get" action="">
+    <p>
+      General:
+            <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/units/icon_general.png" alt="G" title="General" />
+      <input type="radio" name="general" id="radio-general_G" value="G" checked="checked" />
+              <img src="http://settlersonlinesimulator.com/dso_kampfsimulator/images/units/icon_special_general1.png" alt="GII" title="Meister der Kampfkunst" />
+      <input type="radio" name="general" id="radio-general_GII" value="GII" />
+            </p>
+    <div class="clear"></div>
     <ol id="filter_left" class="filter-unit-list">
       <li>
         <a>
@@ -406,7 +406,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
 <iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="728" height="90" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3008" target="_blank"></iframe>
                 <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes></div>
 <ul id="footer-ads">
-    <li class="normal"><a href="http://clix.superclix.de/cgi-bin/eclix.cgi?id=lalala&pp=13619&linknr=22466" target="_blank">Travian</a></li>
+    <li class="bold"><a href="http://clix.superclix.de/cgi-bin/tclix.cgi?id=lalala&pp=14502&linknr=29834" target="_blank">Supremacy 1914</a></li>
   </ul>
 
 
@@ -429,6 +429,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -449,7 +452,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>6R 2S 192C</td><td>5.46R</td><td>6R</td><td>70NO</td><td>70NO</td><td>8.85</td></tr><tr><td>5R 1M 1S 193C</td><td>4.93R 0.2M</td><td>5R 1M</td><td>70NO</td><td>70NO</td><td>10.025</td></tr><tr><td>7R 5S 188C</td><td>5.95R</td><td>7R</td><td>70NO</td><td>70NO</td><td>10.325</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 6R 192C 2S</td><td>5.46R</td><td>6R</td><td>70NO</td><td>70NO</td><td>8.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>6R 2S 192C</td><td>5.46R</td><td>6R</td><td>70NO</td><td>70NO</td><td>8.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>5R 1M 1S 193C</td><td>4.93R 0.2M</td><td>5R 1M</td><td>70NO</td><td>70NO</td><td>10.025</td></tr>    </tbody>
   </table>
       <h3 id="camp-38">
     40<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Composite Bow (KB)" class="RaidersBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -462,6 +465,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -482,7 +488,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>5R 1S 194C</td><td>4.16R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td>2R 2M 1S 195C</td><td>2R 1.24M</td><td>2R 2M</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.25</td></tr><tr><td>3R 2S 195C</td><td>2.99R 0.17S</td><td>3R 1S</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.4</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 5R 194C 1S</td><td>4.14R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>5R 1S 194C</td><td>4.16R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>2R 2M 1S 195C</td><td>2R 1.24M</td><td>2R 2M</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.25</td></tr>    </tbody>
   </table>
       <h3 id="camp-40">
     90<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 90<span title="Composite Bow (KB)" class="RaidersBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -495,6 +501,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -515,7 +524,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>35R 5S 160LB</td><td>32.97R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr><tr><td>35R 10S 155LB</td><td>32.96R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr><tr><td>35R 35S 130LB</td><td>32.96R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 35R 10S 155LB</td><td>32.96R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>35R 10S 155LB</td><td>32.96R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>35R 35S 130LB</td><td>32.96R</td><td>35R</td><td>90NO 90KB</td><td>90NO 90KB</td><td>51.625</td></tr>    </tbody>
   </table>
       <h3 id="camp-39">
     60<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -528,6 +537,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -548,7 +560,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 28R 78S</td><td>26.71R</td><td>28R</td><td>60LR</td><td>60LR</td><td>41.3</td></tr><tr><td>1G 28R 145S</td><td>26.7R</td><td>28R</td><td>60LR</td><td>60LR</td><td>41.3</td></tr><tr><td>1G 28R 84S</td><td>26.71R</td><td>28R</td><td>60LR</td><td>60LR</td><td>41.3</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 25R 140S</td><td>24.96R 0.44S</td><td>25R 1S</td><td>60LR</td><td>60LR</td><td>40.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>28R 94S</td><td>26.71R</td><td>28R</td><td>60LR</td><td>60LR</td><td>41.3</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>28R 84S</td><td>26.67R</td><td>28R</td><td>60LR</td><td>60LR</td><td>41.3</td></tr>    </tbody>
   </table>
       <h3 id="camp-41">
     80<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 120<span title="Composite Bow (KB)" class="RaidersBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -561,6 +573,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -581,7 +596,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>200S</td><td>18.62S</td><td>20S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>79.5</td></tr><tr><td>1G 198S</td><td>19.27S</td><td>21S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>83.475</td></tr><tr><td>1G 199S</td><td>19.04S</td><td>21S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>83.475</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td>200S</td><td>18.62S</td><td>20S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>79.5</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 200S</td><td>18.62S</td><td>20S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>79.5</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 2M 198S</td><td>2M 17.71S</td><td>2M 19S</td><td>80LR 120KB</td><td>80LR 120KB</td><td>80.825</td></tr>    </tbody>
   </table>
       <h3 id="camp-42">
     30<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 70<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -594,6 +609,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -614,7 +632,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 45R 145S</td><td>42.32R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr><tr><td>1G 45R 144S</td><td>42.3R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr><tr><td>45R 100S</td><td>42.28R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 45R 144S</td><td>42.29R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 45R 145S</td><td>42.32R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>45R 100S</td><td>42.28R</td><td>45R</td><td>30NO 70LR</td><td>30NO 70LR</td><td>66.375</td></tr>    </tbody>
   </table>
       <h3 id="camp-43">
     40<span title="Riding Bowman (BB)" class="RaidersCavalryBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 30<span title="Riding Amazonian (BA)" class="RaidersCavalryLongbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -627,6 +645,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -647,7 +668,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 69R 90S</td><td>66.34R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr><tr><td>1G 69R 128S</td><td>66.38R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr><tr><td>69R 74S</td><td>66.4R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 69R 114S</td><td>66.33R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 69R 77S</td><td>66.33R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 69R 131S</td><td>66.29R</td><td>69R</td><td>40BB 30BA</td><td>40BB 30BA</td><td>101.775</td></tr>    </tbody>
   </table>
       <h3 id="camp-44">
     60<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 75<span title="Riding Bowman (BB)" class="RaidersCavalryBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -660,6 +681,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -680,7 +704,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 1R 53M 144S</td><td>1R 51.7M</td><td>1R 53M</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.925</td></tr><tr><td>1G 1R 53M 140S</td><td>1R 51.71M</td><td>1R 53M</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.925</td></tr><tr><td>1G 1R 53M 142S</td><td>1R 51.7M</td><td>1R 53M</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.925</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 28M 172S</td><td>28M 16.22S</td><td>28M 17S</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.775</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 19M 181S</td><td>19M 22.23S</td><td>19M 23S</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.775</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 1R 53M 140S</td><td>1R 51.69M</td><td>1R 53M</td><td>60NO 75BB</td><td>60NO 75BB</td><td>141.925</td></tr>    </tbody>
   </table>
       <h3 id="camp-45">
     50<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 10<span title="Riding Amazonian (BA)" class="RaidersCavalryLongbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -693,6 +717,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -713,7 +740,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1S 199C</td><td>10C</td><td>10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>30.5</td></tr><tr><td>1R 4S 195C</td><td>0.33R 10C</td><td>1R 10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>31.975</td></tr><tr><td>2M 198C</td><td>0.02M 10C</td><td>1M 10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>33.15</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 199C 1S</td><td>10C</td><td>10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>30.5</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>1S 199C</td><td>10C</td><td>10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>30.5</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 1R 198C 1S</td><td>0.15R 10C</td><td>1R 10C</td><td>50NO 10BA</td><td>50NO 10BA</td><td>31.975</td></tr>    </tbody>
   </table>
       <h3 id="camp-46">
     70<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 20<span title="Cataphract (KPH)" class="RaidersCavalryCrossbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -726,6 +753,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -746,7 +776,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 45R 100S</td><td>44.81R 0.15S</td><td>45R 1S</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.35</td></tr><tr><td>1G 48R 103S</td><td>45.58R</td><td>48R</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.8</td></tr><tr><td>1G 48R 86S</td><td>45.59R</td><td>48R</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.8</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 45R 100S</td><td>44.81R 0.15S</td><td>45R 1S</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.35</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>48R 150S</td><td>45.57R</td><td>48R</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.8</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 48R 152S</td><td>45.59R</td><td>48R</td><td>70NO 20KPH</td><td>70NO 20KPH</td><td>70.8</td></tr>    </tbody>
   </table>
       <h3 id="camp-47">
     40<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Composite Bow (KB)" class="RaidersBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -759,6 +789,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -779,7 +812,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>5R 1S 194C</td><td>4.16R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td>2R 2M 1S 195C</td><td>2R 1.24M</td><td>2R 2M</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.25</td></tr><tr><td>3R 2S 195C</td><td>2.99R 0.17S</td><td>3R 1S</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.4</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 5R 194C 1S</td><td>4.14R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>5R 1S 194C</td><td>4.16R</td><td>5R</td><td>40NO 40KB</td><td>40NO 40KB</td><td>7.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>2R 2M 1S 195C</td><td>2R 1.24M</td><td>2R 2M</td><td>40NO 40KB</td><td>40NO 40KB</td><td>8.25</td></tr>    </tbody>
   </table>
       <h3 id="camp-48">
     40<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -792,6 +825,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -812,7 +848,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 33R 1M 100S</td><td>32.22R 0.11M</td><td>33R 1M</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.325</td></tr><tr><td>1G 35R 78S</td><td>32.46R</td><td>35R</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.625</td></tr><tr><td>35R 150S</td><td>32.48R</td><td>35R</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.625</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 33R 1M 166S</td><td>32.22R 0.11M</td><td>33R 1M</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.325</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 35R 130S</td><td>32.48R</td><td>35R</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.625</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>35R 150S</td><td>32.48R</td><td>35R</td><td>40NO 40LR</td><td>40NO 40LR</td><td>51.625</td></tr>    </tbody>
   </table>
       <h3 id="camp-49">
     40<span title="Riding Amazonian (BA)" class="RaidersCavalryLongbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -825,6 +861,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -845,7 +884,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>39R 50S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr><tr><td>1G 39R 41S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr><tr><td>1G 39R 60S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 39R 41S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>39R 153S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>39R 120S</td><td>39R</td><td>39R</td><td>40BA</td><td>40BA</td><td>57.525</td></tr>    </tbody>
   </table>
       <h3 id="camp-50">
     40<span title="Riding Bowman (BB)" class="RaidersCavalryBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -858,6 +897,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -878,7 +920,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>19M 181S</td><td>19M</td><td>19M</td><td>40BB</td><td>40BB</td><td>50.35</td></tr><tr><td>1G 10M 60S</td><td>10M 6S</td><td>10M 6S</td><td>40BB</td><td>40BB</td><td>50.35</td></tr><tr><td>1G 5R 12M 103S</td><td>5R 12M 2.99S</td><td>5R 12M 3S</td><td>40BB</td><td>40BB</td><td>51.1</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 10M 100S</td><td>10M 6S</td><td>10M 6S</td><td>40BB</td><td>40BB</td><td>50.35</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 10M 60S</td><td>10M 6S</td><td>10M 6S</td><td>40BB</td><td>40BB</td><td>50.35</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>19M 181S</td><td>19M</td><td>19M</td><td>40BB</td><td>40BB</td><td>50.35</td></tr>    </tbody>
   </table>
       <h3 id="camp-51">
     30<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 30<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -891,6 +933,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -911,7 +956,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>26R 157S</td><td>24.3R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr><tr><td>1G 26R 164S</td><td>24.28R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr><tr><td>1G 26R 120S</td><td>24.31R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td>26R 165S</td><td>24.28R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>26R 120S</td><td>24.3R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>26R 157S</td><td>24.3R</td><td>26R</td><td>30NO 30LR</td><td>30NO 30LR</td><td>38.35</td></tr>    </tbody>
   </table>
       <h3 id="camp-52">
     60<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 60<span title="Composite Bow (KB)" class="RaidersBowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -924,6 +969,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -944,7 +992,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 43R 156S</td><td>39.9R</td><td>43R</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>63.425</td></tr><tr><td>1G 43R 152S</td><td>39.91R</td><td>43R</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>63.425</td></tr><tr><td>43R 154S</td><td>39.88R</td><td>43R</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>63.425</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 40R 160S</td><td>39.42R 0.1S</td><td>40R 1S</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>62.975</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 43R 154S</td><td>39.88R</td><td>43R</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>63.425</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>43R 156S</td><td>39.94R</td><td>43R</td><td>60NO 40LR 60KB</td><td>60NO 40LR 60KB</td><td>63.425</td></tr>    </tbody>
   </table>
       <h3 id="camp-53">
     70<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -957,6 +1005,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -977,7 +1028,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>46R 111S</td><td>43.59R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td>46R 142S</td><td>43.55R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td>46R 153S</td><td>43.57R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td>46R 153S</td><td>43.57R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>46R 111S</td><td>43.59R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>46R 142S</td><td>43.55R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr>    </tbody>
   </table>
       <h3 id="camp-54">
     70<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Riding Amazonian (BA)" class="RaidersCavalryLongbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -990,6 +1041,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -1010,7 +1064,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>1G 68R 119S</td><td>65.57R</td><td>68R</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100.3</td></tr><tr><td>1G 68R 128S</td><td>65.61R</td><td>68R</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100.3</td></tr><tr><td>68R 128S</td><td>65.59R</td><td>68R</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100.3</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 66R 1M 133S</td><td>65.34R 0.1M</td><td>66R 1M</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 68R 128S</td><td>65.56R</td><td>68R</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100.3</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 68R 127S</td><td>65.59R</td><td>68R</td><td>70NO 40BA</td><td>70NO 40BA</td><td>100.3</td></tr>    </tbody>
   </table>
       <h3 id="camp-55">
     70<span title="Nomad (NO)" class="RaidersRecruit" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 40<span title="Lance Rider (LR)" class="RaidersCavalry" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -1023,6 +1077,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -1043,7 +1100,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>46R 111S</td><td>43.59R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td>46R 142S</td><td>43.55R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td>46R 153S</td><td>43.57R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td>46R 153S</td><td>43.57R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>46R 111S</td><td>43.59R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>46R 142S</td><td>43.55R</td><td>46R</td><td>70NO 40LR</td><td>70NO 40LR</td><td>67.85</td></tr>    </tbody>
   </table>
       <h3 id="camp-56">
     90<span title="Riding Amazonian (BA)" class="RaidersCavalryLongbowman" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span> 10<span title="Uproarious Bull (BS)" class="RaidersBoss1" style="display:inline;padding:2px 12px 2px 11px;">&#160;</span>    <span class="small-8">
@@ -1056,6 +1113,9 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     <table class="example-sim">
     <thead>
     <tr>
+      <th style="width:20px;">
+        &#160;
+      </th>
       <th style="width:130px;">
         Units      </th>
       <th>
@@ -1076,7 +1136,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
     </tr>
     </thead>
     <tbody>
-    <tr><td>38R 90B 72LB</td><td>38R 90B 2LB</td><td>38R 90B 2LB</td><td>90BA 10BS</td><td>90BA 10BS</td><td>208.45</td></tr><tr><td>34R 96B 70LB</td><td>34R 96B</td><td>34R 96B</td><td>90BA 10BS</td><td>90BA 10BS</td><td>208.55</td></tr><tr><td>31R 99B 70LB</td><td>31R 99B</td><td>31R 99B</td><td>90BA 10BS</td><td>90BA 10BS</td><td>209.075</td></tr>    </tbody>
+    <tr><td><span class="general_mini" title="General"></span></td><td> 35R 95B 70LB</td><td>35R 95B</td><td>35R 95B</td><td>90BA 10BS</td><td>90BA 10BS</td><td>208.375</td></tr><tr><td><span class="general_mini" title="General"></span></td><td> 38R 90B 72LB</td><td>38R 90B 2LB</td><td>38R 90B 2LB</td><td>90BA 10BS</td><td>90BA 10BS</td><td>208.45</td></tr><tr><td><span class="general_mini" title="General"></span></td><td>38R 90B 72LB</td><td>38R 90B 2LB</td><td>38R 90B 2LB</td><td>90BA 10BS</td><td>90BA 10BS</td><td>208.45</td></tr>    </tbody>
   </table>
     </div>
 
@@ -1084,7 +1144,7 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
 <iframe  marginheight="0" marginwidth="0" scrolling="no" frameborder="0" width="728" height="90" src="http://www3.game-advertising-online.com/process/serve-f.php?section=serve&id=3008" target="_blank"></iframe>
                 <noframes>Game advertisements by <a href="http://www.game-advertising-online.com" target="_blank">Game Advertising Online</a> require iframes.</noframes></div>
 <ul id="footer-ads">
-    <li class="normal"><a href="http://clix.superclix.de/cgi-bin/eclix.cgi?id=lalala&pp=13619&linknr=22466" target="_blank">Travian</a></li>
+    <li class="normal"><a href="http://clix.superclix.de/cgi-bin/tclix.cgi?id=lalala&pp=14502&linknr=29834" target="_blank">Supremacy 1914</a></li>
   </ul>
 <br /><br />
 <div class="infobox">
@@ -1098,25 +1158,36 @@ this page is basically a straight copy, but there are some -grimbo- comments to 
   <h3>
     Units needed
   </h3>
-578  <span title="Recruit" class="recruit" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        73  <span title="Militia" class="militia" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        202  <span title="Soldier" class="soldier" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+566  <span title="Recruit" class="recruit" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        40  <span title="Militia" class="militia" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        210  <span title="Soldier" class="soldier" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
         204  <span title="Cavalry" class="cavalry" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        90  <span title="Bowman" class="bowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        160  <span title="Longbowman" class="longbowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        95  <span title="Bowman" class="bowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        155  <span title="Longbowman" class="longbowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
           <h3>
-    Maximum losses <span class="normal costs">(1312 Coins)</span>
+    Maximum losses <span class="normal costs">(1310 Coins)</span>
   </h3>
-578  <span title="Recruit" class="recruit" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        73  <span title="Militia" class="militia" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        21  <span title="Soldier" class="soldier" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+566  <span title="Recruit" class="recruit" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        40  <span title="Militia" class="militia" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        46  <span title="Soldier" class="soldier" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
         10  <span title="Cavalry" class="cavalry" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        90  <span title="Bowman" class="bowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
-        2  <span title="Longbowman" class="longbowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
+        95  <span title="Bowman" class="bowman" style="display:inline;padding:0px 15px 10px 11px;">&#160;</span>
         </div>        
+        
+            
+    <script type="text/javascript">
+      $(document).ready(function() {              
+        $('table.example-sim tr,#building-destruction tr').bind('mouseover', function(){
+          $(this).css("background", '#CFE1D1');
+        }).bind('mouseout', function(){
+          $(this).css("background", 'transparent');
+        });
+      });
+    </script>
+        
         <div id="footer">
           <p>
-            This page was created in <span class="bold">0.47392 seconds</span>.
+            This page was created in <span class="bold">0.32099 seconds</span>.
           </p>
           <p>
             Copyright &copy; 2010-2014 by SettlersOnlineSimulator.com
