@@ -1,6 +1,12 @@
 // NOTE! This code uses pipe() and not then() to pipe Deferreds, as the host page is jQuery 1.6.4
 // (i.e. less than 1.8, when then() becomes replacement for pipe()).
 
+/*
+
+The AdventureBox is the per-adventure UI element on the "Adventures"
+page (http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/).
+
+*/
 /*jslint browser: true*/
 /*global jQuery, console*/
 define([
@@ -9,7 +15,7 @@ define([
 
 "../deferred-utils", "../console", "../ajax", "../ui-utils",
 
-"../adventures-model", "../units-required/model/UnitList", "../units-required/ui-app", "../units-required/Service", "../adventures-page", "../thesettlersonline-wiki"
+"../adventures-model", "../units-required/model/UnitList", "../units-required/ui-app", "../units-required/Service", "../adventures-page", "../thesettlersonline-wikia-com"
 
 ], function(module, deferredUtils, _console, ajax, uiUtils, adventuresModel, UnitList, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
 
@@ -54,9 +60,10 @@ define([
     // UI class for an Adventure Box
     // All the UI handling for the enhancements to each adventure <li>
 
-    function AdventureBox(li, adventureInfo) {
+    function AdventureBox(li, adventureInfo, wikis) {
         this.li = li;
         this.adventureInfo = adventureInfo;
+        this.wikis = wikis;
     }
 
     AdventureBox.prototype.showResults = function(details) {
@@ -89,10 +96,24 @@ define([
         return null;
     };
 
-    AdventureBox.prototype.addWikiLink = function(title) {
-        var link = $("<a>").addClass("wiki-link btn-link").attr("href", wiki.getLink(title)).html("wiki");
-        this.li.append(link);
-        return link;
+    AdventureBox.prototype.addWikiLinks = function(title) {
+        var box = this;
+        var links = this.wikis.map(function(wiki, idx) {
+            var href = wiki.getHrefForAdventure(title);
+
+            var link = $("<a>").addClass("wiki-link btn-link");
+            link.attr("href", href);
+            link.attr("title", wiki.getName());
+            link.html("").append("<img src='" + wiki.getIcon() + "'>").append(" wiki");
+
+            if (idx > 0) {
+                box.li.append(" ");
+            }
+            box.li.append(link);
+
+            return link;
+        });
+        return links;
     };
 
     AdventureBox.prototype.addUnitsRequiredLink = function() {

@@ -9,7 +9,15 @@ define(["module", "./ajax", "./WikiAdventurePage"], function(module, ajax, WikiA
         "The end of the earth": "The End of the World"
     };
 
-    function getLink(title) {
+    function getName() {
+        return "thesettlersonline.wikia.com";
+    }
+
+    function getIcon() {
+        return "http://img3.wikia.nocookie.net/__cb6/thesettlersonline/images/6/64/Favicon.ico";
+    }
+
+    function getHrefForAdventure(title) {
         // See if we need to map the page name, before replacing spaces with underscores.
         var pageName = (wikiMappings[title] || title).replace(/\s/gi, "_");
         return "http://thesettlersonline.wikia.com/wiki/" + pageName;
@@ -25,7 +33,9 @@ define(["module", "./ajax", "./WikiAdventurePage"], function(module, ajax, WikiA
     }
 
     return {
-        getLink: getLink,
+        getName: getName,
+        getIcon: getIcon,
+        getHrefForAdventure: getHrefForAdventure,
         getRewardsImageSrc: getRewardsImageSrc
     };
 

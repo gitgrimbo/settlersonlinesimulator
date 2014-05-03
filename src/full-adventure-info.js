@@ -9,9 +9,9 @@ define([
 
 "./deferred-utils", "./console", "./ajax", "./ui-utils", "./adventures-page/AdventureBox",
 
-"./adventures-model", "./units-required/model/UnitList", "./units-required/ui-app", "./units-required/Service", "./adventures-page", "./thesettlersonline-wiki"
+"./adventures-model", "./units-required/model/UnitList", "./units-required/ui-app", "./units-required/Service", "./adventures-page", "./wikis"
 
-], function(module, deferredUtils, _console, ajax, uiUtils, AdventureBox, adventuresModel, UnitList, unitsRequired, UnitsRequiredService, adventuresPage, wiki) {
+], function(module, deferredUtils, _console, ajax, uiUtils, AdventureBox, adventuresModel, UnitList, unitsRequired, UnitsRequiredService, adventuresPage, wikis) {
     var $ = jQuery;
     if ("1.6.4" !== jQuery.fn.jquery) {
         throw new Error("Expected jQuery 1.6.4!");
@@ -133,8 +133,8 @@ define([
                 xp: xp
             };
 
-            var adventureBox = new AdventureBox(li, adventureInfo);
-            adventureBox.addWikiLink(AdventuresPage.liTitle(li));
+            var adventureBox = new AdventureBox(li, adventureInfo, wikis);
+            adventureBox.addWikiLinks(AdventuresPage.liTitle(li));
             var unitsRequiredLink = adventureBox.addUnitsRequiredLink();
             var allUnitsRequiredLink = adventureBox.addAllUnitsRequiredLink();
             var rewardsLink = adventureBox.addRewardsLink(href);
