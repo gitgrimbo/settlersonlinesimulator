@@ -87,14 +87,19 @@ define([
         }
 
         // str will be like "47R 1S 80C 72B"
-        str = str.split(/\s+/);
+        // [*] or like 12R 1S 200C  <span class="small" title="General">(220)</span>
+        // if a new general is used.
+        var split = str.split(/\s+/);
 
-        // str will be array like ["47R", "1S", "80C", "72B"]
-        for (var i = 0; i < str.length; i++) {
-            match = str[i].match(/([\d.]+)(.*)/);
-            var unitType = match[2];
-            var unitNumber = match[1];
-            units[unitType] = parseFloat(unitNumber);
+        // split will be array like ["47R", "1S", "80C", "72B"]
+        for (var i = 0; i < split.length; i++) {
+            match = split[i].match(/([\d.]+)(.*)/);
+            if (match) {
+                // match will be null if new general is used. see above. [*]
+                var unitType = match[2];
+                var unitNumber = match[1];
+                units[unitType] = parseFloat(unitNumber);
+            }
         }
         return units;
     };
