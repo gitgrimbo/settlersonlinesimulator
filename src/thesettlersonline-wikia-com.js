@@ -24,7 +24,7 @@ define(["module", "./ajax", "./WikiAdventurePage"], function(module, ajax, WikiA
     }
 
     function getRewardsImageSrc(title) {
-        var link = getLink(title);
+        var link = getHrefForAdventure(title);
         // Using deprecated pipe() because of the version of jQuery on the page.
         return ajax.crossDomainAjax(link).pipe(function(response) {
             var page = new WikiAdventurePage(response);
