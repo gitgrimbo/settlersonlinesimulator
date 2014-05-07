@@ -1,9 +1,9 @@
 {
     "name": "The Settlers Online",
     "version": "1.0.0",
-    "permissions": ["http://thesettlersonline.wikia.com/wiki/", "tabs", "activeTab"],
+    "permissions": ["http://thesettlersonline.wikia.com/wiki/", "http://localhost/", "tabs", "activeTab"],
     "content_scripts": [{
-        "matches": ["http://settlersonlinesimulator.com/dso_kampfsimulator/en/*"],
+        "matches": ["http://settlersonlinesimulator.com/dso_kampfsimulator/en/*", "http://localhost/*"],
         "js": ["chrome/contentscript.js", "chrome/xhr.js"]
     }],
     "background": {
