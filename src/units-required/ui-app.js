@@ -197,7 +197,7 @@ define([
             try {
                 doUnitsRequiredUI($("table.example-sim"));
             } catch (e) {
-                log(typeof e, e.message, e);
+                log.error(typeof e, e.message, e);
             }
         }).fail(function() {
             log(arguments);
