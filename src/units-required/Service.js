@@ -3,7 +3,9 @@
 Module to provide an abstraction for loading an adventure attack plan details.
 
 */
-define(["module", "jquery", "../context", "../console", "../deferred-utils", "./PageParser"], function(module, $, GRIMBO, _console, deferredUtils, UnitsRequiredPageParser) {
+define([
+    "module", "jquery", "../context", "../console", "../deferred-utils", "./PageParser"
+], function(module, $, GRIMBO, _console, deferredUtils, UnitsRequiredPageParser) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
 
@@ -11,10 +13,30 @@ define(["module", "jquery", "../context", "../console", "../deferred-utils", "./
         return $.ajax.apply($, arguments);
     }
 
-    function loadAttackPlan(adventureInfo) {
-        var xhr = get(adventureInfo.href);
-        xhr.href = adventureInfo.href;
+    function loadAttackPlan(adventureInfo, troopOptions) {
+        troopOptions = troopOptions || {
+            "general": "GII",
+            "my_r": 200,
+            "my_m": 200,
+            "my_s": 200,
+            "my_e": 0,
+            "my_c": 200,
+            "my_b": 200,
+            "my_lb": 200,
+            "my_a": 0,
+            "my_k": 0,
+            "wave": 3,
+            "limit_user_units": 220
+        };
+
+        var href = adventureInfo.href;
+        href += "?" + $.param(troopOptions);
+
+        var xhr = get(href);
+
+        xhr.href = href;
         xhr.idx = adventureInfo.idx;
+
         return xhr.pipe(mapHtmlToAttackPlan.bind(null, adventureInfo.idx));
     }
 
