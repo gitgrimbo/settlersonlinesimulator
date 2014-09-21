@@ -57,6 +57,25 @@ define([
 
 
 
+    function RatioBar() {
+    }
+
+    RatioBar.prototype.create = function() {
+        var bar = uiUtils.createBar({
+            width: "100px"
+        }, {
+            width: "100%"
+        });
+        return (this.bar = bar);
+    };
+
+    RatioBar.prototype.update = function(percent) {
+        var inner = this.bar.find(".bar-inner");
+        inner.css({
+            width: percent + "%"
+        });
+    };
+
     // UI class for an Adventure Box
     // All the UI handling for the enhancements to each adventure <li>
 
@@ -66,32 +85,40 @@ define([
         this.wikis = wikis;
     }
 
-    AdventureBox.prototype.showResults = function(details) {
+    AdventureBox.prototype.updateRatioBar = function(ratio, maxRatio) {
+        if (!this.ratioBar) {
+            return;
+        }
+        var percent = 100 * (ratio / maxRatio);
+        this.ratioBar.update(percent);
+    };
+
+    AdventureBox.prototype.showResults = function(details, maxRatio) {
         var li = $(this.li);
         if (details.attackPlan) {
-            // Guess at the max calculatedXP/tuv ratio
-            var MAX_XP_TUV_RATIO = 40;
             var info = handleDetails(li, details);
-            var ratioStr = toNdp("" + (info.calculatedXP / info.tuv), 2);
+
+            var ratio = info.calculatedXP / info.tuv;
+
+            var ratioStr = toNdp("" + ratio, 2);
             var arr = [info.totalLosses, info.calculatedXP, info.tuv, ratioStr];
-            var bar = uiUtils.createBar({
-                width: "100px"
-            }, {
-                width: 100 * (info.calculatedXP / info.tuv) / MAX_XP_TUV_RATIO + "px"
-            });
             var ratioStrEl = $("<div>").css({
                 "display": "inline-block",
                 "width": "100%",
                 "text-align": "center"
             }).append(ratioStr);
+
+            this.ratioBar = new RatioBar();
+            var bar = this.ratioBar.create();
+
             var ratioEl = $("<div>").css("display", "inline-block").append(bar).append("<br>").append(ratioStrEl);
             var lossesEl = $("<div>").attr("style", "padding: 2px;").append(uiUtils.unitListToHtml(info.totalLosses)).append("Total Losses: " + info.tuv);
-            li.find(".wiki-link").before(lossesEl);
+            li.find(".wiki-link").first().before(lossesEl);
             li.find(".camp-ep").append(ratioEl);
             log([info.title].concat(arr).join("\t"));
             return info;
         } else if (details.error) {
-            li.find(".wiki-link").before(details.error.message);
+            li.find(".wiki-link").first().before(details.error.message);
         }
         return null;
     };
@@ -137,17 +164,25 @@ define([
         var info = this.adventureInfo;
         var link = li.find(".units-required-link").first();
         details.title = AdventuresPage.liTitle(li);
-        var box = new AdventureBox(li);
-        var results = box.showResults(details);
+        var results = this.showResults(details);
         if (results) {
             // Mixin the new data.
             $.extend(info, results);
             link.remove();
         }
+        return results;
     };
 
     AdventureBox.updateAllAttackPlans = function(adventureBoxes, progressCallback) {
+        function updateAdventureBoxRatioBars(maxRatio) {
+            adventureBoxes.forEach(function(box) {
+                var ratio = box.adventureInfo.calculatedXP / box.adventureInfo.tuv;
+                box.updateRatioBar(ratio, maxRatio);
+            });
+        }
+
         var count = 0;
+        var maxRatio = 0;
         var size = adventureBoxes.length;
         var dfds = adventureBoxes.map(function(box) {
             var adventureInfo = box.adventureInfo;
@@ -157,10 +192,18 @@ define([
                     size: size
                 });
                 box.updateWithAttackPlan(status, details);
+                var ratio = adventureInfo.calculatedXP / adventureInfo.tuv
+                if (ratio > maxRatio) {
+                    maxRatio = ratio;
+                }
             });
         });
-        var dfd = $.when.apply($, dfds);
-        return dfd;
+        return $.Deferred(function(dfd) {
+            $.when.apply($, dfds).then(function(it) {
+                updateAdventureBoxRatioBars(maxRatio);
+                dfd.resolve(it);
+            });
+        });
     };
 
     AdventureBox.onAllUnitsRequiredClicked = function(adventureBoxes, progressCallback, evt) {
