@@ -3,9 +3,22 @@
 Parser for a single adventure page.
 
 */
-define(["module", "jquery", "context", "console", "./SimTable", "./model/AttackPlan"], function(module, $, GRIMBO, _console, SimTable, AttackPlan) {
+define([
+    "module", "jquery", "context", "console", "./SimTable", "./model/AttackPlan"
+], function(module, $, GRIMBO, _console, SimTable, AttackPlan) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);
+
+    function PageParser() {
+        this.attackPlan = null;
+    }
+
+    PageParser.prototype.parse = function(html) {
+        this.attackPlan = getAttackPlanFromHtml(html);
+    };
+
+    PageParser.getAttackPlanFromHtml = getAttackPlanFromHtml;
+    PageParser.getAttackPlanFromSimTables = getAttackPlanFromSimTables;
 
     function getAttackPlanFromHtml(html) {
         // non-greedy regex to capture the table container
@@ -51,9 +64,9 @@ define(["module", "jquery", "context", "console", "./SimTable", "./model/AttackP
         return new AttackPlan(sims);
     }
 
-    return {
-        getAttackPlanFromHtml: getAttackPlanFromHtml,
-        getAttackPlanFromSimTables: getAttackPlanFromSimTables
-    };
+    function getTroopsChoice(html) {
+    }
+
+    return PageParser;
 
 });
