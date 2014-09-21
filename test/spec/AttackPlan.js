@@ -1,5 +1,10 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
-define(["./jasmine-matchers", "units-required/model/UnitList", "units-required/model/AttackPlan", "./adventure/der-shamane"], function(customJasmineMatchers, UnitList, AttackPlan, derShamane) {
+define([
+    "./jasmine-matchers",
+    "units-required/model/UnitList",
+    "units-required/model/AttackPlan",
+    "./adventure/der-shamane"
+], function(customJasmineMatchers, UnitList, AttackPlan, derShamane) {
 
     expect = (function(expect) {
         return function() {
@@ -29,6 +34,13 @@ define(["./jasmine-matchers", "units-required/model/UnitList", "units-required/m
         return a;
     }
 
+    // These tests assume the following attack parameters:
+    // general=G (normal general)
+    //   recruit=200, militia=200, soldier=200, elite=0, cavalry=200, bowman=200, long bowman=200, crossbowman=0, cannoneer=0
+    //   wave=0 (5+ waves)
+    //   limit_user_units=200
+    // E.g. URL:
+    // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schamane/?general=G&my_r=200&my_m=200&my_s=200&my_e=0&my_c=200&my_b=200&my_lb=200&my_a=0&my_k=0&wave=0&limit_user_units=200
     describe("derShamane - calculateTransportRequired", function() {
 
         beforeEach(function() {
@@ -37,7 +49,7 @@ define(["./jasmine-matchers", "units-required/model/UnitList", "units-required/m
         });
 
         function checkTransportRequired(expected, actual) {
-            expect(actual.length).toBe(expected.length);
+            expect(actual.length).toBeSameLength(expected.length);
             expected.forEach(function(expected, i) {
                 expect(actual[i]).toEqualUnitList(expected, i);
             });
@@ -89,6 +101,17 @@ define(["./jasmine-matchers", "units-required/model/UnitList", "units-required/m
             checkTransportRequired(expected, transportRequired);
         });
 
+        it("has the correct transport required when first sim is ignored", function() {
+            var attackPlan = newAttackPlan(derShamane, 2);
+            attackPlan.ignore(0);
+
+            var transportRequired = attackPlan.calculateTransportRequired();
+
+            var expected = [];
+            expected.push(UnitList.fromUnits("R", 21, "S", 1, "C", 177));
+
+            checkTransportRequired(expected, transportRequired);
+        });
     });
 
 });

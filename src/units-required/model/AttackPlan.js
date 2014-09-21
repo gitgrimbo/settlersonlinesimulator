@@ -124,6 +124,10 @@ define([
     AttackPlan.prototype.getBattles = function() {
         var battles = [];
         this.sims.forEach(function(sim, idx) {
+            if (sim.ignore) {
+                // sim is ignored
+                return;
+            }
             var attack = sim.attackOptions[sim.chosenAttackOption];
             battles = battles.concat(attack);
         });

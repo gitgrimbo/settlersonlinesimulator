@@ -15,13 +15,23 @@ define([], function() {
                         return result;
                     }
                 };
+            },
+            toBeSameLength: function(util, customEqualityTesters) {
+                return {
+                    compare: function(actual, expected) {
+                        var result = {};
+                        result.pass = (actual === expected);
+                        return result;
+                    }
+                };
             }
         };
     }
 
     function jasmine1matchers() {
         return {
-            toEqualUnitList: toEqualUnitList
+            toEqualUnitList: toEqualUnitList,
+            toBeSameLength: toBeSameLength
         };
     }
 
@@ -47,6 +57,16 @@ define([], function() {
         };
 
         return result;
+    }
+
+    function toBeSameLength(expected) {
+        // Jasmine will look for this function and utilise it for custom error messages
+        this.message = function () {
+            var msg = "Length: expected " + this.actual + " to equal " + expected;
+            return msg;
+        };
+
+        return this.actual === expected;
     }
 
     return {
