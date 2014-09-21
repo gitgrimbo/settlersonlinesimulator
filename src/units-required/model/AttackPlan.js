@@ -1,4 +1,6 @@
-define(["module", "console", "./UnitList", "./UnitListArr", "./Sim"], function(module, _console, UnitList, UnitListArr, Sim) {
+define([
+    "module", "console", "./UnitList", "./UnitListArr", "./Sim"
+], function(module, _console, UnitList, UnitListArr, Sim) {
     var DEBUG = false;
     var log = _console.createLog(module.id, DEBUG);
 
