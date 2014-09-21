@@ -72,6 +72,17 @@ define([
     };
 
     SimTable.parseUnitsStr = function(str) {
+        function crop(arr) {
+            // remove 'new general' baggage from split by cropping the array if necessary [*]
+            for (var i = 0; i < arr.length; i++) {
+                // match a digit from the start of the string to eliminate extra parts of string
+                if (!arr[i].match(/^\d/)) {
+                    arr.length = i;
+                    break;
+                }
+            }
+        }
+
         var units = new UnitList(),
             match;
 
@@ -91,16 +102,20 @@ define([
         // if a new general is used.
         var split = str.split(/\s+/);
 
-        // split will be array like ["47R", "1S", "80C", "72B"]
+        crop(split);
+
+        // split will now be array with only units, like ["47R", "1S", "80C", "72B"]
         for (var i = 0; i < split.length; i++) {
-            match = split[i].match(/([\d.]+)(.*)/);
+            match = split[i].match(/^([\d]+)(.*)/);
             if (match) {
-                // match will be null if new general is used. see above. [*]
+                // match should not be null after we've sanitised the array
                 var unitType = match[2];
                 var unitNumber = match[1];
-                units[unitType] = parseFloat(unitNumber);
+                unitNumber = parseFloat(unitNumber);
+                units = units.addUnits(unitType, unitNumber);
             }
         }
+
         return units;
     };
 
