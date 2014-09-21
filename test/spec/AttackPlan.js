@@ -102,11 +102,15 @@ define([
         });
 
         it("has the correct transport required when first sim is ignored", function() {
+            // use the first two battles from the adventure
             var attackPlan = newAttackPlan(derShamane, 2);
+
+            // ignore the first sim
             attackPlan.ignore(0);
 
             var transportRequired = attackPlan.calculateTransportRequired();
 
+            // we only expect to need one set of soldiers
             var expected = [];
             expected.push(UnitList.fromUnits("R", 21, "S", 1, "C", 177));
 
