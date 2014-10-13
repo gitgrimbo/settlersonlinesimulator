@@ -12,13 +12,13 @@ function url(partialFilePath) {
 return {
     selenium: {
         server: {
-            url: url("dev/testing/selenium-server-standalone-2.38.0.jar")
+            url: url("dev/testing/selenium-server-standalone-2.43.1.jar")
         },
         chromedriver: {
-            url: url("dev/testing/chromedriver/2.7/chromedriver_win32.zip")
+            url: url("dev/testing/chromedriver/2.11/chromedriver_win32.zip")
         },
         iedriver: {
-            url: url("dev/testing/iedriver/IEDriverServer_Win32_2.38.0.zip")
+            url: url("dev/testing/iedriver/IEDriverServer_Win32_2.43.0.zip")
         }
     },
     sonar: {

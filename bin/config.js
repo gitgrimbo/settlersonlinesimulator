@@ -1,13 +1,13 @@
 var config = {
     selenium: {
         server: {
-            url: "http://selenium.googlecode.com/files/selenium-server-standalone-2.38.0.jar"
+            url: "http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar"
         },
         chromedriver: {
-            url: "http://chromedriver.storage.googleapis.com/2.7/chromedriver_win32.zip"
+            url: "http://chromedriver.storage.googleapis.com/2.11/chromedriver_win32.zip"
         },
         iedriver: {
-            url: "https://selenium.googlecode.com/files/IEDriverServer_x64_2.38.0.zip"
+            url: "http://selenium-release.storage.googleapis.com/2.43/IEDriverServer_x64_2.43.0.zip"
         }
     },
     sonar: {
