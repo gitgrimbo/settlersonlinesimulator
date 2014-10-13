@@ -13,6 +13,8 @@ NOTE! Uses Windows-specific commands such as 'cmd' and 'copy'.
 
 // IMPORTS
 
+load('nashorn:mozilla_compat.js')
+
 importClass(java.lang.System);
 importPackage(java.io);
 importPackage(java.net);
