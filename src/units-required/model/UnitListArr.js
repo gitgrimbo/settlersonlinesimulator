@@ -1,4 +1,6 @@
-define(["./UnitList"], function(UnitList) {
+define([
+    "./UnitList"
+], function(UnitList) {
 
     function UnitListArr(unitListArr) {
         this.unitListArr = unitListArr || [];

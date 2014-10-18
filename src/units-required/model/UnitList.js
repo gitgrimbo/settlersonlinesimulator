@@ -1,4 +1,6 @@
-define(["module", "console"], function(module, _console) {
+define([
+    "module", "../../console"
+], function(module, _console) {
     var DEBUG = true;
     var log = _console.createLog(module.id, DEBUG);
 
