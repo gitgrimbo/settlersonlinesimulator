@@ -4,9 +4,9 @@ define([
 
 "module", "jquery",
 
-"context", "console", "conditional-script-loader",
+"../context", "../console", "../conditional-script-loader",
 
-"ui-utils", "./PageParser", "./SimTable",
+"../ui-utils", "./PageParser", "./SimTable",
 
 "./model/UnitList", "./model/Sim", "./model/AttackPlan"
 

@@ -1,10 +1,10 @@
 define([
     "sos/units-required/model/UnitList",
     "sos/units-required/PageParser",
-    "text!html/adventures/der-schamane.html",
-    "text!html/adventures/sattelfest.html",
-    "text!html/adventures/verraeter-with-mma.html",
-    "text!html/adventures/the-valiant-little-tailor.html",
+    "text!../html/adventures/der-schamane.html",
+    "text!../html/adventures/sattelfest.html",
+    "text!../html/adventures/verraeter-with-mma.html",
+    "text!../html/adventures/the-valiant-little-tailor.html",
     "./test-helpers!"
 ], function(UnitList, UnitsRequiredPageParser, derSchamaneHtml, sattelfestHtml, verraeterWithMMAHtml, theValiantLittleTailorHtml) {
 

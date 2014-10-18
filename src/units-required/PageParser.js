@@ -4,7 +4,7 @@ Parser for a single adventure page.
 
 */
 define([
-    "module", "jquery", "context", "console", "./SimTable", "./model/AttackPlan"
+    "module", "jquery", "../context", "../console", "./SimTable", "./model/AttackPlan"
 ], function(module, $, GRIMBO, _console, SimTable, AttackPlan) {
     var DEBUG = GRIMBO.debug;
     var log = _console.createLog(module.id, DEBUG);

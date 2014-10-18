@@ -9,7 +9,7 @@ This module provided utility functions for reading from and manipulating this ta
 */
 define([
 
-"module", "jquery", "context", "console", "string-utils", "ui-utils",
+"module", "jquery", "../context", "../console", "../string-utils", "../ui-utils",
 
 "./model/UnitList", "./model/Sim", "./model/AttackPlan"
 
