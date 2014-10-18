@@ -1,4 +1,6 @@
-define(["module"], function(module) {
+define([
+    "module"
+], function(module) {
 
     function getName() {
         return "www.settlersonlinewiki.eu";

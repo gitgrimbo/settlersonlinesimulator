@@ -1,4 +1,6 @@
-define(["module", "jquery", "./console", "./adventures-page"], function(module, $, console, adventuresPage) {
+define([
+    "module", "jquery", "./console", "./adventures-page"
+], function(module, $, console, adventuresPage) {
     var log = console.createLog(module.id);
     var AdventuresPage = adventuresPage.AdventuresPage;
 

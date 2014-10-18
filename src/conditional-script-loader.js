@@ -1,5 +1,7 @@
 /*global yepnope */
-define(["jquery"], function($) {
+define([
+    "jquery"
+], function($) {
 
     /**
      * Deferred wrapper for yepnope.

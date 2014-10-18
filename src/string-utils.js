@@ -1,4 +1,6 @@
-define(["jquery"], function($) {
+define([
+    "jquery"
+], function($) {
 
     function forEachOwnProperty(ob, fn, context) {
         for (var i in ob) {

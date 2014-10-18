@@ -1,4 +1,6 @@
-define(["jquery", "env", "./units-required/model/UnitList"], function($, env, UnitList) {
+define([
+    "jquery", "./env", "./units-required/model/UnitList"
+], function($, env, UnitList) {
     var NO_OPTS = {};
     var env = env.defaultEnv;
     var imgRoot = env.isLive() ? "https://rawgithub.com/gitgrimbo/settlersonlinesimulator/master/" : "/";

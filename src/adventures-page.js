@@ -1,4 +1,6 @@
-define(["jquery"], function($) {
+define([
+    "jquery"
+], function($) {
     function AdventuresPage(container) {
         this.container = $(container || document);
     }

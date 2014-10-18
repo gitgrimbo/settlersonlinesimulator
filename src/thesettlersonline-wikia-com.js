@@ -1,4 +1,6 @@
-define(["module", "./ajax", "./WikiAdventurePage"], function(module, ajax, WikiAdventurePage) {
+define([
+    "module", "./ajax", "./WikiAdventurePage"
+], function(module, ajax, WikiAdventurePage) {
     var wikiMappings = {
         "Island of the Pirates": "The Island of the Pirates",
         "Stealing from the rich": "Stealing from the Rich",
