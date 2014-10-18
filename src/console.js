@@ -1,5 +1,6 @@
 define(function() {
-    var console = window.console;
+    // Get handle to console in node or browser
+    var _console = ("undefined" !== typeof console && console);
 
     function noop() {}
 
@@ -23,8 +24,8 @@ define(function() {
     function createLog(name, on) {
         on = (false !== on);
 
-        var log = !on ? noop : wrap(name, console, "log");
-        var error = wrap(name, console, "error");
+        var log = !on ? noop : wrap(name, _console, "log");
+        var error = wrap(name, _console, "error");
 
         var f = log;
         f.error = error;
