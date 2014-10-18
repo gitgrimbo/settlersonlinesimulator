@@ -100,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -107,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -140,7 +154,7 @@
             margin-left: 0.5em;
         }
         div.coverage-summary .yui3-datatable-sort-indicator {
-            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
         }
         div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
             background-position: 0 -20px;
@@ -176,6 +190,8 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
@@ -183,17 +199,18 @@
     <h1>Code coverage report for <span class="entity">src\</span></h1>
     <h2>
         
-        Statements: <span class="metric">63.57% <small>(82 / 129)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">65.67% <small>(88 / 134)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">71.15% <small>(37 / 52)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">72.22% <small>(39 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">56.25% <small>(18 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">58.82% <small>(20 / 34)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">61.79% <small>(76 / 123)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">64.06% <small>(82 / 128)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; src\</div>
 </div>
@@ -228,16 +245,29 @@
 	</tr>
 
 <tr>
+	<td class="file high" data-value="amdjquery.js"><a href="amdjquery.js.html">amdjquery.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	</tr>
+
+<tr>
 	<td class="file medium" data-value="console.js"><a href="console.js.html">console.js</a></td>
-	<td data-value="58.82" class="pic medium"><span class="cover-fill" style="width: 58px;"></span><span class="cover-empty" style="width:42px;"></span></td>
-	<td data-value="58.82" class="pct medium">58.82%</td>
-	<td data-value="17" class="abs medium">(10&nbsp;/&nbsp;17)</td>
-	<td data-value="50" class="pct medium">50%</td>
-	<td data-value="4" class="abs medium">(2&nbsp;/&nbsp;4)</td>
-	<td data-value="60" class="pct medium">60%</td>
-	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
-	<td data-value="58.82" class="pct medium">58.82%</td>
-	<td data-value="17" class="abs medium">(10&nbsp;/&nbsp;17)</td>
+	<td data-value="70" class="pic medium"><span class="cover-fill" style="width: 70px;"></span><span class="cover-empty" style="width:30px;"></span></td>
+	<td data-value="70" class="pct medium">70%</td>
+	<td data-value="20" class="abs medium">(14&nbsp;/&nbsp;20)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="70" class="pct medium">70%</td>
+	<td data-value="20" class="abs medium">(14&nbsp;/&nbsp;20)</td>
 	</tr>
 
 <tr>
@@ -297,12 +327,12 @@
 </div>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 05 2014 23:56:26 GMT+0000 (GMT Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Oct 18 2014 21:10:14 GMT+0100 (GMT Daylight Time)</div>
 </div>
 
 <script src="../prettify.js"></script>
 
-<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
 
     YUI().use('datatable', function (Y) {
