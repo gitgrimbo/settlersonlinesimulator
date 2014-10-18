@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "grimbo-settlersonlinesimulator-bookmarklet",
   "devDependencies": {
-    "intern": "~1.3.0"
+    "intern": "2.1.1"
   },
   "scripts": {
-    "test": "node node_modules/intern/runner.js config=tests/intern"
+    "unit-tests": "node node_modules/intern/client.js config=interntest/intern",
+    "test": "node node_modules/intern/runner.js config=interntest/intern-grid"
   }
 }
