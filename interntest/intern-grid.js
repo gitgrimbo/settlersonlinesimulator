@@ -70,7 +70,7 @@ define([
         },
 
         //reporters: [ 'runner', 'lcov', 'interntest/lcovhtml', 'interntest/ReporterToHandleJasmineJUnitReports.js' ]
-        reporters: [ 'cobertura', 'console', 'lcov', 'lcovhtml' ]
+        reporters: [ 'junit', 'cobertura', 'console', 'lcov', 'lcovhtml' ]
     };
 
     for (var i in cfg) {

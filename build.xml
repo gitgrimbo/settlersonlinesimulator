@@ -38,7 +38,23 @@ Usage:
     <!--
     Do the reporting.
     -->
-    <target name="junitreport" depends="fix-xml-reports-for-junitreport">
+    <target name="junitreport">
+        <mkdir dir="${html-reports}"/>
+
+        <junitreport todir="${html-reports}">
+            <fileset dir="${basedir}">
+                <include name="report.xml"/>
+            </fileset>
+            <report format="frames" todir="${html-reports}"/>
+        </junitreport>
+    </target>
+
+
+
+    <!--
+    Do the reporting.
+    -->
+    <target name="junitreport-jasmine" depends="fix-xml-reports-for-junitreport">
         <mkdir dir="${html-reports}"/>
 
         <junitreport todir="${html-reports}">

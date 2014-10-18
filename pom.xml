@@ -62,15 +62,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
-        <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
-        <maven-release-plugin.version>2.4.2</maven-release-plugin.version>
-        <maven-site-plugin.version>3.3</maven-site-plugin.version>
+        <maven-assembly-plugin.version>2.4.1</maven-assembly-plugin.version>
+        <maven-dependency-plugin.version>2.9</maven-dependency-plugin.version>
+        <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+        <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-        <maven-surefire-report-plugin.version>2.16</maven-surefire-report-plugin.version>
+        <maven-surefire-report-plugin.version>2.17</maven-surefire-report-plugin.version>
         <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
 
-        <doxia-module-markdown.version>1.5</doxia-module-markdown.version>
+        <doxia-module-markdown.version>1.6</doxia-module-markdown.version>
         <jshint-maven-plugin.version>1.1</jshint-maven-plugin.version>
         <jshint.version>2.1.9</jshint.version>
         <xml-maven-plugin.version>1.0</xml-maven-plugin.version>
@@ -226,6 +226,20 @@
                                 3. jshint-maven-plugin won't create folders itself, so have to do it here.
                                 -->
                                 <mkdir dir="${project.reporting.outputDirectory}/reports/checkstyle"/>
+
+                                <!--
+                                4. Copy istanbul report to right place.
+                                -->
+                                <copy todir="${project.reporting.outputDirectory}/reports/istanbulhtml">
+                                    <fileset dir="${basedir}/html-report"/>
+                                </copy>
+
+                                <!--
+                                5. How to get Maven to process the junit file?
+                                -->
+                                <mkdir dir="${basedir}/reports/junit"/>
+                                <copy file="${basedir}/report.xml" tofile="${basedir}/reports/junit/report.xml"/>
+
                             </target>
                         </configuration>
                         <goals>
