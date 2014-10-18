@@ -1,5 +1,5 @@
 define([
-    "units-required/model/UnitList",
+    "sos/units-required/model/UnitList",
     "./test-helpers!"
 ], function(UnitList) {
 

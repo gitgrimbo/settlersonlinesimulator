@@ -1,5 +1,5 @@
 define([
-    "adventures-model",
+    "sos/adventures-model",
     "./test-helpers!"
 ], function(adventuresModel) {
     var AdventuresModel = adventuresModel;

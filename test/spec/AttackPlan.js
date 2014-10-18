@@ -1,7 +1,7 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
 define([
-    "units-required/model/UnitList",
-    "units-required/model/AttackPlan",
+    "sos/units-required/model/UnitList",
+    "sos/units-required/model/AttackPlan",
     "./adventure/der-shamane",
     "./test-helpers!"
 ], function(UnitList, AttackPlan, derShamane) {

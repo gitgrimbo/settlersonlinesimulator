@@ -1,6 +1,6 @@
 define([
-    "units-required/model/UnitList",
-    "units-required/PageParser",
+    "sos/units-required/model/UnitList",
+    "sos/units-required/PageParser",
     "text!html/adventures/der-schamane.html",
     "text!html/adventures/sattelfest.html",
     "text!html/adventures/verraeter-with-mma.html",
