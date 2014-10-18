@@ -1,26 +1,17 @@
 define([
     "module"
 ], function(module) {
-console.log(module.id);
-    var hasWindow = ('undefined' !== typeof window);
+    console.log("Loading intern config", module.id);
 
-    // If hasWindow (running in client.html, then use absolute path,
-    // otherwise it's running from client.js and path is relative to current working directory.
-    var baseUrl = (hasWindow ? '/src/' : './src/');
-
-    // Remember that baseUrl is a property of loader!
     var config = {
         loader: {
-            baseUrl: baseUrl,
-            // relative to baseUrl
+            // These paths are for modules that are accessed via a top-level module id.
             paths: {
-                text: "../lib/text",
-                test: "../test",
-                html: "../test/html"
+                text: "./lib/text",
+                amdjquery: "./src/amdjquery",
+                sos: "./src",
+                jquery: "./lib/jquery-1.6.4"
             },
-            packages: [
-                { name: "jquery", location: "../lib", main: "jquery-1.6.4" }
-            ],
             map: {
                 "*": {
                     "jquery": "amdjquery"
@@ -52,7 +43,11 @@ console.log(module.id);
         // or any path part of 'lib'.
         // E.g. excluding 'interntest', 'test', 'tests', 'lib', etc.
         //excludeInstrumentation: /interntest|(test)s?\/|^lib\//
-        excludeInstrumentation: /^node_modules/
+        excludeInstrumentation: /^(test|interntest|node_modules|lib)/
     };
+
+    // the suitesNeedingDom should be removed by the unit-test only config
+    config.suites = config.suites.concat(config.suitesNeedingDom);
+
     return config;
 });

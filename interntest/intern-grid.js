@@ -30,15 +30,16 @@ define([
         // OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
         // capabilities options specified for an environment will be copied as-is
         environments: [
-            { browserName: 'chrome' }
-            , { browserName: 'firefox', version: [ '33' ] }
+            { browserName: 'chrome' },
+            { browserName: 'firefox' },
+            { browserName: 'internet explorer' }
 
             // version: version: ['9', ''] or ['', '9'] *seems* to work for 2 IEs,
             // when the IE9 node has a specific version '9' in its capability file,
             // and I also have an IE10 available
             // But when I omit version, I just get one IE running, rather than both.
             // IE9 is min supported for the bookmarklet
-            , { browserName: 'internet explorer', version: [ '9', '10'] }
+            //, { browserName: 'internet explorer', version: [ '9', '10'] }
 
             //,{ browserName: 'internet explorer', version: '9' }
             // grimbo - can't get phantomjs to work (see pom-selenium.xml)

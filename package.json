@@ -6,7 +6,7 @@
     "intern": "2.1.1"
   },
   "scripts": {
-    "unit-tests": "node node_modules/intern/client.js config=interntest/intern",
+    "unit-tests": "node node_modules/intern/client.js config=interntest/intern-unit-tests",
     "test": "node node_modules/intern/runner.js config=interntest/intern-grid"
   }
 }
