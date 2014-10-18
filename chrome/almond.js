@@ -1,5 +1,5 @@
 /**
- * @license almond 0.2.8 Copyright (c) 2011-2012, The Dojo Foundation All Rights Reserved.
+ * @license almond 0.3.0 Copyright (c) 2011-2014, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
  * see: http://github.com/jrburke/almond for details
  */
@@ -16,7 +16,8 @@ var requirejs, require, define;
         config = {},
         defining = {},
         hasOwn = Object.prototype.hasOwnProperty,
-        aps = [].slice;
+        aps = [].slice,
+        jsSuffixRegExp = /\.js$/;
 
     function hasProp(obj, prop) {
         return hasOwn.call(obj, prop);
@@ -35,7 +36,6 @@ var requirejs, require, define;
             foundI, foundStarMap, starI, i, j, part,
             baseParts = baseName && baseName.split("/"),
             map = config.map,
-            jsSuffixRegExp = /\.js$/,
             starMap = (map && map['*']) || {};
 
         //Adjust any relative paths.
@@ -54,8 +54,7 @@ var requirejs, require, define;
                 lastIndex = name.length - 1;
 
                 // Node .js allowance:
-                if (config.pkgs && hasProp(config.pkgs, baseParts[0]) &&
-                    jsSuffixRegExp.test(name[lastIndex])) {
+                if (config.nodeIdCompat && jsSuffixRegExp.test(name[lastIndex])) {
                     name[lastIndex] = name[lastIndex].replace(jsSuffixRegExp, '');
                 }
 
@@ -151,7 +150,15 @@ var requirejs, require, define;
             //A version of a require function that passes a moduleName
             //value for items that may need to
             //look up paths relative to the moduleName
-            return req.apply(undef, aps.call(arguments, 0).concat([relName, forceSync]));
+            var args = aps.call(arguments, 0);
+
+            //If first arg is not require('string'), and there is only
+            //one arg, it is the array form without a callback. Insert
+            //a null so that the following concat is correct.
+            if (typeof args[0] !== 'string' && args.length === 1) {
+                args.push(null);
+            }
+            return req.apply(undef, args.concat([relName, forceSync]));
         };
     }
 
@@ -328,7 +335,6 @@ var requirejs, require, define;
     };
 
     requirejs = require = req = function (deps, callback, relName, forceSync, alt) {
-        var i, pkgs;
         if (typeof deps === "string") {
             if (handlers[deps]) {
                 //callback in this case is really relName
@@ -344,13 +350,6 @@ var requirejs, require, define;
             config = deps;
             if (config.deps) {
                 req(config.deps, config.callback);
-            }
-            pkgs = config.packages;
-            if (config.packages) {
-                config.pkgs = {};
-                for (i = 0; i < pkgs.length; i++) {
-                    config.pkgs[pkgs[i].name || pkgs[i]] = true;
-                }
             }
             if (!callback) {
                 return;
