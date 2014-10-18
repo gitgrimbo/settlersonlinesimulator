@@ -24,6 +24,15 @@ define([], function() {
                         return result;
                     }
                 };
+            },
+            equal: function(util, customEqualityTesters) {
+                return {
+                    compare: function(actual, expected) {
+                        var result = {};
+                        result.pass = (actual === expected);
+                        return result;
+                    }
+                };
             }
         };
     }
