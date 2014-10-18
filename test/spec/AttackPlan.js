@@ -1,20 +1,10 @@
 /*global:describe,beforeEach,it,expect,spyOn*/
 define([
-    "./jasmine-matchers",
     "units-required/model/UnitList",
     "units-required/model/AttackPlan",
-    "./adventure/der-shamane"
-], function(customJasmineMatchers, UnitList, AttackPlan, derShamane) {
-
-    expect = (function(expect) {
-        return function() {
-            try {
-                return expect.apply(null, arguments);
-            } catch (e) {
-                //throw e;
-            }
-        };
-    }(expect));
+    "./adventure/der-shamane",
+    "./test-helpers!"
+], function(UnitList, AttackPlan, derShamane) {
 
     /**
      * Create an AttackPlan of an optional subset of the "attackJson".
@@ -43,15 +33,10 @@ define([
     // http://settlersonlinesimulator.com/dso_kampfsimulator/en/adventures/der-schamane/?general=G&my_r=200&my_m=200&my_s=200&my_e=0&my_c=200&my_b=200&my_lb=200&my_a=0&my_k=0&wave=0&limit_user_units=200
     describe("derShamane - calculateTransportRequired", function() {
 
-        beforeEach(function() {
-            // adds toEqualUnitList()
-            customJasmineMatchers.addMatchers(this);
-        });
-
         function checkTransportRequired(expected, actual) {
-            expect(actual.length).toBeSameLength(expected.length);
+            expect(actual.length).to.be.sameLength(expected.length);
             expected.forEach(function(expected, i) {
-                expect(actual[i]).toEqualUnitList(expected, i);
+                expect(actual[i]).to.be.equalUsingEquals(expected, i);
             });
         }
 

@@ -1,5 +1,7 @@
-/*global:describe,beforeEach,it,expect,spyOn*/
-define(["adventures-model", "text!html/adventures/der-schamane.html"], function(adventuresModel, adventureHtml) {
+define([
+    "adventures-model",
+    "./test-helpers!"
+], function(adventuresModel) {
     var AdventuresModel = adventuresModel;
 
     var NORMAL_ORDER = false;
@@ -11,51 +13,51 @@ define(["adventures-model", "text!html/adventures/der-schamane.html"], function(
         var adventures = JSON.parse(jsonStr);
 
         it("checks the adventures length", function() {
-            expect(adventures.length).toBe(35);
+            expect(adventures.length).to.be.equal(35);
         });
 
         it("sorts by ratio", function() {
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByRatio);
             // only first and second items have xp and tuv defined, and therefore a valid ratio
-            expect(clone[0].idx).toBe(0);
-            expect(clone[1].idx).toBe(3);
+            expect(clone[0].idx).to.be.equal(0);
+            expect(clone[1].idx).to.be.equal(3);
 
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByRatio);
             // only first and second items have xp and tuv defined, and therefore a valid ratio
-            expect(clone[0].idx).toBe(3);
-            expect(clone[1].idx).toBe(0);
+            expect(clone[0].idx).to.be.equal(3);
+            expect(clone[1].idx).to.be.equal(0);
         });
 
         it("sorts by xp", function() {
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByXP);
-            expect(clone[0].idx).toBe(23);
-            expect(clone[1].idx).toBe(22);
+            expect(clone[0].idx).to.be.equal(23);
+            expect(clone[1].idx).to.be.equal(22);
 
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByXP);
-            expect(clone[0].idx).toBe(4);
-            expect(clone[1].idx).toBe(18);
+            expect(clone[0].idx).to.be.equal(4);
+            expect(clone[1].idx).to.be.equal(18);
         });
 
         it("sorts by total losses", function() {
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, REVERSE_ORDER, AdventuresModel.sortInfoByTotalLosses);
             // only the first 4 items have total losses defined
-            expect(clone[0].idx).toBe(2);
-            expect(clone[1].idx).toBe(3);
-            expect(clone[2].idx).toBe(0);
-            expect(clone[3].idx).toBe(1);
+            expect(clone[0].idx).to.be.equal(2);
+            expect(clone[1].idx).to.be.equal(3);
+            expect(clone[2].idx).to.be.equal(0);
+            expect(clone[3].idx).to.be.equal(1);
 
             var clone = adventures.slice();
             AdventuresModel.sortInfo(clone, NORMAL_ORDER, AdventuresModel.sortInfoByTotalLosses);
             // only the first 4 items have total losses defined
-            expect(clone[0].idx).toBe(1);
-            expect(clone[1].idx).toBe(0);
-            expect(clone[2].idx).toBe(3);
-            expect(clone[3].idx).toBe(2);
+            expect(clone[0].idx).to.be.equal(1);
+            expect(clone[1].idx).to.be.equal(0);
+            expect(clone[2].idx).to.be.equal(3);
+            expect(clone[3].idx).to.be.equal(2);
         });
 
     });
