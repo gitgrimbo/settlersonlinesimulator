@@ -1,18 +1,37 @@
 {
-    "name": "The Settlers Online",
+    "name": "A Chrome extension for http://settlersonlinesimulator.com/",
     "version": "1.0.0",
-    "permissions": ["http://thesettlersonline.wikia.com/wiki/", "http://localhost/", "tabs", "activeTab"],
+    "permissions": [
+        "http://thesettlersonline.wikia.com/wiki/",
+        "http://localhost/",
+        "tabs",
+        "activeTab"
+    ],
     "content_scripts": [{
-        "matches": ["http://settlersonlinesimulator.com/dso_kampfsimulator/en/*", "http://localhost/*"],
-        "js": ["chrome/contentscript.js", "chrome/xhr.js"]
+        "matches": [
+            "http://settlersonlinesimulator.com/dso_kampfsimulator/en/*",
+            "http://localhost/*"
+        ],
+        "js": [
+            "chrome/contentscript.js",
+            "chrome/xhr.js"
+        ]
     }],
     "background": {
-        "scripts": ["chrome/background.js", "chrome/xhr.js"],
+        "scripts": [
+            "chrome/background.js",
+            "chrome/xhr.js"
+        ],
         "persistent": false
     },
-    "web_accessible_resources": ["all.js"],
+    "web_accessible_resources": [
+        "all.js"
+    ],
     "externally_connectable": {
-        "matches": ["*://settlersonlinesimulator.com/*", "*://*.settlersonlinesimulator.com/*"]
+        "matches": [
+            "*://settlersonlinesimulator.com/*",
+            "*://*.settlersonlinesimulator.com/*"
+        ]
     },
     "manifest_version": 2
 }
