@@ -50,13 +50,15 @@ define([
                 assert.ok(true);
             }, function(e) {
                 console.error(MID, test.name, e);
-                assert.ok(false);
+                assert.ok(false, MID + ": " + test.name + ": " + e);
             });
     }
 
     // Do not have final semi-colon in this function,
     // as it will be toString'd and then the source eval'd in parens.
     // So "(CODE;)" is not valid to be eval'd.
+    // The file containing this function MUST be in the "excludeInstrumentation" property of intern config otherwise a
+    // semicolon will be inserted and this function will break.
     function navigatorToJSON() {
         (function(o) {
             var val = null, t = null;
@@ -82,9 +84,9 @@ define([
         promise = this.saveBrowserObjectToRemote(promise, test, 'jasmine.JUnitJSONReporter.results', 'jsonResults');
 
         var nav1 = navigatorToJSON.toString();
-        //console.log(nav1);
+        console.log(nav1);
         nav1 = /\{([\s\S]*)\}/.exec(nav1)[1].trim();
-        //console.log(nav1);
+        console.log(nav1);
 
         promise = this.saveBrowserObjectToRemote(promise, test, nav1, '__navigator');
         promise = this.saveBrowserObjectToRemote(promise, test, 'navigator.userAgent', '__userAgent');
