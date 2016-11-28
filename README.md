@@ -32,7 +32,7 @@ Just edit the files!
 
 ## Testing
 
-The tests are written using [Jasmine](http://pivotal.github.io/jasmine/).
+The tests are written using [Jasmine](https://jasmine.github.io/).
 
 ### Manual
 
